@@ -7,10 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.BusTableListener;
 import gui.model.MenuTableModel;
 import util.GUIUtil;
-import util.TableInstance;
 
 /**
  * ²Ëµ¥Ò³Ãæ
@@ -50,7 +49,7 @@ public class B_MenLisPanel extends WorkingPanel{
 	}
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		BusTableListener listener = new BusTableListener();
 		bAdd.addActionListener(listener);
 		bMod.addActionListener(listener);
 		bDel.addActionListener(listener);

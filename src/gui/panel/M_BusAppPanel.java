@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.ManaTableListener;
 import gui.model.BusLisTableModel;
 import util.GUIUtil;
 import util.TableInstance;
@@ -56,7 +56,7 @@ public class M_BusAppPanel extends WorkingPanel {
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		ManaTableListener listener = new ManaTableListener();
 		bSee.addActionListener(listener);
 		bAdopt.addActionListener(listener);
 		bReject.addActionListener(listener);

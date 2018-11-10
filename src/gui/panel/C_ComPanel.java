@@ -7,7 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.CusTableListener;
+import gui.listener.ManaTableListener;
 import util.TableInstance;
 
 /**
@@ -17,12 +18,12 @@ import util.TableInstance;
  * @作者 丁伟宏
  *
  */
-public class C_ComPanel extends WorkingPanel{
+public class C_ComPanel extends WorkingPanel {
 	public static C_ComPanel instance = new C_ComPanel();
 	public JButton bSee = new JButton("查看详情");
 	public JButton bAdd = new JButton("新增");
 	public JTable t = TableInstance.instance_com_c;
-	
+
 	public C_ComPanel() {
 		JScrollPane sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
@@ -35,19 +36,19 @@ public class C_ComPanel extends WorkingPanel{
 
 		addListener();
 	}
-	
+
 	@Override
 	public void updateData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		CusTableListener listener = new CusTableListener();
 		bSee.addActionListener(listener);
 		bAdd.addActionListener(listener);
-		
+
 	}
 
 }

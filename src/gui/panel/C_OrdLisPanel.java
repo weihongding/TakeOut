@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.CusTableListener;
+import gui.listener.ManaTableListener;
 import util.GUIUtil;
 import util.TableInstance;
+
 /**
  * ¶©µ¥ÁÐ±í
  * 
@@ -33,7 +35,7 @@ public class C_OrdLisPanel extends WorkingPanel {
 
 		addListener();
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance);
 	}
@@ -46,7 +48,7 @@ public class C_OrdLisPanel extends WorkingPanel {
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		CusTableListener listener = new CusTableListener();
 		bSee.addActionListener(listener);
 
 	}

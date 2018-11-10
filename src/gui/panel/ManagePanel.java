@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.plaf.metal.MetalBorders.ToolBarBorder;
 
-import gui.listener.ToolBarListener;
+import gui.listener.ManaWorkpanelListener;
 import util.CenterPanel;
 import util.GUIUtil;
 
@@ -45,7 +45,7 @@ public class ManagePanel extends JPanel {
 	}
 
 	private void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		ManaWorkpanelListener listener = new ManaWorkpanelListener();
 
 		bBusApp.addActionListener(listener);
 		bBusLis_up.addActionListener(listener);

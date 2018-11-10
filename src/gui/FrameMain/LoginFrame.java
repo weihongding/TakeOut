@@ -11,15 +11,20 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
+import dao.CustomerDao;
 import gui.panel.BusinessPanel;
 import gui.panel.CustomerPanel;
 import gui.panel.ManagePanel;
+import service.BusinessService;
+import service.CustomerService;
+import util.GUIUtil;
 
 /**
  * 用户登录页面
@@ -138,19 +143,27 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 		if (e.getActionCommand() == "登陆") {
 			if (jrb1.isSelected()) {
-				// 验证CustMpa<账号,密码>;
+				// 验证顾客账号密码
 				// 返回结果
-				dispose();
-				CustomerFrame.instance.show();
-				CustomerPanel.instance.workingPanel.show(new JLabel("欢迎使用顾客页面！"));
+				int id = CustomerService.check(jtf.getText(), jpf.getText());
+				if (id != -1) {
+					GUIUtil.cus_id = id;
+					dispose();
+					CustomerFrame.instance.show();
+					CustomerPanel.instance.workingPanel.show(new JLabel("欢迎使用顾客页面！"));
+				}
 			} else if (jrb2.isSelected()) {
-				// 验证BusiMap<账号,密码>
+				// 验证商家帐号密码
 				// 返回结果
-				dispose();
-				BusinessFrame.instance.show();
-				BusinessPanel.instance.workingPanel.show(new JLabel("欢迎使用商家页面！"));
+				int id = BusinessService.check(jtf.getText(), jpf.getText());
+				if (id != -1) {
+					GUIUtil.bus_id = id;
+					dispose();
+					BusinessFrame.instance.show();
+					BusinessPanel.instance.workingPanel.show(new JLabel("欢迎使用商家页面！"));
+				}
 			} else if (jrb3.isSelected()) {
-				// 验证ManageMap<账号,密码>
+				// 验证管理员帐号密码
 				// 返回结果
 				dispose();
 				ManageFrame.instance.show();

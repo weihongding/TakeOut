@@ -8,7 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entity.Business;
-import gui.listener.ToolBarListener;
+import gui.listener.BusWorkpanelListener;
+import gui.listener.ManaWorkpanelListener;
+import service.BusinessService;
+import util.GUIUtil;
 
 /**
  * 个人页面
@@ -19,7 +22,7 @@ import gui.listener.ToolBarListener;
  */
 public class B_MyPanel extends WorkingPanel{
 	public static B_MyPanel instance = new B_MyPanel();
-	public Business c = new Business(1,"食堂一号", "超好吃", "15959857669", "福大学生街","上架中");//后期service直接传入id，返回一个customer对象
+	public Business c = BusinessService.get(GUIUtil.bus_id);//后期service直接传入id，返回一个customer对象
 	public JButton bMod = new JButton("修改");
 	public JLabel[] jl = new JLabel[8];
 	public JPanel[] jp = new JPanel[4];
@@ -62,6 +65,10 @@ public class B_MyPanel extends WorkingPanel{
 		addListener();
 	}
 	
+	public static void main(String[] args) {
+		GUIUtil.showPanel(instance);
+	}
+	
 	@Override
 	public void updateData() {
 		// TODO Auto-generated method stub
@@ -70,7 +77,7 @@ public class B_MyPanel extends WorkingPanel{
 
 	@Override
 	public void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		BusWorkpanelListener listener = new BusWorkpanelListener();
 		bMod.addActionListener(listener);
 	}
 

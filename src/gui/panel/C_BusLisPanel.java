@@ -8,10 +8,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.CusTableListener;
+import gui.listener.ManaTableListener;
 import gui.model.BusLisTableModel;
 import util.GUIUtil;
 import util.TableInstance;
+
 /**
  * 商家列表
  * 
@@ -34,7 +36,7 @@ public class C_BusLisPanel extends WorkingPanel {
 		this.add(pSubmit, BorderLayout.SOUTH);
 
 		addListener();
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -47,7 +49,7 @@ public class C_BusLisPanel extends WorkingPanel {
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		CusTableListener listener = new CusTableListener();
 		bSee.addActionListener(listener);
 	}
 

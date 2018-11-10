@@ -6,7 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-import gui.listener.ToolBarListener;
+import gui.listener.BusWorkpanelListener;
+import gui.listener.ManaWorkpanelListener;
 import util.CenterPanel;
 import util.GUIUtil;
 
@@ -43,7 +44,7 @@ public class BusinessPanel extends JPanel {
 	}
 
 	private void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		BusWorkpanelListener listener = new BusWorkpanelListener();
 		bMenLis.addActionListener(listener);
 		bOrdLis.addActionListener(listener);
 		bEarn.addActionListener(listener);

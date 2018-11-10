@@ -7,7 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.plaf.metal.MetalBorders.ToolBarBorder;
 
-import gui.listener.ToolBarListener;
+import gui.listener.CusWorkpanelListener;
+import gui.listener.ManaWorkpanelListener;
 import util.CenterPanel;
 import util.GUIUtil;
 
@@ -17,7 +18,7 @@ import util.GUIUtil;
  * @作者 丁伟宏
  *
  */
-public class CustomerPanel extends JPanel{
+public class CustomerPanel extends JPanel {
 
 	public static CustomerPanel instance = new CustomerPanel();
 	public JToolBar tb = new JToolBar();
@@ -25,41 +26,40 @@ public class CustomerPanel extends JPanel{
 	public JButton bOrdLis = new JButton("订单");
 	public JButton bComplain = new JButton("投诉建议");
 	public JButton bMy = new JButton("我的");
-	
+
 	public CenterPanel workingPanel;
-	
-	private CustomerPanel(){
-		
+
+	private CustomerPanel() {
+
 		tb.add(bBusLis);
 		tb.add(bOrdLis);
 		tb.add(bComplain);
 		tb.add(bMy);
 		tb.setFloatable(false);
-		
+
 		workingPanel = new CenterPanel(0.8);
-		
+
 		setLayout(new BorderLayout());
 		add(tb, BorderLayout.NORTH);
 		add(workingPanel, BorderLayout.CENTER);
 
 		addListener();
-		
+
 	}
 
 	private void addListener() {
-		
-		ToolBarListener listener = new ToolBarListener();
-		
+
+		CusWorkpanelListener listener = new CusWorkpanelListener();
+
 		bBusLis.addActionListener(listener);
 		bOrdLis.addActionListener(listener);
 		bComplain.addActionListener(listener);
 		bMy.addActionListener(listener);
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance, 1);
 	}
-	
-	
+
 }

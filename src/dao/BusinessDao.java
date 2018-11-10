@@ -260,7 +260,7 @@ public class BusinessDao {
 	 * 验证商家账号密码
 	 * @param account
 	 * @param password
-	 * @return id
+	 * @return 商家id，错误则返回-1
 	 */
 	public int check (String account,String password){
 		int id = -1;

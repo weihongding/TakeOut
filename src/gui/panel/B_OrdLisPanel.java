@@ -6,9 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.event.TableModelListener;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.BusTableListener;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -52,7 +51,7 @@ public class B_OrdLisPanel extends WorkingPanel{
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		BusTableListener listener = new BusTableListener();
 		bSee.addActionListener(listener);
 		bRece.addActionListener(listener);
 		bReje.addActionListener(listener);

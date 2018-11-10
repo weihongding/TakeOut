@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import entity.Customer;
-import gui.listener.ToolBarListener;
+import gui.listener.BusWorkpanelListener;
+import gui.listener.ManaWorkpanelListener;
 
 /**
  * 个人修改页面
@@ -74,7 +75,7 @@ public class B_MyModPanel extends WorkingPanel{
 
 	@Override
 	public void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		BusWorkpanelListener listener = new BusWorkpanelListener();
 		bSave.addActionListener(listener);
 	}
 }

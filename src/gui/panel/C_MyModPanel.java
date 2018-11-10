@@ -9,8 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import entity.Customer;
-import gui.listener.TableSelectedListener;
-import gui.listener.ToolBarListener;
+import gui.listener.CusWorkpanelListener;
+import gui.listener.ManaTableListener;
+import gui.listener.ManaWorkpanelListener;
 import util.GUIUtil;
 
 /**
@@ -80,7 +81,7 @@ public class C_MyModPanel extends WorkingPanel{
 
 	@Override
 	public void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		CusWorkpanelListener listener = new CusWorkpanelListener();
 		bSave.addActionListener(listener);
 	}
 	

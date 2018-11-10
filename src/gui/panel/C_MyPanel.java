@@ -11,7 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entity.Customer;
-import gui.listener.ToolBarListener;
+import gui.listener.CusWorkpanelListener;
+import gui.listener.ManaWorkpanelListener;
+import service.CustomerService;
 import util.CenterPanel;
 import util.GUIUtil;
 
@@ -25,7 +27,7 @@ import util.GUIUtil;
 public class C_MyPanel extends WorkingPanel{
 
 	public static C_MyPanel instance = new C_MyPanel();
-	public Customer c = new Customer(1,"牧威", "超能吃", "18050782349", "福大生活一区");//后期service直接传入id，返回一个customer对象
+	public Customer c = CustomerService.get(GUIUtil.cus_id);//后期service直接传入id，返回一个customer对象
 	public JButton bMod = new JButton("修改");
 	public JLabel[] jl = new JLabel[8];
 	public JPanel[] jp = new JPanel[4];
@@ -82,7 +84,7 @@ public class C_MyPanel extends WorkingPanel{
 
 	@Override
 	public void addListener() {
-		ToolBarListener listener = new ToolBarListener();
+		CusWorkpanelListener listener = new CusWorkpanelListener();
 		bMod.addActionListener(listener);
 		
 	}

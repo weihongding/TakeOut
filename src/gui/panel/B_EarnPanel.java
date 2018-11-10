@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import gui.listener.BusTableListener;
 import util.ChartUtil;
 import util.GUIUtil;
 
@@ -24,26 +25,26 @@ import util.GUIUtil;
 public class B_EarnPanel extends WorkingPanel {
 
 	public static B_EarnPanel instance = new B_EarnPanel();
-	public JButton bTmonth = new JButton("本周"); 
+	public JButton bTmonth = new JButton("本周");
 	public JButton bTime = new JButton("选择时间段");
-	
+
 	private B_EarnPanel() {
 		JLabel l = new JLabel();
 		Image img = ChartUtil.getImage(350, 250);
 		Icon icon = new ImageIcon(img);
 		l.setIcon(icon);
-		
+
 		JScrollPane sp = new JScrollPane(l);
 		JPanel pSubmit = new JPanel();
-		
+
 		pSubmit.add(bTmonth);
 		pSubmit.add(bTime);
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance);
 	}
@@ -56,7 +57,7 @@ public class B_EarnPanel extends WorkingPanel {
 
 	@Override
 	public void addListener() {
-		// TODO Auto-generated method stub
+		BusTableListener listener = new BusTableListener();
 
 	}
 

@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import gui.listener.TableSelectedListener;
+import gui.listener.ManaTableListener;
 import gui.model.BusLisTableModel;
 import util.GUIUtil;
 import util.TableInstance;
@@ -53,7 +53,7 @@ public class M_BusLisPanel_up extends WorkingPanel {
 
 	@Override
 	public void addListener() {
-		TableSelectedListener listener = new TableSelectedListener();
+		ManaTableListener listener = new ManaTableListener();
 		bSee.addActionListener(listener);
 		bDown.addActionListener(listener);
 	}
