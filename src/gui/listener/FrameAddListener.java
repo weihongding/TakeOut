@@ -25,14 +25,14 @@ public class FrameAddListener implements ActionListener {
 			OrderCar.instance.setVisible(true);
 		}
 		if (b == OrderBusi.instance.bSee) {
-			int i = TableInstance.instance_orBus_c.getSelectedRow();
-			OrderFood.instance = new OrderFood((String)MenuTableModel.instance2.getValueAt(i, 0),Double.parseDouble((String)MenuTableModel.instance2.getValueAt(i, 1)), "img/1.jpg");
-			OrderFood.instance.jtf.setText(Integer.toString((int)MenuTableModel.instance2.getValueAt(i, 2)));
+			int i = OrderBusi.instance.t.getSelectedRow();
+			OrderFood.instance = new OrderFood((String)OrderBusi.instance.m.getValueAt(i, 0),(Double)OrderBusi.instance.m.getValueAt(i, 1), "img/1.jpg");
+			OrderFood.instance.jtf.setText(Integer.toString((int)OrderBusi.instance.m.getValueAt(i, 2)));
 			OrderFood.instance.setVisible(true);
 		}
 		if( b == OrderFood.instance.bSave){
-			int i = TableInstance.instance_orBus_c.getSelectedRow();
-			MenuTableModel.instance2.num[i] = Integer.parseInt(OrderFood.instance.jtf.getText());
+			int i = OrderBusi.instance.t.getSelectedRow();
+			MenuTableModel.num[i] = Integer.parseInt(OrderFood.instance.jtf.getText());
 			OrderBusi.instance.setVisible(false);
 			OrderFood.instance.setVisible(false);
 			OrderBusi.instance.setVisible(true);

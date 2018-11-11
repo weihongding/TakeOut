@@ -1,5 +1,7 @@
 package util;
  
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -86,6 +88,13 @@ public class DateUtil {
         long toDayMilliSeconds = today().getTime();
         return (int) ((lastDayMilliSeconds-toDayMilliSeconds)/millisecondsOfOneDay) +1;
     }   
+    
+    public static String formatDate(Date time){
+        DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+        String formatDate = dFormat.format(time);  
+        return formatDate;
+        
+    }
      
     public static void main(String[] args) {
         System.out.println(DateUtil.today());
@@ -95,5 +104,7 @@ public class DateUtil {
         System.out.println(thisMonthTotalDay());
         
         System.out.println(DateUtil.toTimestamp(new Date()));
+        System.out.println();
+        System.out.println(formatDate(new Date()));
     }
 }

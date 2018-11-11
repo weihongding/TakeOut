@@ -29,7 +29,6 @@ public class M_BusAppPanel extends WorkingPanel {
 	public JButton bSee = new JButton("查看");
 	public JButton bAdopt = new JButton("通过");
 	public JButton bReject = new JButton("驳回");
-	String columnNames[] = { "店名", "申请时间", "处理情况" };
 	public JTable t = TableInstance.instance_bus_app;
 
 	private M_BusAppPanel() {

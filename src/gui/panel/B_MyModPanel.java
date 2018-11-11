@@ -8,9 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entity.Business;
 import entity.Customer;
 import gui.listener.BusWorkpanelListener;
 import gui.listener.ManaWorkpanelListener;
+import service.BusinessService;
+import util.GUIUtil;
 
 /**
  * 个人修改页面
@@ -23,7 +26,7 @@ public class B_MyModPanel extends WorkingPanel{
 
 
 	public static B_MyModPanel instance = new B_MyModPanel();
-	public Customer c = new Customer(1,"食堂一号", "超好吃", "15959857669", "福大学生街");//后期service直接传入id，返回一个customer对象
+	public Business c = BusinessService.get(GUIUtil.bus_id);
 	public JButton bSave = new JButton("保存");
 	public JLabel[] jl = new JLabel[4];
 	public JTextField[] jtf = new JTextField[4];

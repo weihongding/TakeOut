@@ -25,7 +25,6 @@ public class TableInstance {
 	public static JTable instance_bus_c = new JTable(BusLisTableModel.instance_up);
 	public static JTable instance_order_c = new JTable(OrderTableModel.instance_c);
 	public static JTable instance_com_c = new JTable(CusComTableModel.instance_c);
-	public static JTable instance_orBus_c = new JTable(MenuTableModel.instance2);
 	
 	//ил╪р
 	public static JTable instance_order_b = new JTable(OrderTableModel.instance_b);

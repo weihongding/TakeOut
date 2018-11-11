@@ -10,6 +10,7 @@ import java.util.*;
 import entity.Order;
 import util.DBUtil;
 import util.DateUtil;
+import util.NumberUtil;
 import util.StateUtil;
 
 public class OrderDao {
@@ -18,9 +19,7 @@ public class OrderDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		OrderDao dao = new OrderDao();
-		Order order = dao.get("business", 5).get(0);
-		order.setState(StateUtil.order[2]);
-		dao.update(order);
+		System.out.println(dao.earn_will(5));
 	}
 
 	/**
@@ -144,7 +143,7 @@ public class OrderDao {
 				double total_price = rs.getDouble("total_price");
 				Date time = DateUtil.toDate(rs.getTimestamp("time"));
 				String state = rs.getString("state");
-				int bid=0,cid=0;
+				int bid = 0, cid = 0;
 				if (status.equals("business")) {
 					bid = sid;
 					cid = rs.getInt("cid");
@@ -152,7 +151,7 @@ public class OrderDao {
 					bid = rs.getInt("bid");
 					cid = sid;
 				}
-				
+
 				Order order = new Order(bid, cid, total_price, time, state);
 				order.setId(id);
 				orderArray.add(order);
@@ -163,6 +162,62 @@ public class OrderDao {
 			e.printStackTrace();
 		}
 		return orderArray;
+	}
+
+	/**
+	 * 根据商家id获得已送达订单总收入
+	 * 
+	 * @param bid
+	 * @return
+	 */
+	public double earn_have(int bid) {
+		String sql = "select * from `order` where bid = ?";
+		List<Double> earn = new ArrayList<>();
+
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+			ps.setInt(1, bid);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				if (rs.getString("state").equals(StateUtil.order[2])) {
+					earn.add(rs.getDouble("total_price"));
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return NumberUtil.sum(earn);
+	}
+
+	/**
+	 * 根据商家id获得已接单订单总收入
+	 * 
+	 * @param bid
+	 * @return
+	 */
+	public double earn_will(int bid) {
+		String sql = "select * from `order` where bid = ?";
+		List<Double> earn = new ArrayList<>();
+
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+			ps.setInt(1, bid);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				if (rs.getString("state").equals(StateUtil.order[1])) {
+					earn.add(rs.getDouble("total_price"));
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return NumberUtil.sum(earn);
 	}
 
 }

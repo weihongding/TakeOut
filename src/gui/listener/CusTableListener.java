@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import entity.Business;
 import gui.FrameAdd.OrderBusi;
 import gui.model.BusLisTableModel;
 import gui.model.CusComTableModel;
@@ -13,6 +14,7 @@ import gui.panel.C_BusLisPanel;
 import gui.panel.C_ComPanel;
 import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
+import service.BusinessService;
 import util.TableInstance;
 
 /**
@@ -35,8 +37,10 @@ public class CusTableListener implements ActionListener {
 
 		if (b == cblp.bSee) {
 			int i = TableInstance.instance_bus_c.getSelectedRow();
+			String bname = (String)BusLisTableModel.instance_up.getValueAt(i, 0);
+			int bid = BusinessService.getid(bname);
 			if (i != -1)
-				System.out.println("查看了商家：" + BusLisTableModel.instance_up.getValueAt(i, 0));
+			OrderBusi.instance = new OrderBusi(bid);
 			OrderBusi.instance.setVisible(true);
 		}
 		if (b == colp.bSee) {

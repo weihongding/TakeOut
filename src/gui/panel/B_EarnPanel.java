@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import gui.listener.BusTableListener;
+import service.OrderService;
 import util.ChartUtil;
 import util.GUIUtil;
 
@@ -25,24 +26,16 @@ import util.GUIUtil;
 public class B_EarnPanel extends WorkingPanel {
 
 	public static B_EarnPanel instance = new B_EarnPanel();
-	public JButton bTmonth = new JButton("本周");
-	public JButton bTime = new JButton("选择时间段");
+	public JLabel jl1, jl2;
 
 	private B_EarnPanel() {
-		JLabel l = new JLabel();
-		Image img = ChartUtil.getImage(350, 250);
-		Icon icon = new ImageIcon(img);
-		l.setIcon(icon);
 
-		JScrollPane sp = new JScrollPane(l);
-		JPanel pSubmit = new JPanel();
+		jl1 = new JLabel("已送达订单："+Double.toString(OrderService.earn_have(GUIUtil.bus_id)));
+		jl2 = new JLabel("未送达订单："+Double.toString(OrderService.earn_will(GUIUtil.bus_id)));
+		this.add(jl1);
+		this.add(jl2);
+		this.setLayout(new GridLayout(2, 2));
 
-		pSubmit.add(bTmonth);
-		pSubmit.add(bTime);
-
-		this.setLayout(new BorderLayout());
-		this.add(sp, BorderLayout.CENTER);
-		this.add(pSubmit, BorderLayout.SOUTH);
 	}
 
 	public static void main(String[] args) {

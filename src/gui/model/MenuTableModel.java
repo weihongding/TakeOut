@@ -1,10 +1,17 @@
 package gui.model;
 
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
+import entity.Apply;
+import entity.Food;
+import service.BusinessService;
+import service.FoodService;
+import util.DateUtil;
 import util.GUIUtil;
 
 /**
@@ -16,27 +23,29 @@ import util.GUIUtil;
 public class MenuTableModel extends AbstractTableModel {
 
 	String[] columnNames;
-	String[][] menus;
+	List<Food> menus;
 
 	static String[] columnNames1 = { "菜名", "价格" };
-	static String[][] menus1 = { { "糖醋排骨", "7.0" }, { "回锅肉", "7.5" } };
 
-	static String[] columnNames2 = { "菜名", "价格", "数量" };
-	static String[][] menus2 = { { "糖醋排骨", "7.0"}, { "回锅肉", "7.5"} };
 	public static int[] num;
 
-	public static MenuTableModel instance1 = new MenuTableModel(columnNames1, menus1);
-	public static MenuTableModel instance2 = new MenuTableModel(columnNames2, menus2);
+	public static MenuTableModel instance1 = new MenuTableModel(columnNames1, FoodService.list_b(GUIUtil.bus_id));
 
-	private MenuTableModel(String[] col, String[][] men) {
+	private MenuTableModel(String[] col, List<Food> menus) {
 		this.columnNames = col;
-		this.menus = men;
-		num = GUIUtil.getArray_int_num(menus2.length);
+		this.menus = menus;
+	}
+
+	public MenuTableModel(int bid) {
+		String[] columnNames2 = { "菜名", "价格", "数量" };
+		this.columnNames = columnNames2;
+		this.menus = FoodService.list_b(bid);
+		num = GUIUtil.getArray_int_num(menus.size());
 	}
 
 	@Override
 	public int getRowCount() {
-		return menus.length;
+		return menus.size();
 	}
 
 	@Override
@@ -50,8 +59,13 @@ public class MenuTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex == 2) return num[rowIndex];
-		return menus[rowIndex][columnIndex];
+		if (columnNames[columnIndex].equals("菜名"))
+			return menus.get(rowIndex).getName();
+		if (columnNames[columnIndex].equals("价格"))
+			return menus.get(rowIndex).getPrice();
+		if (columnNames[columnIndex].equals("数量"))
+			return num[rowIndex];
+		return null;
 	}
 
 }

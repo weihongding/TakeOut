@@ -15,7 +15,7 @@ import gui.model.OrderTableModel;
 import util.GUIUtil;
 import util.TableInstance;
 
-public class OrderCar extends JFrame{
+public class OrderCar extends JFrame {
 
 	public static OrderCar instance;
 	public JLabel jl1 = new JLabel();
@@ -26,21 +26,21 @@ public class OrderCar extends JFrame{
 	public JPanel pSubmit = new JPanel();
 	public JScrollPane sp;
 	public JTable t;
-	
-	public OrderCar(){
-		
+
+	public OrderCar() {
+
 		jl1.setText("未命名食堂1号的购物车");
 		pTitle.add(jl1);
 		OrderCarTableModel.instance = new OrderCarTableModel();
 		t = new JTable(OrderCarTableModel.instance);
-		jl2.setText("总价："+Double.toString(GUIUtil.getSum(OrderCarTableModel.instance, 1, 2)));
+		jl2.setText("总价：" + Double.toString(GUIUtil.getSum(OrderCarTableModel.instance, 1, 2)));
 		sp = new JScrollPane(t);
 		pSubmit.add(jl2);
 		pSubmit.add(bPlace);
 		pSubmit.add(bQuit);
 		this.setTitle("购物车");
 		this.setLayout(new BorderLayout());
-		this.add(pTitle,BorderLayout.NORTH);
+		this.add(pTitle, BorderLayout.NORTH);
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
 		this.setSize(350, 300);
@@ -48,16 +48,16 @@ public class OrderCar extends JFrame{
 
 		addListener();
 	}
-	
+
 	public static void main(String[] args) {
-		MenuTableModel.instance2.num[0] = 2;
+		MenuTableModel.num[0] = 2;
 		instance = new OrderCar();
 		instance.setVisible(true);
 	}
 
 	public void addListener() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

@@ -27,7 +27,7 @@ import gui.model.OrderCarTableModel;
  */
 public class GUIUtil {
 	public static int cus_id = -1;
-	public static int bus_id = -1;
+	public static int bus_id = 5;
 	public static int mana_id = -1;
 
 	/**
@@ -197,7 +197,7 @@ public class GUIUtil {
 		String[][] str = new String[array.size()][3];
 		for (int i = 0; i < array.size(); i++) {
 			str[i][0] = (String) t.getValueAt(i, 0);
-			str[i][1] = (String) t.getValueAt(i, 1);
+			str[i][1] = Double.toString((Double) t.getValueAt(i, 1));
 			str[i][2] = Integer.toString(num[array.get(i)]);
 		}
 		return str;

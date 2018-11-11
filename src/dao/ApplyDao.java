@@ -18,9 +18,8 @@ public class ApplyDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		ApplyDao dao = new ApplyDao();
-		Apply app = dao.get(5).get(0);
-		app.setContent("喜欢");
-		dao.add(app);
+		Apply app = dao.list().get(1);
+		System.out.println(app.getContent());
 	}
 
 	/**
@@ -117,24 +116,23 @@ public class ApplyDao {
 	}
 
 	/**
-	 * 根据商家id得到申请实例集合
+	 * 得到申请实例集合
 	 * 
 	 * @param bid
 	 * @return
 	 */
-	public List<Apply> get(int bid) {
+	public List<Apply> list() {
 		List<Apply> appArray = new ArrayList<Apply>();
 
-		String sql = "select * from apply where bid = ?";
+		String sql = "select * from apply";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
-
-			ps.setInt(1, bid);
 
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
+				int bid = rs.getInt("bid");
 				String content = rs.getString("content");
 				Date time = DateUtil.toDate(rs.getTimestamp("time"));
 				String state = rs.getString("state");

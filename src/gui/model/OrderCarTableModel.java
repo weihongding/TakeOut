@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.FrameAdd.OrderBusi;
 import util.GUIUtil;
 
 /**
@@ -20,8 +21,8 @@ public class OrderCarTableModel extends AbstractTableModel {
 	public static OrderCarTableModel instance;
 
 	public OrderCarTableModel() {
-		this.columnNames = MenuTableModel.instance2.columnNames;
-		this.menus = GUIUtil.getArray_String(MenuTableModel.instance2, MenuTableModel.instance2.num);
+		this.columnNames = OrderBusi.instance.m.columnNames;
+		this.menus = GUIUtil.getArray_String(OrderBusi.instance.m, OrderBusi.instance.m.num);
 	}
 
 	@Override
