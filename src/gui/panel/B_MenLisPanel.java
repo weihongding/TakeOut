@@ -48,6 +48,8 @@ public class B_MenLisPanel extends WorkingPanel{
 	
 	@Override
 	public void updateData() {
+		t.setModel(MenuTableModel.instance1);
+		sp.setViewportView(t);
 	}
 	@Override
 	public void addListener() {

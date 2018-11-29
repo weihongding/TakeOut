@@ -66,8 +66,6 @@ public class BusTableListener implements ActionListener {
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1)
 				System.out.println("É¾³ýÁË²ËÆ·" + MenuTableModel.instance1.getValueAt(i, 0));
-			bmlp.t = new JTable(MenuTableModel.instance1);
-			bmlp.sp = new JScrollPane(bmlp.t);
 		}
 
 	}
