@@ -17,7 +17,7 @@ import util.TableInstance;
 
 public class OrderCar extends JFrame {
 
-	public static OrderCar instance;
+	public static OrderCar instance = new OrderCar();
 	public JLabel jl1 = new JLabel();
 	public JLabel jl2 = new JLabel();
 	public JButton bPlace = new JButton("È·¶¨");
@@ -54,7 +54,7 @@ public class OrderCar extends JFrame {
 		instance = new OrderCar();
 		instance.setVisible(true);
 	}
-
+	
 	public void addListener() {
 		// TODO Auto-generated method stub
 

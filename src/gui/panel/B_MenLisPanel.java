@@ -24,9 +24,11 @@ public class B_MenLisPanel extends WorkingPanel{
 	public JButton bAdd = new JButton("ÐÂÔö");
 	public JButton bMod = new JButton("ÐÞ¸Ä");
 	public JButton bDel = new JButton("É¾³ý");
-	public JTable t = new JTable(MenuTableModel.instance1);
+	public JTable t;
+	public JScrollPane  sp;
 	private B_MenLisPanel(){
-		JScrollPane sp = new JScrollPane(t);
+		t = new JTable(MenuTableModel.instance1);
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
 		pSubmit.add(bAdd);
 		pSubmit.add(bMod);

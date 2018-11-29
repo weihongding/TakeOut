@@ -26,9 +26,9 @@ import gui.model.OrderCarTableModel;
  *
  */
 public class GUIUtil {
-	public static int cus_id = -1;
+	public static int cus_id = 9;
 	public static int bus_id = 5;
-	public static int mana_id = -1;
+	public static int mana_id = 1;
 
 	/**
 	 * ÏÔÊ¾Panel

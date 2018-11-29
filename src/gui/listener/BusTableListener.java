@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
@@ -49,13 +51,14 @@ public class BusTableListener implements ActionListener {
 				System.out.println("拒接了订单" + OrderTableModel.instance_b.getValueAt(i, 0));
 		}
 		if (b == bmlp.bAdd) {// 增加菜品
-			new MenuAddFrame().setVisible(true);
+			MenuAddFrame.instance.clean();
+			MenuAddFrame.instance.setVisible(true);
 		}
 		if (b == bmlp.bMod) {// 菜单修改
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1) {
 				MenuModFrame.instance = new MenuModFrame((String) MenuTableModel.instance1.getValueAt(i, 0),
-						Double.parseDouble((String) MenuTableModel.instance1.getValueAt(i, 1)), "img/1.jpg");
+						(Double) MenuTableModel.instance1.getValueAt(i, 1), "img/1.jpg");
 				MenuModFrame.instance.setVisible(true);
 			}
 		}
@@ -63,7 +66,8 @@ public class BusTableListener implements ActionListener {
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1)
 				System.out.println("删除了菜品" + MenuTableModel.instance1.getValueAt(i, 0));
-			bmlp.updateData();
+			bmlp.t = new JTable(MenuTableModel.instance1);
+			bmlp.sp = new JScrollPane(bmlp.t);
 		}
 
 	}

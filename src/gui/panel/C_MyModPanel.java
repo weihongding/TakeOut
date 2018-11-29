@@ -12,6 +12,7 @@ import entity.Customer;
 import gui.listener.CusWorkpanelListener;
 import gui.listener.ManaTableListener;
 import gui.listener.ManaWorkpanelListener;
+import service.CustomerService;
 import util.GUIUtil;
 
 /**
@@ -24,7 +25,7 @@ import util.GUIUtil;
 public class C_MyModPanel extends WorkingPanel{
 
 	public static C_MyModPanel instance = new C_MyModPanel();
-	public Customer c = new Customer(1,"牧威", "超能吃", "18050782349", "福大生活一区");//后期service直接传入id，返回一个customer对象
+	public Customer c = CustomerService.get(GUIUtil.cus_id);//后期service直接传入id，返回一个customer对象
 	public JButton bSave = new JButton("保存");
 	public JLabel[] jl = new JLabel[4];
 	public JTextField[] jtf = new JTextField[4];
@@ -75,8 +76,11 @@ public class C_MyModPanel extends WorkingPanel{
 	
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-		
+		Customer c = CustomerService.get(GUIUtil.cus_id);
+		jtf[0].setText(c.getName());
+		jtf[1].setText(c.getDes());
+		jtf[2].setText(c.getPhone());
+		jtf[3].setText(c.getAddress());
 	}
 
 	@Override

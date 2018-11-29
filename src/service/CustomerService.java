@@ -20,6 +20,10 @@ public class CustomerService {
 		cdao.add(cus);
 	}
 
+	public static void update(Customer cus){
+		cdao.update(cus);
+	}
+	
 	/**
 	 * 获得顾客信息
 	 * 

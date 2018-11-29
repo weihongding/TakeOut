@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import gui.listener.FrameAddListener;
+import gui.listener.MenuListener;
 import util.GUIUtil;
 
 /**
@@ -20,6 +22,7 @@ import util.GUIUtil;
  */
 public class MenuAddFrame extends JFrame {
 
+	public static MenuAddFrame instance = new MenuAddFrame();
 	public JLabel[] jl = new JLabel[2];
 	public JPanel[] jp = new JPanel[3];
 	public JPanel pCent = new JPanel();
@@ -58,13 +61,20 @@ public class MenuAddFrame extends JFrame {
 
 		addListener();
 	}
+	
+	public void clean(){
+		jtf[0].setText("");
+		jtf[1].setText("");
+	}
 
 	public static void main(String[] args) {
 		new MenuAddFrame().setVisible(true);
 	}
 
 	public void addListener() {
-
+		MenuListener listener = new MenuListener();
+		bIcon.addActionListener(listener);
+		bSave.addActionListener(listener);
 	}
 
 }

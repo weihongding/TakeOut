@@ -10,7 +10,7 @@ public class BusinessFrame extends JFrame {
 
 	private BusinessFrame() {
 		this.setSize(500, 450);
-		this.setTitle("管理员界面");
+		this.setTitle("商家界面");
 		this.setContentPane(BusinessPanel.instance);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);

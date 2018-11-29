@@ -78,8 +78,11 @@ public class C_MyPanel extends WorkingPanel{
 	
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-		
+		Customer c = CustomerService.get(GUIUtil.cus_id);
+		jl[4].setText(c.getName());
+		jl[5].setText(c.getDes());
+		jl[6].setText(c.getPhone());
+		jl[7].setText(c.getAddress());
 	}
 
 	@Override

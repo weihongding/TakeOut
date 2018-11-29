@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import gui.listener.FrameAddListener;
+import gui.listener.MenuListener;
 import util.GUIUtil;
 
 /**
@@ -75,7 +76,7 @@ public class MenuModFrame extends JFrame {
 	}
 
 	public void addListener() {
-		FrameAddListener listener = new FrameAddListener();
+		MenuListener listener = new MenuListener();
 		bSave.addActionListener(listener);
 		bIcon.addActionListener(listener);
 	}

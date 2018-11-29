@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import entity.Business;
+import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
 import gui.FrameAdd.OrderBusi;
 import gui.FrameAdd.OrderCar;
@@ -19,7 +20,7 @@ public class FrameAddListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		JButton b = (JButton) e.getSource();// 获取按钮
-
+		
 		if (b == OrderBusi.instance.bPlace) {
 			OrderCar.instance = new OrderCar();
 			OrderCar.instance.setVisible(true);
@@ -36,12 +37,6 @@ public class FrameAddListener implements ActionListener {
 			OrderBusi.instance.setVisible(false);
 			OrderFood.instance.setVisible(false);
 			OrderBusi.instance.setVisible(true);
-		}
-		if (b == MenuModFrame.instance.bSave) {
-			System.out.println("点击了确定");
-		}
-		if (b == MenuModFrame.instance.bIcon) {
-			System.out.println("点击了选择图片");
 		}
 
 	}
