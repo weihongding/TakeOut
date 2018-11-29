@@ -3,7 +3,15 @@ package util;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -18,6 +26,7 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.model.MenuTableModel;
 import gui.model.OrderCarTableModel;
+import service.BusinessService;
 
 /**
  * GUI工具类
@@ -29,6 +38,10 @@ public class GUIUtil {
 	public static int cus_id = 9;
 	public static int bus_id = 5;
 	public static int mana_id = 1;
+	
+	public static void main(String[] args) {
+		ImageCopy("红烧肉");
+	}
 
 	/**
 	 * 显示Panel
@@ -133,8 +146,8 @@ public class GUIUtil {
 	 * @param hight
 	 * @return
 	 */
-	public static ImageIcon setimgwh(String iconpath, int width, int hight) {
-		ImageIcon icon = new ImageIcon(iconpath);
+	public static ImageIcon setimgwh(String iconPath, int width, int hight) {
+		ImageIcon icon = new ImageIcon(iconPath);
 		icon.setImage(icon.getImage().getScaledInstance(width, hight, Image.SCALE_DEFAULT));
 		return icon;
 	}
@@ -219,8 +232,89 @@ public class GUIUtil {
 		return sum;
 	}
 
-	public static void main(String[] args) {
+	/**
+	 * 选择图片后根据菜品名复制到img下
+	 * @param foodname
+	 */
+	public static void ImageCopy(String foodname){
+		ImageChoose ic = new ImageChoose();
+		File file = ic.getImage();
+		String filePath = "img/"+BusinessService.get(bus_id).getName()+"-"+foodname+".jpg";
+		if(file == null){
+			JOptionPane.showMessageDialog(null, "未选择图片","错误",JOptionPane.ERROR_MESSAGE); 
+		}else{
+			if(new File(filePath).exists()){
+				int op = JOptionPane.showConfirmDialog(null, "已存在同名图片，是否覆盖？", "提示",JOptionPane.YES_NO_CANCEL_OPTION); 
+				if(op==JOptionPane.YES_OPTION){
+					copyFile(file, filePath);
+				}else{
+					JOptionPane.showMessageDialog(null, "取消图片上传","提示",JOptionPane.INFORMATION_MESSAGE); 
+				}
+			}
+			else{
+				copyFile(file, filePath);
+			}
+		}
+	}
+	
+	/**
+	 * 使用缓存流进行文件复制
+	 * 
+	 * @param file
+	 */
+	public static void copyFile(File file,String filePath) {
+		
+		
+		File file2 = new File(filePath);
+
+		InputStream inStream = null;
+		BufferedInputStream bin = null;
+		OutputStream outputStream = null;
+		BufferedOutputStream bout = null;
+		int i = -1;
+
+		try {
+			inStream = new FileInputStream(file);
+			bin = new BufferedInputStream(inStream);
+			outputStream = new FileOutputStream(filePath);
+			bout = new BufferedOutputStream(outputStream);
+			while ((i = bin.read()) != -1) {
+				bout.write(i);
+				// 注意，读取一个字节，然后写入缓存中！需要在最后将缓存中的内容写入文件中！
+				// 需要清空缓存区，将缓存区内容写入文件中！-flush()
+			}
+			JOptionPane.showMessageDialog(null, "图片上传成功！","提示",JOptionPane.INFORMATION_MESSAGE); 
+			// 如果要剪切，在此加一句delete即可！
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				// bout.flush();
+				bout.close();// close()方法内部自动调用flush()
+				outputStream.close();
+				bin.close();
+				inStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
-
+	
+	/**
+	 * 根据商家id和菜品名获得菜品绝对路径
+	 * @param bid
+	 * @param foodname
+	 * @return
+	 */
+	public static String getImgPath(int bid,String foodname){
+		String filePath = "img/"+BusinessService.get(bid).getName()+"-"+foodname+".jpg";
+		return filePath;
+	}
+	
 }

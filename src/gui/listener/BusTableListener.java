@@ -15,6 +15,7 @@ import gui.panel.B_EarnPanel;
 import gui.panel.B_MenLisPanel;
 import gui.panel.B_MyPanel;
 import gui.panel.B_OrdLisPanel;
+import util.GUIUtil;
 import util.TableInstance;
 
 /**
@@ -58,7 +59,7 @@ public class BusTableListener implements ActionListener {
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1) {
 				MenuModFrame.instance = new MenuModFrame((String) MenuTableModel.instance1.getValueAt(i, 0),
-						(Double) MenuTableModel.instance1.getValueAt(i, 1), "img/1.jpg");
+						(Double) MenuTableModel.instance1.getValueAt(i, 1),GUIUtil.getImgPath(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0)));
 				MenuModFrame.instance.setVisible(true);
 			}
 		}
