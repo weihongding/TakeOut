@@ -38,6 +38,7 @@ public class GUIUtil {
 	public static int cus_id = 9;
 	public static int bus_id = 5;
 	public static int mana_id = 1;
+	public static int c_bid = 5;
 	
 	public static void main(String[] args) {
 		ImageCopy("∫Ï…’»‚");
@@ -314,7 +315,10 @@ public class GUIUtil {
 	 */
 	public static String getImgPath(int bid,String foodname){
 		String filePath = "img/"+BusinessService.get(bid).getName()+"-"+foodname+".jpg";
-		return filePath;
+		if(new File(filePath).exists()){
+			return filePath;
+		}
+		return "img/NotImage.jpg";
 	}
 	
 }

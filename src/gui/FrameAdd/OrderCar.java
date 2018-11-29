@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import gui.model.MenuTableModel;
 import gui.model.OrderCarTableModel;
 import gui.model.OrderTableModel;
+import service.BusinessService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -29,7 +30,7 @@ public class OrderCar extends JFrame {
 
 	public OrderCar() {
 
-		jl1.setText("未命名食堂1号的购物车");
+		jl1.setText(BusinessService.get(GUIUtil.c_bid).getName()+"的购物车");
 		pTitle.add(jl1);
 		OrderCarTableModel.instance = new OrderCarTableModel();
 		t = new JTable(OrderCarTableModel.instance);

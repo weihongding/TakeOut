@@ -15,6 +15,7 @@ import gui.panel.C_ComPanel;
 import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
 import service.BusinessService;
+import util.GUIUtil;
 import util.TableInstance;
 
 /**
@@ -38,9 +39,9 @@ public class CusTableListener implements ActionListener {
 		if (b == cblp.bSee) {
 			int i = TableInstance.instance_bus_c.getSelectedRow();
 			String bname = (String)BusLisTableModel.instance_up.getValueAt(i, 0);
-			int bid = BusinessService.getid(bname);
+			GUIUtil.c_bid = BusinessService.getid(bname);
 			if (i != -1)
-			OrderBusi.instance = new OrderBusi(bid);
+			OrderBusi.instance = new OrderBusi();
 			OrderBusi.instance.setVisible(true);
 		}
 		if (b == colp.bSee) {

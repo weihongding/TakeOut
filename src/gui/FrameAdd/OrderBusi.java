@@ -30,13 +30,13 @@ public class OrderBusi extends JFrame {
 	public MenuTableModel m;
 	public JTable t;
 
-	public OrderBusi(int bid) {
-		m = new MenuTableModel(bid);
+	public OrderBusi() {
+		m = new MenuTableModel(GUIUtil.c_bid);
 		t = new JTable(m);
 		sp = new JScrollPane(t);
 		pSubmit.add(bSee);
 		pSubmit.add(bPlace);
-		this.setTitle(BusinessService.get(bid).getName());
+		this.setTitle(BusinessService.get(GUIUtil.c_bid).getName());
 		this.setLayout(new BorderLayout());
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
@@ -48,7 +48,7 @@ public class OrderBusi extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		instance = new OrderBusi(GUIUtil.bus_id);
+		instance = new OrderBusi();
 		instance.setVisible(true);
 	}
 

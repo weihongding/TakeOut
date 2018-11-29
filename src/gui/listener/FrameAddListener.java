@@ -12,6 +12,7 @@ import gui.FrameAdd.OrderBusi;
 import gui.FrameAdd.OrderCar;
 import gui.FrameAdd.OrderFood;
 import gui.model.MenuTableModel;
+import util.GUIUtil;
 import util.TableInstance;
 
 public class FrameAddListener implements ActionListener {
@@ -27,7 +28,7 @@ public class FrameAddListener implements ActionListener {
 		}
 		if (b == OrderBusi.instance.bSee) {
 			int i = OrderBusi.instance.t.getSelectedRow();
-			OrderFood.instance = new OrderFood((String)OrderBusi.instance.m.getValueAt(i, 0),(Double)OrderBusi.instance.m.getValueAt(i, 1), "img/1.jpg");
+			OrderFood.instance = new OrderFood((String)OrderBusi.instance.m.getValueAt(i, 0),(Double)OrderBusi.instance.m.getValueAt(i, 1), GUIUtil.getImgPath(GUIUtil.c_bid, (String)OrderBusi.instance.m.getValueAt(i, 0)));
 			OrderFood.instance.jtf.setText(Integer.toString((int)OrderBusi.instance.m.getValueAt(i, 2)));
 			OrderFood.instance.setVisible(true);
 		}
