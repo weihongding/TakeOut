@@ -29,10 +29,10 @@ public class MenuTableModel extends AbstractTableModel {
 
 	public static int[] num;
 
-	public static MenuTableModel instance1 = new MenuTableModel(columnNames1, FoodService.list_b(GUIUtil.bus_id));
+	public static MenuTableModel instance1 = new MenuTableModel(FoodService.list_b(GUIUtil.bus_id));
 
-	private MenuTableModel(String[] col, List<Food> menus) {
-		this.columnNames = col;
+	public MenuTableModel(List<Food> menus) {
+		this.columnNames = columnNames1;
 		this.menus = menus;
 	}
 

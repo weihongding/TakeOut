@@ -39,9 +39,9 @@ public class GUIUtil {
 	public static int bus_id = 5;
 	public static int mana_id = 1;
 	public static int c_bid = 5;
-	
+
 	public static void main(String[] args) {
-		ImageCopy("红烧肉");
+
 	}
 
 	/**
@@ -234,38 +234,50 @@ public class GUIUtil {
 	}
 
 	/**
-	 * 选择图片后根据菜品名复制到img下
+	 * 根据菜名和登陆的商家id得到预留的图片地址
+	 * 
 	 * @param foodname
+	 * @return
 	 */
-	public static void ImageCopy(String foodname){
+	public static String get_Foodimgpath(String foodname) {
+		String filePath = "img/" + BusinessService.get(bus_id).getName() + "-" + foodname + ".jpg";
+		return filePath;
+	}
+
+	/**
+	 * 图片复制器
+	 * 
+	 * @param oldpath
+	 * @param newpath
+	 */
+	public static void ImageCopy(String oldpath, String newpath) {
+		File file = new File(oldpath);
+		copyFile(file, newpath);
+	}
+
+	/**
+	 * 图片选择器
+	 * 
+	 * @param foodname
+	 * @return 选择的实际图片的地址
+	 */
+	public static String imgcho() {
 		ImageChoose ic = new ImageChoose();
 		File file = ic.getImage();
-		String filePath = "img/"+BusinessService.get(bus_id).getName()+"-"+foodname+".jpg";
-		if(file == null){
-			JOptionPane.showMessageDialog(null, "未选择图片","错误",JOptionPane.ERROR_MESSAGE); 
-		}else{
-			if(new File(filePath).exists()){
-				int op = JOptionPane.showConfirmDialog(null, "已存在同名图片，是否覆盖？", "提示",JOptionPane.YES_NO_CANCEL_OPTION); 
-				if(op==JOptionPane.YES_OPTION){
-					copyFile(file, filePath);
-				}else{
-					JOptionPane.showMessageDialog(null, "取消图片上传","提示",JOptionPane.INFORMATION_MESSAGE); 
-				}
-			}
-			else{
-				copyFile(file, filePath);
-			}
+		if (file == null) {
+			JOptionPane.showMessageDialog(null, "未选择图片", "错误", JOptionPane.ERROR_MESSAGE);
+			return "img/NotImage.jpg";
 		}
+		return file.getPath();
 	}
-	
+
 	/**
 	 * 使用缓存流进行文件复制
 	 * 
 	 * @param file
 	 */
-	public static void copyFile(File file,String filePath) {
-		
-		
+	public static void copyFile(File file, String filePath) {
+
 		File file2 = new File(filePath);
 
 		InputStream inStream = null;
@@ -284,7 +296,6 @@ public class GUIUtil {
 				// 注意，读取一个字节，然后写入缓存中！需要在最后将缓存中的内容写入文件中！
 				// 需要清空缓存区，将缓存区内容写入文件中！-flush()
 			}
-			JOptionPane.showMessageDialog(null, "图片上传成功！","提示",JOptionPane.INFORMATION_MESSAGE); 
 			// 如果要剪切，在此加一句delete即可！
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -306,19 +317,20 @@ public class GUIUtil {
 		}
 
 	}
-	
+
 	/**
 	 * 根据商家id和菜品名获得菜品绝对路径
+	 * 
 	 * @param bid
 	 * @param foodname
 	 * @return
 	 */
-	public static String getImgPath(int bid,String foodname){
-		String filePath = "img/"+BusinessService.get(bid).getName()+"-"+foodname+".jpg";
-		if(new File(filePath).exists()){
+	public static String getImgPath(int bid, String foodname) {
+		String filePath = "img/" + BusinessService.get(bid).getName() + "-" + foodname + ".jpg";
+		if (new File(filePath).exists()) {
 			return filePath;
 		}
 		return "img/NotImage.jpg";
 	}
-	
+
 }

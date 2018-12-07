@@ -16,5 +16,17 @@ public class FoodService {
 		return fdao.get(bid);
 	}
 	
+	public static void add(Food food){
+		fdao.add(food);
+	}
+	
+	public static void update(Food food){
+		fdao.update(food);
+	}
+	
+	public static Food get(int bid,String foodname){
+		Food food = fdao.get(bid, foodname);
+		return food;
+	}
 	
 }

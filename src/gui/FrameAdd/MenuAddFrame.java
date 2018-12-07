@@ -25,11 +25,13 @@ public class MenuAddFrame extends JFrame {
 	public static MenuAddFrame instance = new MenuAddFrame();
 	public JLabel[] jl = new JLabel[2];
 	public JPanel[] jp = new JPanel[3];
+	public JLabel jicon = new JLabel();
 	public JPanel pCent = new JPanel();
 	public JPanel pSout = new JPanel();
 	public JTextField[] jtf = new JTextField[2];
 	public JButton bIcon = new JButton("选择新图片");
 	public JButton bSave = new JButton("保存");
+	public ImageIcon icon;
 
 	public MenuAddFrame() {
 		jl[0] = new JLabel("菜名：");
@@ -40,13 +42,16 @@ public class MenuAddFrame extends JFrame {
 
 		jtf[0] = new JTextField(10);
 		jtf[1] = new JTextField(10);
-
+		icon = GUIUtil.setimgwh("img/NotImage.jpg", 150, 150);
+		jicon.setIcon(icon);
+		
 		jp[0].add(jl[0]);
 		jp[0].add(jtf[0]);
 		jp[0].setLayout(new GridLayout(1, 2));
 		jp[1].add(jl[1]);
 		jp[1].add(jtf[1]);
 		jp[1].setLayout(new GridLayout(1, 2));
+		jp[2].add(jicon);
 		jp[2].add(bIcon);
 
 		for (int i = 0; i < 3; i++) {
@@ -66,10 +71,17 @@ public class MenuAddFrame extends JFrame {
 		jtf[0].setText("");
 		jtf[1].setText("");
 	}
+	
 
 	public static void main(String[] args) {
 		new MenuAddFrame().setVisible(true);
 	}
+	
+	public void updateDate(String imgpath){
+		icon = GUIUtil.setimgwh(imgpath, 150, 150);
+		jicon.setIcon(icon);
+	}
+
 
 	public void addListener() {
 		MenuListener listener = new MenuListener();

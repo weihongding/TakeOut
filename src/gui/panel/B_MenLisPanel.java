@@ -9,6 +9,7 @@ import javax.swing.JTable;
 
 import gui.listener.BusTableListener;
 import gui.model.MenuTableModel;
+import service.FoodService;
 import util.GUIUtil;
 
 /**
@@ -48,6 +49,7 @@ public class B_MenLisPanel extends WorkingPanel{
 	
 	@Override
 	public void updateData() {
+		MenuTableModel.instance1 = new MenuTableModel(FoodService.list_b(GUIUtil.bus_id));
 		t.setModel(MenuTableModel.instance1);
 		sp.setViewportView(t);
 	}

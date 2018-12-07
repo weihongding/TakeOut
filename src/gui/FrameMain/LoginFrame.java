@@ -53,9 +53,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 		jb1 = new JButton("µÇÂ½");
 		jb2 = new JButton("ÖØÖÃ");
-		jb3 = new JButton("ÍË³ö");
+		jb3 = new JButton("×¢²á");
 		jb1.addActionListener(this);
 		jb2.addActionListener(this);
+		jb3.addActionListener(this);
 
 		jl1 = new JLabel("ÕË ºÅ£º");
 		jl2 = new JLabel("ÃÜ Âë£º");
@@ -165,8 +166,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 			}
 		} else if (e.getActionCommand() == "ÖØÖÃ") {
 			clean();
-		} else if (e.getActionCommand() == "ÍË³ö") {
+		} else if (e.getActionCommand() == "×¢²á") {
 			dispose();
+			RegisterFrame.instance.setVisible(true);
 		}
 
 	}

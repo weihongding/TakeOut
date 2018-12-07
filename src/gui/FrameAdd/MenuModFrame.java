@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entity.Food;
 import gui.listener.FrameAddListener;
 import gui.listener.MenuListener;
 import util.GUIUtil;
@@ -22,7 +23,8 @@ import util.GUIUtil;
  */
 public class MenuModFrame extends JFrame {
 
-	public static MenuModFrame instance = new MenuModFrame("无", 10.0, "0");
+	public static MenuModFrame instance = new MenuModFrame(new Food("无", 10, "img/NotImage.jpg", 5));
+	public static Food food = null;
 	public JLabel[] jl = new JLabel[2];
 	public JPanel[] jp = new JPanel[3];
 	public JLabel jicon = new JLabel();
@@ -31,9 +33,11 @@ public class MenuModFrame extends JFrame {
 	public JTextField[] jtf = new JTextField[2];
 	public JButton bIcon = new JButton("选择新图片");
 	public JButton bSave = new JButton("保存");
+	public ImageIcon icon;
 
-	public MenuModFrame(String name, Double price, String imgpath) {
-
+	public MenuModFrame(Food food) {
+		
+		this.food = food;
 		jl[0] = new JLabel("菜名：");
 		jl[1] = new JLabel("价格：");
 		for (int i = 0; i < 3; i++) {
@@ -41,10 +45,10 @@ public class MenuModFrame extends JFrame {
 		}
 
 		jtf[0] = new JTextField(10);
-		jtf[0].setText(name);
+		jtf[0].setText(food.getName());
 		jtf[1] = new JTextField(10);
-		jtf[1].setText(Double.toString(price));
-		ImageIcon icon = GUIUtil.setimgwh(imgpath, 150, 150);
+		jtf[1].setText(Double.toString(food.getPrice()));
+		icon = GUIUtil.setimgwh(food.getImage(), 150, 150);
 		jicon.setIcon(icon);
 
 		jp[0].add(jl[0]);
@@ -69,12 +73,16 @@ public class MenuModFrame extends JFrame {
 		addListener();
 
 	}
-
+	
 	public static void main(String[] args) {
-		instance = new MenuModFrame("回锅肉", 10.5, "img/1.jpg");
 		instance.setVisible(true);
 	}
-
+	
+	public void updateDate(String imgpath){
+		icon = GUIUtil.setimgwh(imgpath, 150, 150);
+		jicon.setIcon(icon);
+	}
+	
 	public void addListener() {
 		MenuListener listener = new MenuListener();
 		bSave.addActionListener(listener);

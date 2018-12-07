@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import entity.Food;
 import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
 import gui.model.MenuTableModel;
@@ -15,6 +16,7 @@ import gui.panel.B_EarnPanel;
 import gui.panel.B_MenLisPanel;
 import gui.panel.B_MyPanel;
 import gui.panel.B_OrdLisPanel;
+import service.FoodService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -57,9 +59,9 @@ public class BusTableListener implements ActionListener {
 		}
 		if (b == bmlp.bMod) {// ²Ëµ¥ÐÞ¸Ä
 			int i = bmlp.t.getSelectedRow();
+			Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
 			if (i != -1) {
-				MenuModFrame.instance = new MenuModFrame((String) MenuTableModel.instance1.getValueAt(i, 0),
-						(Double) MenuTableModel.instance1.getValueAt(i, 1),GUIUtil.getImgPath(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0)));
+				MenuModFrame.instance = new MenuModFrame(food);
 				MenuModFrame.instance.setVisible(true);
 			}
 		}

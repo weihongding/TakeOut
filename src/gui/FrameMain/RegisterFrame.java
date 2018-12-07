@@ -44,11 +44,12 @@ public class RegisterFrame extends JFrame implements ActionListener {
 		jp4 = new JPanel();
 		jp5 = new JPanel();
 
-		jb1 = new JButton("注册");
+		jb1 = new JButton("确认");
 		jb2 = new JButton("重置");
-		jb3 = new JButton("退出");
+		jb3 = new JButton("登陆");
 		jb1.addActionListener(this);
 		jb2.addActionListener(this);
+		jb3.addActionListener(this);
 
 		jl1 = new JLabel("注 册 账 号：");
 		jl2 = new JLabel("注 册 密 码：");
@@ -126,7 +127,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == "注册") {
+		if (e.getActionCommand() == "确认") {
 			if (jrb1.isSelected()) {
 				if(jtf.getText().equals("")){
 					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ",JOptionPane.ERROR_MESSAGE);
@@ -143,8 +144,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
 			}
 		} else if (e.getActionCommand() == "重置") {
 			clean();
-		} else if (e.getActionCommand() == "退出") {
+		} else if (e.getActionCommand() == "登陆") {
 			dispose();
+			LoginFrame.instance.setVisible(true);
 		}
 
 	}

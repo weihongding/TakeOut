@@ -19,7 +19,9 @@ public class CustomerDao {
 
 		//已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
 		CustomerDao dao = new CustomerDao();
-		
+		Customer cus = dao.get(13);
+		cus.setPhone("18050782349");
+		dao.update(cus);
 	}
 
 	/**
