@@ -9,6 +9,8 @@ import javax.swing.JTable;
 
 import gui.listener.CusTableListener;
 import gui.listener.ManaTableListener;
+import gui.model.OrderTableModel;
+import service.OrderService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -42,15 +44,13 @@ public class C_OrdLisPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-
+		OrderTableModel.instance_c.setOrdlis(OrderService.get("customer", GUIUtil.cus_id));
 	}
 
 	@Override
 	public void addListener() {
 		CusTableListener listener = new CusTableListener();
 		bSee.addActionListener(listener);
-
 	}
 
 }

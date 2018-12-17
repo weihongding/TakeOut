@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import gui.listener.FrameAddListener;
 import gui.model.MenuTableModel;
 import gui.model.OrderCarTableModel;
 import gui.model.OrderTableModel;
@@ -17,7 +18,9 @@ import util.GUIUtil;
 import util.TableInstance;
 
 public class OrderCar extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static OrderCar instance = new OrderCar();
 	public JLabel jl1 = new JLabel();
 	public JLabel jl2 = new JLabel();
@@ -57,8 +60,9 @@ public class OrderCar extends JFrame {
 	}
 	
 	public void addListener() {
-		// TODO Auto-generated method stub
-
+		FrameAddListener listener = new FrameAddListener();
+		bPlace.addActionListener(listener);
+		bQuit.addActionListener(listener);
 	}
 
 }

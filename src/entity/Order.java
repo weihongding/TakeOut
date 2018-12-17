@@ -18,10 +18,9 @@ public class Order {
 	 * @param cid
 	 * @param total_price
 	 */
-	public Order(int bid, int cid, double total_price) {
+	public Order(int bid, int cid) {
 		setBid(bid);
 		setCid(cid);
-		setTotal_price(total_price);
 	}
 
 	/**

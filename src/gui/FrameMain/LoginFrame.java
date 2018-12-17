@@ -27,7 +27,9 @@ import util.GUIUtil;
  *
  */
 public class LoginFrame extends JFrame implements ActionListener {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static LoginFrame instance = new LoginFrame();
 	JPanel jp1, jp2, jp3, jp4, jp5, jp6;
 	JButton jb1, jb2, jb3;

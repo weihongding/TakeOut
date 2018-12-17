@@ -15,7 +15,9 @@ import service.ApplyService;
 import util.GUIUtil;
 
 public class ApplyFrame extends JFrame implements ActionListener {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	JTextArea jta = new JTextArea(10, 20);
 	JButton bSub = new JButton("提交");
 	JButton bCan = new JButton("取消");

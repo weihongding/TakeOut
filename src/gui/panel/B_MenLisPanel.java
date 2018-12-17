@@ -19,15 +19,16 @@ import util.GUIUtil;
  * @作者 丁伟宏
  *
  */
-public class B_MenLisPanel extends WorkingPanel{
+public class B_MenLisPanel extends WorkingPanel {
 
 	public static B_MenLisPanel instance = new B_MenLisPanel();
 	public JButton bAdd = new JButton("新增");
 	public JButton bMod = new JButton("修改");
 	public JButton bDel = new JButton("删除");
 	public JTable t;
-	public JScrollPane  sp;
-	private B_MenLisPanel(){
+	public JScrollPane sp;
+
+	private B_MenLisPanel() {
 		t = new JTable(MenuTableModel.instance1);
 		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
@@ -40,19 +41,20 @@ public class B_MenLisPanel extends WorkingPanel{
 		this.add(pSubmit, BorderLayout.SOUTH);
 
 		addListener();
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance);
 	}
-	
+
 	@Override
 	public void updateData() {
 		MenuTableModel.instance1 = new MenuTableModel(FoodService.list_b(GUIUtil.bus_id));
 		t.setModel(MenuTableModel.instance1);
 		sp.setViewportView(t);
 	}
+
 	@Override
 	public void addListener() {
 		BusTableListener listener = new BusTableListener();
@@ -60,5 +62,5 @@ public class B_MenLisPanel extends WorkingPanel{
 		bMod.addActionListener(listener);
 		bDel.addActionListener(listener);
 	}
-	
+
 }

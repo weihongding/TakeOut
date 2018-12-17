@@ -1,5 +1,6 @@
 package dao;
 
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import entity.Food;
 import entity.Order;
 import util.DBUtil;
 import util.DateUtil;
+import util.GUIUtil;
 import util.NumberUtil;
 import util.StateUtil;
 
@@ -19,7 +22,8 @@ public class OrderDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		OrderDao dao = new OrderDao();
-		System.out.println(dao.earn_will(5));
+		Order order = new Order(5, 7);
+		dao.add(order);
 	}
 
 	/**
@@ -218,6 +222,76 @@ public class OrderDao {
 			e.printStackTrace();
 		}
 		return NumberUtil.sum(earn);
+	}
+
+	/**
+	 * 获取最后一行的订单
+	 * 
+	 * @return
+	 */
+	public Order get_last() {
+
+		Order order = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from `order` order by id DESC limit 1";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				int cid = rs.getInt("cid");
+				int bid = rs.getInt("bid");
+				double total_price = rs.getDouble("total_price");
+				Date time = DateUtil.toDate(rs.getTimestamp("time"));
+				String state = rs.getString("state");
+
+				order = new Order(bid, cid, total_price, time, state);
+				order.setId(id);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return order;
+
+	}
+
+	/**
+	 * 根据商家id、顾客id以及时间返回order实例
+	 * 
+	 * @param bid
+	 * @param cid
+	 * @param time
+	 * @return
+	 */
+	public Order get(int bid, int cid, Date time) {
+		java.sql.Timestamp t_time = DateUtil.toTimestamp(time);
+		Order order = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from `order` where bid = '" + bid + "' AND cid = '" + cid + "' AND time = '" + t_time
+					+ "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				double total_price = rs.getDouble("total_price");
+				String state = rs.getString("state");
+
+				order = new Order(bid, cid, total_price, t_time, state);
+				order.setId(id);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return order;
 	}
 
 }

@@ -1,6 +1,14 @@
 package gui.model;
 
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
+
+import entity.Order;
+import service.BusinessService;
+import service.CustomerService;
+import service.OrderService;
+import util.GUIUtil;
 
 /**
  * 订单表模型
@@ -11,24 +19,24 @@ import javax.swing.table.AbstractTableModel;
 public class OrderTableModel extends AbstractTableModel {
 
 	String[] columnNames;
-	String[][] ordlis;
+	List<Order> ordlis;
 
-	static String[] columnNames1 = { "商家", "时间", "状态" };
-	static String[][] ordlis1 = { { "商家1", "2018-10-21", "已送达" }, { "商家2", "2018-10-22", "已送达" } };
+	static String[] columnNames1 = { "商家", "时间", "状态" ,"总价"};
+	static String[] columnNames2 = { "顾客", "时间", "状态" ,"总价"};
 
-	static String[] columnNames2 = { "顾客", "时间", "状态" };
-	static String[][] ordlis2 = { { "顾客1", "2018-10-21", "已送达" }, { "顾客2", "2018-10-22", "已送达" } };
+	public static OrderTableModel instance_c = new OrderTableModel(columnNames1, OrderService.get("customer", GUIUtil.cus_id));
+	public static OrderTableModel instance_b = new OrderTableModel(columnNames2, OrderService.get("business", GUIUtil.bus_id));
 
-	public static OrderTableModel instance_c = new OrderTableModel(columnNames1, ordlis1);
-	public static OrderTableModel instance_b = new OrderTableModel(columnNames2, ordlis2);
-
-	private OrderTableModel(String[] col, String[][] ord) {
+	private OrderTableModel(String[] col, List<Order> list) {
 		this.columnNames = col;
-		this.ordlis = ord;
+		this.ordlis = list;
+	}
+	
+	public void setOrdlis(List<Order> list){
+		this.ordlis = list;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(ordlis1.length);
 	}
 
 	@Override
@@ -38,7 +46,7 @@ public class OrderTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return ordlis.length;
+		return ordlis.size();
 	}
 
 	public String getColumnName(int columnIndex) {
@@ -47,7 +55,18 @@ public class OrderTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return ordlis[rowIndex][columnIndex];
+		if (columnNames[columnIndex].equals("商家"))
+			return BusinessService.get(ordlis.get(rowIndex).getBid()).getName();
+		if (columnNames[columnIndex].equals("顾客"))
+			return CustomerService.get(ordlis.get(rowIndex).getCid()).getName();
+		if (columnNames[columnIndex].equals("时间"))
+			return ordlis.get(rowIndex).getTime();
+		if (columnNames[columnIndex].equals("状态"))
+			return ordlis.get(rowIndex).getState();
+		if (columnNames[columnIndex].equals("总价"))
+			return ordlis.get(rowIndex).getTotal_price();
+
+		return null;
 	}
 
 }

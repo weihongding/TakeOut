@@ -43,6 +43,15 @@ public class GUIUtil {
 	public static void main(String[] args) {
 
 	}
+	
+    public static void useLNF() {
+        try {
+            javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * œ‘ æPanel

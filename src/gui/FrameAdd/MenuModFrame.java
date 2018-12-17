@@ -22,7 +22,9 @@ import util.GUIUtil;
  *
  */
 public class MenuModFrame extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static MenuModFrame instance = new MenuModFrame(new Food("нч", 10, "img/NotImage.jpg", 5));
 	public static Food food = null;
 	public JLabel[] jl = new JLabel[2];

@@ -3,6 +3,7 @@ package gui.FrameMain;
 import javax.swing.JFrame;
 
 import gui.panel.CustomerPanel;
+import util.GUIUtil;
 
 /**
  * 商家主页面
@@ -11,7 +12,9 @@ import gui.panel.CustomerPanel;
  *
  */
 public class CustomerFrame extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static CustomerFrame instance = new CustomerFrame();
 
 	private CustomerFrame() {

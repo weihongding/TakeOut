@@ -23,7 +23,9 @@ import util.GUIUtil;
  *
  */
 public class OrderFood extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static OrderFood instance;
 	public JLabel[] jl = new JLabel[6];
 	public JLabel jicon = new JLabel();

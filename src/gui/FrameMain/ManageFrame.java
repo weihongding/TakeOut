@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import gui.panel.ManagePanel;
+import util.GUIUtil;
 
 /**
  * 管理员主页面
@@ -12,7 +13,9 @@ import gui.panel.ManagePanel;
  *
  */
 public class ManageFrame extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static ManageFrame instance = new ManageFrame();
 
 	private ManageFrame() {

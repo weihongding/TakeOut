@@ -3,9 +3,12 @@ package gui.FrameMain;
 import javax.swing.JFrame;
 
 import gui.panel.BusinessPanel;
+import util.GUIUtil;
 
 public class BusinessFrame extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static BusinessFrame instance = new BusinessFrame();
 
 	private BusinessFrame() {

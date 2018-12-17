@@ -19,9 +19,12 @@ import gui.panel.BusinessPanel;
 import gui.panel.CustomerPanel;
 import service.CustomerService;
 import util.CheckUtil;
+import util.GUIUtil;
 
 public class RegisterFrame extends JFrame implements ActionListener {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static RegisterFrame instance = new RegisterFrame();
 	JLabel jl1, jl2, jl3, jl4;
 	JTextField jtf;

@@ -38,11 +38,13 @@ public class CusTableListener implements ActionListener {
 
 		if (b == cblp.bSee) {
 			int i = TableInstance.instance_bus_c.getSelectedRow();
-			String bname = (String)BusLisTableModel.instance_up.getValueAt(i, 0);
-			GUIUtil.c_bid = BusinessService.getid(bname);
-			if (i != -1)
-			OrderBusi.instance = new OrderBusi();
-			OrderBusi.instance.setVisible(true);
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_up.getValueAt(i, 0);
+				GUIUtil.c_bid = BusinessService.getid(bname);
+				if (i != -1)
+					OrderBusi.instance = new OrderBusi();
+				OrderBusi.instance.setVisible(true);
+			}
 		}
 		if (b == colp.bSee) {
 			int i = TableInstance.instance_order_c.getSelectedRow();

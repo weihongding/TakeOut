@@ -152,6 +152,12 @@ public class FoodDao {
 		return foodArray;
 	}
 
+	/**
+	 * 根据商家ID和菜品名得到菜品实例
+	 * @param bid
+	 * @param foodname
+	 * @return
+	 */
 	public Food get(int bid, String foodname) {
 
 		Food food = null;

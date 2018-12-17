@@ -21,7 +21,9 @@ import util.GUIUtil;
  *
  */
 public class MenuAddFrame extends JFrame {
-
+	static {
+		GUIUtil.useLNF();
+	}
 	public static MenuAddFrame instance = new MenuAddFrame();
 	public JLabel[] jl = new JLabel[2];
 	public JPanel[] jp = new JPanel[3];
