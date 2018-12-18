@@ -24,7 +24,7 @@ public class OrderBusi extends JFrame {
 	static {
 		GUIUtil.useLNF();
 	}
-	public static OrderBusi instance;
+	public static OrderBusi instance = new OrderBusi();
 	public JButton bSee = new JButton("查看");
 	public JButton bPlace = new JButton("下单");
 	public JPanel pSubmit = new JPanel();

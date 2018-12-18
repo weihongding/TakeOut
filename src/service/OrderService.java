@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 
 import dao.FoodDao;
@@ -27,6 +28,7 @@ public class OrderService {
 
 	/**
 	 * 根据购物车保存订单到数据库
+	 * 
 	 * @param bid
 	 * @param cid
 	 * @param str
@@ -58,13 +60,21 @@ public class OrderService {
 			order.setTotal_price(total_price);
 			odao.update(order);
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public static List<Order> get(String status, int sid){
+
+	public static Order get(int bid, int cid, Date time) {
+		return odao.get(bid, cid, time);
+	}
+
+	public static List<Order> get(String status, int sid) {
 		return odao.get(status, sid);
+	}
+
+	public static List<Otof> getotof(int oid) {
+		return otofdao.get(oid);
 	}
 
 }

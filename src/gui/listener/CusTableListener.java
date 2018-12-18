@@ -2,11 +2,14 @@ package gui.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 
 import entity.Business;
+import entity.Order;
 import gui.FrameAdd.OrderBusi;
+import gui.FrameAdd.OrderFrame;
 import gui.model.BusLisTableModel;
 import gui.model.CusComTableModel;
 import gui.model.OrderTableModel;
@@ -15,6 +18,8 @@ import gui.panel.C_ComPanel;
 import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
 import service.BusinessService;
+import service.OrderService;
+import util.DateUtil;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -48,8 +53,13 @@ public class CusTableListener implements ActionListener {
 		}
 		if (b == colp.bSee) {
 			int i = TableInstance.instance_order_c.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了订单：" + OrderTableModel.instance_c.getValueAt(i, 0));
+			if (i != -1) {
+				int bid = BusinessService.getid((String) OrderTableModel.instance_c.getValueAt(i, 0));
+				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_c.getValueAt(i, 1));
+				Order order = OrderService.get(bid, GUIUtil.cus_id, time);
+				OrderFrame.instance_c = new OrderFrame(order);
+				OrderFrame.instance_c.setVisible(true);
+			}
 		}
 		if (b == ccp.bSee) {
 			int i = TableInstance.instance_com_c.getSelectedRow();

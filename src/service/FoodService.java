@@ -9,23 +9,30 @@ import entity.Food;
 public class FoodService {
 
 	static FoodDao fdao = new FoodDao();
-	
+
 	/** 根据商家id获得商家的菜单 */
-	public static List<Food> list_b(int bid){
+	public static List<Food> list_b(int bid) {
 		return fdao.get(bid);
 	}
-	
-	public static void add(Food food){
+
+	public static void add(Food food) {
 		fdao.add(food);
 	}
-	
-	public static void update(Food food){
+
+	public static void update(Food food) {
 		fdao.update(food);
 	}
-	
-	public static Food get(int bid,String foodname){
-		Food food = fdao.get(bid, foodname);
-		return food;
+
+	public static Food get(int bid, String foodname) {
+		return fdao.get(bid, foodname);
+	}
+
+	public static Food get(int foodid) {
+		return fdao.get_fid(foodid);
 	}
 	
+	public static void delete(Food food){
+		fdao.delete(food.getId());
+	}
+
 }

@@ -46,7 +46,7 @@ public class MenuAddFrame extends JFrame {
 		jtf[1] = new JTextField(10);
 		icon = GUIUtil.setimgwh("img/NotImage.jpg", 150, 150);
 		jicon.setIcon(icon);
-		
+
 		jp[0].add(jl[0]);
 		jp[0].add(jtf[0]);
 		jp[0].setLayout(new GridLayout(1, 2));
@@ -68,22 +68,20 @@ public class MenuAddFrame extends JFrame {
 
 		addListener();
 	}
-	
-	public void clean(){
+
+	public void clean() {
 		jtf[0].setText("");
 		jtf[1].setText("");
 	}
-	
 
 	public static void main(String[] args) {
 		new MenuAddFrame().setVisible(true);
 	}
-	
-	public void updateDate(String imgpath){
+
+	public void updateDate(String imgpath) {
 		icon = GUIUtil.setimgwh(imgpath, 150, 150);
 		jicon.setIcon(icon);
 	}
-
 
 	public void addListener() {
 		MenuListener listener = new MenuListener();

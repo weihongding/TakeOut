@@ -19,9 +19,8 @@ public class FoodDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、获取单个实例
 		FoodDao dao = new FoodDao();
-		Food food = dao.get(5, "回锅肉");
-		food.setPrice(1);
-		dao.update(food);
+		Food food = dao.get_fid(11);
+		System.out.println(food == null);
 	}
 
 	/**
@@ -154,6 +153,7 @@ public class FoodDao {
 
 	/**
 	 * 根据商家ID和菜品名得到菜品实例
+	 * 
 	 * @param bid
 	 * @param foodname
 	 * @return
@@ -183,6 +183,36 @@ public class FoodDao {
 
 			e.printStackTrace();
 		}
+		return food;
+
+	}
+
+	public Food get_fid(int foodid) {
+
+		Food food = null;
+
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from food where id = '" + foodid + "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int bid = rs.getInt("bid");
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String image = rs.getString("image");
+
+				food = new Food(name, price, image, bid);
+				food.setId(foodid);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
 		return food;
 
 	}

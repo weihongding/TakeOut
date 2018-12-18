@@ -51,5 +51,7 @@ public class CustomerService {
 		return cdao.check(account, password);
 
 	}
+	
+	
 
 }

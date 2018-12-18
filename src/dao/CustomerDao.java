@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import entity.Business;
 import entity.Customer;
 import util.DBUtil;
 import util.DateUtil;
@@ -19,9 +20,7 @@ public class CustomerDao {
 
 		//已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
 		CustomerDao dao = new CustomerDao();
-		Customer cus = dao.get(13);
-		cus.setPhone("18050782349");
-		dao.update(cus);
+		System.out.println(dao.getId("牧威"));
 	}
 
 	/**
@@ -181,6 +180,32 @@ public class CustomerDao {
 			e.printStackTrace();
 		}
 		return cus;
+	}
+	
+	/**
+	 * 根据name得到顾客id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public int getId(String name) {
+		int id = -1;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from customer where name = '" + name+ "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				id = rs.getInt("id");
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 	/**

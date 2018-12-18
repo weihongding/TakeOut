@@ -2,21 +2,29 @@ package gui.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import entity.Food;
+import entity.Order;
 import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
+import gui.FrameAdd.OrderFrame;
 import gui.model.MenuTableModel;
 import gui.model.OrderTableModel;
 import gui.panel.B_EarnPanel;
 import gui.panel.B_MenLisPanel;
 import gui.panel.B_MyPanel;
 import gui.panel.B_OrdLisPanel;
+import service.BusinessService;
+import service.CustomerService;
 import service.FoodService;
+import service.OrderService;
+import util.DateUtil;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -40,8 +48,13 @@ public class BusTableListener implements ActionListener {
 
 		if (b == bolp.bSee) {
 			int i = TableInstance.instance_order_b.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了订单" + OrderTableModel.instance_b.getValueAt(i, 0));
+			if (i != -1){
+//				int cid = CustomerService.getid((String) OrderTableModel.instance_c.getValueAt(i, 0));
+//				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_c.getValueAt(i, 1));
+//				Order order = OrderService.get(GUIUtil.bus_id, cid, time);
+//				OrderFrame.instance_b = new OrderFrame(order);
+//				OrderFrame.instance_b.setVisible(true);
+			}
 		}
 		if (b == bolp.bRece) {
 			int i = TableInstance.instance_order_b.getSelectedRow();
@@ -57,18 +70,22 @@ public class BusTableListener implements ActionListener {
 			MenuAddFrame.instance.clean();
 			MenuAddFrame.instance.setVisible(true);
 		}
-		if (b == bmlp.bMod) {// 菜单修改
+		if (b == bmlp.bMod) {// 菜品修改
 			int i = bmlp.t.getSelectedRow();
-			Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
 			if (i != -1) {
+				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
 				MenuModFrame.instance = new MenuModFrame(food);
 				MenuModFrame.instance.setVisible(true);
 			}
 		}
 		if (b == bmlp.bDel) {// 删除菜品
 			int i = bmlp.t.getSelectedRow();
-			if (i != -1)
-				System.out.println("删除了菜品" + MenuTableModel.instance1.getValueAt(i, 0));
+			if (i != -1){
+				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
+				FoodService.delete(food);
+				JOptionPane.showMessageDialog(null, "成功删除菜品："+food.getName(), "提示", JOptionPane.PLAIN_MESSAGE);
+				bmlp.updateData();
+			}
 		}
 
 	}

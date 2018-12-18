@@ -13,7 +13,9 @@ import gui.FrameAdd.MenuModFrame;
 import gui.FrameAdd.OrderBusi;
 import gui.FrameAdd.OrderCar;
 import gui.FrameAdd.OrderFood;
+import gui.FrameAdd.OrderFrame;
 import gui.model.MenuTableModel;
+import gui.model.OrderCarTableModel;
 import service.OrderService;
 import util.GUIUtil;
 import util.TableInstance;
@@ -26,8 +28,12 @@ public class FrameAddListener implements ActionListener {
 		JButton b = (JButton) e.getSource();// 获取按钮
 
 		if (b == OrderBusi.instance.bPlace) {
-			OrderCar.instance = new OrderCar();
-			OrderCar.instance.setVisible(true);
+			if (GUIUtil.getSum(new OrderCarTableModel(), 1, 2) == 0) {
+				JOptionPane.showMessageDialog(null, "没有选择餐品，下单失败！", "错误", JOptionPane.ERROR_MESSAGE);
+			} else {
+				OrderCar.instance = new OrderCar();
+				OrderCar.instance.setVisible(true);
+			}
 		}
 		if (b == OrderBusi.instance.bSee) {
 			int i = OrderBusi.instance.t.getSelectedRow();
@@ -51,13 +57,19 @@ public class FrameAddListener implements ActionListener {
 		if (b == OrderCar.instance.bPlace) {
 			String[][] str = GUIUtil.getArray_String(OrderBusi.instance.m, OrderBusi.instance.m.num);
 			boolean flag = OrderService.add(GUIUtil.c_bid, GUIUtil.cus_id, str);
-			if(flag){
-				JOptionPane.showMessageDialog(null, "下单成功！","提示",JOptionPane.PLAIN_MESSAGE);  
-			}else{
-				JOptionPane.showMessageDialog(null, "下单失败！","错误",JOptionPane.ERROR_MESSAGE);
+			if (flag) {
+				JOptionPane.showMessageDialog(null, "下单成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+				OrderCar.instance.setVisible(false);
+			} else {
+				JOptionPane.showMessageDialog(null, "下单失败！", "错误", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
+		if (b == OrderFrame.instance_c.bPlace) {
+			OrderFrame.instance_c.setVisible(false);
+		}
+		if (b == OrderFrame.instance_b.bPlace) {
+			OrderFrame.instance_b.setVisible(false);
+		}
 	}
 
 }

@@ -33,7 +33,7 @@ public class OrderCar extends JFrame {
 
 	public OrderCar() {
 
-		jl1.setText(BusinessService.get(GUIUtil.c_bid).getName()+"的购物车");
+		jl1.setText(BusinessService.get(GUIUtil.c_bid).getName() + "的购物车");
 		pTitle.add(jl1);
 		OrderCarTableModel.instance = new OrderCarTableModel();
 		t = new JTable(OrderCarTableModel.instance);
@@ -58,7 +58,7 @@ public class OrderCar extends JFrame {
 		instance = new OrderCar();
 		instance.setVisible(true);
 	}
-	
+
 	public void addListener() {
 		FrameAddListener listener = new FrameAddListener();
 		bPlace.addActionListener(listener);
