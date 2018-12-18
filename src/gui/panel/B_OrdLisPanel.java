@@ -1,4 +1,4 @@
- package gui.panel;
+package gui.panel;
 
 import java.awt.BorderLayout;
 
@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import gui.listener.BusTableListener;
+import gui.model.OrderTableModel;
+import service.OrderService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -18,15 +20,16 @@ import util.TableInstance;
  * @作者 丁伟宏
  *
  */
-public class B_OrdLisPanel extends WorkingPanel{
+public class B_OrdLisPanel extends WorkingPanel {
 	public static B_OrdLisPanel instance = new B_OrdLisPanel();
 	public JButton bSee = new JButton("查看详情");
 	public JButton bRece = new JButton("接单");
-	public JButton bReje = new JButton("拒接");
+	public JButton bReje = new JButton("送达");
 	public JTable t = TableInstance.instance_order_b;
-	
-	private B_OrdLisPanel(){
-		JScrollPane sp = new JScrollPane(t);
+	public JScrollPane sp;
+
+	private B_OrdLisPanel() {
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
 		pSubmit.add(bSee);
 		pSubmit.add(bRece);
@@ -38,15 +41,16 @@ public class B_OrdLisPanel extends WorkingPanel{
 
 		addListener();
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance);
 	}
-	
+
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-		
+		OrderTableModel.instance_b.setOrdlis(OrderService.get("business", GUIUtil.bus_id));
+		t = TableInstance.instance_order_b;
+		sp.setViewportView(t);
 	}
 
 	@Override
@@ -57,6 +61,4 @@ public class B_OrdLisPanel extends WorkingPanel{
 		bReje.addActionListener(listener);
 	}
 
-	
-	
 }

@@ -22,20 +22,20 @@ import util.GUIUtil;
  * @作者 丁伟宏
  *
  */
-public class C_MyModPanel extends WorkingPanel{
+public class C_MyModPanel extends WorkingPanel {
 
 	public static C_MyModPanel instance = new C_MyModPanel();
-	public Customer c = CustomerService.get(GUIUtil.cus_id);//后期service直接传入id，返回一个customer对象
+	public Customer c = CustomerService.get(GUIUtil.cus_id);// 后期service直接传入id，返回一个customer对象
 	public JButton bSave = new JButton("保存");
 	public JLabel[] jl = new JLabel[4];
 	public JTextField[] jtf = new JTextField[4];
 	public JPanel[] jp = new JPanel[4];
 	public JPanel jp_all = new JPanel();
 	public JPanel pSubmit = new JPanel();
-	
+
 	private C_MyModPanel() {
-		
-		for (int i = 0;i<4;i++) {
+
+		for (int i = 0; i < 4; i++) {
 			jl[i] = new JLabel();
 			jp[i] = new JPanel();
 			jtf[i] = new JTextField(10);
@@ -48,39 +48,36 @@ public class C_MyModPanel extends WorkingPanel{
 		jtf[1].setText(c.getDes());
 		jtf[2].setText(c.getPhone());
 		jtf[3].setText(c.getAddress());
-		
-		for(int i = 0;i<4;i++){
+
+		for (int i = 0; i < 4; i++) {
 			jp[i].add(jl[i]);
 			jp[i].add(jtf[i]);
 		}
-		
+
 		for (JPanel jpa : jp) {
 			jp_all.add(jpa);
 		}
-		
-		jp_all.setLayout(new GridLayout(4,1));
-		
+
+		jp_all.setLayout(new GridLayout(4, 1));
+
 		pSubmit.add(bSave);
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(jp_all, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
-		
+
 		addListener();
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		GUIUtil.showPanel(instance);
 	}
-	
+
 	@Override
 	public void updateData() {
-		Customer c = CustomerService.get(GUIUtil.cus_id);
-		jtf[0].setText(c.getName());
-		jtf[1].setText(c.getDes());
-		jtf[2].setText(c.getPhone());
-		jtf[3].setText(c.getAddress());
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -88,5 +85,5 @@ public class C_MyModPanel extends WorkingPanel{
 		CusWorkpanelListener listener = new CusWorkpanelListener();
 		bSave.addActionListener(listener);
 	}
-	
+
 }

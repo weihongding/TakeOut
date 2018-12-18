@@ -17,6 +17,7 @@ import gui.panel.BusinessPanel;
 import service.BusinessService;
 import util.CheckUtil;
 import util.GUIUtil;
+import util.StateUtil;
 
 /**
  * 商家子页面监听
@@ -50,7 +51,7 @@ public class BusWorkpanelListener implements ActionListener {
 		}
 		if (b == B_MyPanel.instance.bApp) {
 			String state = BusinessService.get(GUIUtil.bus_id).getState();
-			if (state.equals("上架中")) {
+			if (state.equals(StateUtil.busi[1])) {
 				JOptionPane.showMessageDialog(null, "您已上架，无需申请！", "", JOptionPane.ERROR_MESSAGE);
 			} else {
 				new ApplyFrame().setVisible(true);

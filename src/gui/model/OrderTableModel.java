@@ -23,7 +23,7 @@ public class OrderTableModel extends AbstractTableModel {
 	List<Order> ordlis;
 
 	static String[] columnNames1 = { "商家", "时间", "状态", "总价" };
-	static String[] columnNames2 = { "顾客", "时间", "状态", "总价" };
+	static String[] columnNames2 = { "顾客手机", "时间", "状态", "总价" };
 
 	public static OrderTableModel instance_c = new OrderTableModel(columnNames1,
 			OrderService.get("customer", GUIUtil.cus_id));
@@ -60,8 +60,8 @@ public class OrderTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if (columnNames[columnIndex].equals("商家"))
 			return BusinessService.get(ordlis.get(rowIndex).getBid()).getName();
-		if (columnNames[columnIndex].equals("顾客"))
-			return CustomerService.get(ordlis.get(rowIndex).getCid()).getName();
+		if (columnNames[columnIndex].equals("顾客手机"))
+			return CustomerService.get(ordlis.get(rowIndex).getCid()).getPhone();
 		if (columnNames[columnIndex].equals("时间"))
 			return DateUtil.formatDate(ordlis.get(rowIndex).getTime());
 		if (columnNames[columnIndex].equals("状态"))

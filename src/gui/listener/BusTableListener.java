@@ -26,6 +26,7 @@ import service.FoodService;
 import service.OrderService;
 import util.DateUtil;
 import util.GUIUtil;
+import util.StateUtil;
 import util.TableInstance;
 
 /**
@@ -48,23 +49,35 @@ public class BusTableListener implements ActionListener {
 
 		if (b == bolp.bSee) {
 			int i = TableInstance.instance_order_b.getSelectedRow();
-			if (i != -1){
-//				int cid = CustomerService.getid((String) OrderTableModel.instance_c.getValueAt(i, 0));
-//				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_c.getValueAt(i, 1));
-//				Order order = OrderService.get(GUIUtil.bus_id, cid, time);
-//				OrderFrame.instance_b = new OrderFrame(order);
-//				OrderFrame.instance_b.setVisible(true);
+			if (i != -1) {
+				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
+				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_b.getValueAt(i, 1));
+				Order order = OrderService.get(GUIUtil.bus_id, cid, time);
+				OrderFrame.instance_b = new OrderFrame(order);
+				OrderFrame.instance_b.setVisible(true);
 			}
 		}
 		if (b == bolp.bRece) {
 			int i = TableInstance.instance_order_b.getSelectedRow();
-			if (i != -1)
-				System.out.println("接收了订单" + OrderTableModel.instance_b.getValueAt(i, 0));
+			if (i != -1) {
+				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
+				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_b.getValueAt(i, 1));
+				Order order = OrderService.get(GUIUtil.bus_id, cid, time);
+				order.setState(StateUtil.order[1]);
+				OrderService.update(order);
+				bolp.updateData();
+			}
 		}
 		if (b == bolp.bReje) {
 			int i = TableInstance.instance_order_b.getSelectedRow();
-			if (i != -1)
-				System.out.println("拒接了订单" + OrderTableModel.instance_b.getValueAt(i, 0));
+			if (i != -1) {
+				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
+				Date time = DateUtil.stringToDate((String) OrderTableModel.instance_b.getValueAt(i, 1));
+				Order order = OrderService.get(GUIUtil.bus_id, cid, time);
+				order.setState(StateUtil.order[2]);
+				OrderService.update(order);
+				bolp.updateData();
+			}
 		}
 		if (b == bmlp.bAdd) {// 增加菜品
 			MenuAddFrame.instance.clean();
@@ -80,10 +93,10 @@ public class BusTableListener implements ActionListener {
 		}
 		if (b == bmlp.bDel) {// 删除菜品
 			int i = bmlp.t.getSelectedRow();
-			if (i != -1){
+			if (i != -1) {
 				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
 				FoodService.delete(food);
-				JOptionPane.showMessageDialog(null, "成功删除菜品："+food.getName(), "提示", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "成功删除菜品：" + food.getName(), "提示", JOptionPane.PLAIN_MESSAGE);
 				bmlp.updateData();
 			}
 		}

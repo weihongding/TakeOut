@@ -49,7 +49,7 @@ public class NumberUtil {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getNum(-100, 100));
+		System.out.println(getTelephone());
 	}
 
 }

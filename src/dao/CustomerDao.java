@@ -20,7 +20,7 @@ public class CustomerDao {
 
 		//已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
 		CustomerDao dao = new CustomerDao();
-		System.out.println(dao.getId("牧威"));
+		System.out.println(dao.getId("18050782349"));
 	}
 
 	/**
@@ -183,16 +183,16 @@ public class CustomerDao {
 	}
 	
 	/**
-	 * 根据name得到顾客id
+	 * 根据phone得到顾客id
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public int getId(String name) {
+	public int getId(String phone) {
 		int id = -1;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-			String sql = "select * from customer where name = '" + name+ "'";
+			String sql = "select * from customer where phone = '" + phone+ "'";
 
 			ResultSet rs = s.executeQuery(sql);
 

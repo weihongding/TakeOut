@@ -73,7 +73,7 @@ public class B_MyModPanel extends WorkingPanel{
 	@Override
 	public void updateData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

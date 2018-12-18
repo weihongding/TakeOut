@@ -77,4 +77,8 @@ public class OrderService {
 		return otofdao.get(oid);
 	}
 
+	public static void update(Order order){
+		odao.update(order);
+	}
+	
 }

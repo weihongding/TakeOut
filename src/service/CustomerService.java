@@ -52,6 +52,10 @@ public class CustomerService {
 
 	}
 	
+	public static int getid(String phone){
+		return cdao.getId(phone);
+	}
+	
 	
 
 }

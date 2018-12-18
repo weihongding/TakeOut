@@ -44,7 +44,8 @@ public class B_EarnPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
+		jl1.setText("已送达订单："+Double.toString(OrderService.earn_have(GUIUtil.bus_id)));
+		jl2.setText("未送达订单："+Double.toString(OrderService.earn_will(GUIUtil.bus_id)));
 
 	}
 
