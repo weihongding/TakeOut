@@ -4,6 +4,7 @@ import dao.ApplyDao;
 import entity.Apply;
 import util.CheckUtil;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -22,6 +23,18 @@ public class ApplyService {
 		}
 	}
 
+	public static Apply get(int aid) {
+		return adao.get(aid);
+	}
+
+	public static Apply get(int bid, Date time) {
+		return adao.get(bid, time);
+	}
+
+	public static void update(Apply app){
+		adao.update(app);
+	}
+	
 	/**
 	 * 获取投诉建议集合
 	 */

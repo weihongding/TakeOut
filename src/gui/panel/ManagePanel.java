@@ -24,20 +24,18 @@ public class ManagePanel extends JPanel {
 	public static ManagePanel instance = new ManagePanel();
 	public JToolBar tb = new JToolBar();
 	public JButton bBusApp = new JButton("上架申请");
-	public JButton bBusLis_up = new JButton("上架中商家");
-	public JButton bBusLis_down = new JButton("下架中商家");
+	public JButton bBusLis_all = new JButton("商家列表");
 	public JButton bCusCom = new JButton("投诉建议");
 	public CenterPanel workingPanel;
 
 	private ManagePanel() {
 		tb.add(bBusApp);
-		tb.add(bBusLis_up);
-		tb.add(bBusLis_down);
+		tb.add(bBusLis_all);
 		tb.add(bCusCom);
 		tb.setFloatable(false);
 
 		workingPanel = new CenterPanel(0.8);
-		
+
 		setLayout(new BorderLayout());
 		add(tb, BorderLayout.NORTH);
 		add(workingPanel, BorderLayout.CENTER);
@@ -48,8 +46,7 @@ public class ManagePanel extends JPanel {
 		ManaWorkpanelListener listener = new ManaWorkpanelListener();
 
 		bBusApp.addActionListener(listener);
-		bBusLis_up.addActionListener(listener);
-		bBusLis_down.addActionListener(listener);
+		bBusLis_all.addActionListener(listener);
 		bCusCom.addActionListener(listener);
 
 	}

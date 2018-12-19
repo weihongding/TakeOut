@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.*;
 
 import entity.Apply;
+import entity.Customer;
+import entity.Order;
 import util.DBUtil;
 import util.DateUtil;
 import util.StateUtil;
@@ -18,7 +20,7 @@ public class ApplyDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		ApplyDao dao = new ApplyDao();
-		Apply app = dao.list().get(1);
+		Apply app = dao.get(18);
 		System.out.println(app.getContent());
 	}
 
@@ -147,6 +149,73 @@ public class ApplyDao {
 			e.printStackTrace();
 		}
 		return appArray;
+	}
+
+	/**
+	 * 根据id得到申请实例
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Apply get(int id) {
+		Apply app = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from apply where id = " + id;
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int bid = rs.getInt("bid");
+				String content = rs.getString("content");
+				Date time = DateUtil.toDate(rs.getTimestamp("time"));
+				String state = rs.getString("state");
+
+				app = new Apply(bid, content, time, state);
+				app.setId(id);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return app;
+	}
+
+	/**
+	 * 根据商家id以及时间返回apply实例
+	 * 
+	 * @param bid
+	 * @param cid
+	 * @param time
+	 * @return
+	 */
+	public Apply get(int bid, Date time) {
+		java.sql.Timestamp t_time = DateUtil.toTimestamp(time);
+		Apply app = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from apply where bid = '" + bid + "' AND time = '" + t_time + "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String content = rs.getString("content");
+				String state = rs.getString("state");
+				
+				app = new Apply(bid, content, t_time, state);
+				app.setId(id);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return app;
 	}
 
 }

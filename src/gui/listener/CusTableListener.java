@@ -46,8 +46,7 @@ public class CusTableListener implements ActionListener {
 			if (i != -1) {
 				String bname = (String) BusLisTableModel.instance_up.getValueAt(i, 0);
 				GUIUtil.c_bid = BusinessService.getid(bname);
-				if (i != -1)
-					OrderBusi.instance = new OrderBusi();
+				OrderBusi.instance = new OrderBusi(GUIUtil.c_bid);
 				OrderBusi.instance.setVisible(true);
 			}
 		}

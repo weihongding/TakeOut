@@ -27,7 +27,7 @@ public class FrameAddListener implements ActionListener {
 
 		JButton b = (JButton) e.getSource();// 获取按钮
 
-		if (b == OrderBusi.instance.bPlace) {
+		if (b == OrderBusi.instance.bPlace) {//商家菜单 下单
 			if (GUIUtil.getSum(new OrderCarTableModel(), 1, 2) == 0) {
 				JOptionPane.showMessageDialog(null, "没有选择餐品，下单失败！", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
@@ -35,7 +35,7 @@ public class FrameAddListener implements ActionListener {
 				OrderCar.instance.setVisible(true);
 			}
 		}
-		if (b == OrderBusi.instance.bSee) {
+		if (b == OrderBusi.instance.bSee) {//商家菜单 查看菜品详情
 			int i = OrderBusi.instance.t.getSelectedRow();
 			if (i != -1) {
 				OrderFood.instance = new OrderFood((String) OrderBusi.instance.m.getValueAt(i, 0),
@@ -45,7 +45,7 @@ public class FrameAddListener implements ActionListener {
 				OrderFood.instance.setVisible(true);
 			}
 		}
-		if (b == OrderFood.instance.bSave) {
+		if (b == OrderFood.instance.bSave) {//商家菜品 确定数量
 			int i = OrderBusi.instance.t.getSelectedRow();
 			if (i != -1) {
 				MenuTableModel.num[i] = Integer.parseInt(OrderFood.instance.jtf.getText());
@@ -54,7 +54,7 @@ public class FrameAddListener implements ActionListener {
 				OrderBusi.instance.setVisible(true);
 			}
 		}
-		if (b == OrderCar.instance.bPlace) {
+		if (b == OrderCar.instance.bPlace) {//购物车 下单
 			String[][] str = GUIUtil.getArray_String(OrderBusi.instance.m, OrderBusi.instance.m.num);
 			boolean flag = OrderService.add(GUIUtil.c_bid, GUIUtil.cus_id, str);
 			if (flag) {

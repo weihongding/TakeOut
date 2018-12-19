@@ -18,9 +18,8 @@ public class Complain_disposeDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		Complain_disposeDao dao = new Complain_disposeDao();
-		Complain_dispose comp = dao.get(3).get(0);
-		comp.setContent("将处理");
-		dao.update(comp);
+		Complain_dispose comp = dao.list(3).get(dao.list(3).size()-1);
+		System.out.println(comp.getContent());
 
 	}
 
@@ -118,19 +117,19 @@ public class Complain_disposeDao {
 	}
 
 	/**
-	 * a 根据投诉建议id得到投诉建议反馈实例集合
+	 * 根据投诉建议id得到投诉建议反馈实例集合
 	 * 
 	 * @param
 	 * @return
 	 */
-	public List<Complain_dispose> get(int Coid) {
+	public List<Complain_dispose> list(int coid) {
 		List<Complain_dispose> compArray = new ArrayList<Complain_dispose>();
 
 		String sql = "select * from Complain_dispose where Coid = ?";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
-			ps.setInt(1, Coid);
+			ps.setInt(1, coid);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -140,7 +139,7 @@ public class Complain_disposeDao {
 				String content = rs.getString("content");
 				Date time = DateUtil.toDate(rs.getTimestamp("time"));
 
-				Complain_dispose comp = new Complain_dispose(Coid, mid, content, time);
+				Complain_dispose comp = new Complain_dispose(coid, mid, content, time);
 				comp.setId(id);
 
 				compArray.add(comp);

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import entity.Apply;
 import entity.Complain;
 import util.DBUtil;
 import util.DateUtil;
@@ -18,9 +19,9 @@ public class ComplainDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		ComplainDao dao = new ComplainDao();
-		Complain comp = dao.get(7).get(0);
-		comp.setContent("态度差");
-		dao.delete(comp.getId());
+		Complain comp = dao.get(9);
+		System.out.println(comp.getContent());
+		
 	}
 
 	/**
@@ -117,12 +118,12 @@ public class ComplainDao {
 	}
 
 	/**
-	 * a 根据顾客id得到投诉建议实例集合
+	 * 根据顾客id得到投诉建议实例集合
 	 * 
 	 * @param cid
 	 * @return
 	 */
-	public List<Complain> get(int cid) {
+	public List<Complain> list(int cid) {
 		List<Complain> compArray = new ArrayList<Complain>();
 
 		String sql = "select * from Complain where cid = ?";
@@ -150,5 +151,37 @@ public class ComplainDao {
 		}
 		return compArray;
 	}
+	
+	/**
+	 * 根据id得到complain实例
+	 * @param id
+	 * @return
+	 */
+	public Complain get(int id) {
+		Complain comp = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from complain where id = " + id;
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int cid = rs.getInt("cid");
+				String content = rs.getString("content");
+				Date time = DateUtil.toDate(rs.getTimestamp("time"));
+				String state = rs.getString("state");
+
+				comp = new Complain(cid, content, time, state);
+				comp.setId(id);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return comp;
+	}
+	
 
 }

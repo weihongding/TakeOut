@@ -24,7 +24,7 @@ public class OrderBusi extends JFrame {
 	static {
 		GUIUtil.useLNF();
 	}
-	public static OrderBusi instance = new OrderBusi();
+	public static OrderBusi instance = new OrderBusi(GUIUtil.c_bid);
 	public JButton bSee = new JButton("查看");
 	public JButton bPlace = new JButton("下单");
 	public JPanel pSubmit = new JPanel();
@@ -32,8 +32,8 @@ public class OrderBusi extends JFrame {
 	public MenuTableModel m;
 	public JTable t;
 
-	public OrderBusi() {
-		m = new MenuTableModel(GUIUtil.c_bid);
+	public OrderBusi(int bid) {
+		m = new MenuTableModel(bid);
 		t = new JTable(m);
 		sp = new JScrollPane(t);
 		pSubmit.add(bSee);
@@ -50,7 +50,6 @@ public class OrderBusi extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		instance = new OrderBusi();
 		instance.setVisible(true);
 	}
 

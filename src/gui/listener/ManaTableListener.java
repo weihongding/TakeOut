@@ -2,10 +2,14 @@ package gui.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+import entity.Apply;
+import entity.Business;
+import gui.FrameAdd.ApplyFrame;
 import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
 import gui.FrameAdd.OrderBusi;
@@ -24,10 +28,14 @@ import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
 import gui.panel.CustomerPanel;
 import gui.panel.M_BusAppPanel;
-import gui.panel.M_BusLisPanel_down;
-import gui.panel.M_BusLisPanel_up;
+import gui.panel.M_BusLisPanel;
 import gui.panel.M_CusComPanel;
 import gui.panel.ManagePanel;
+import service.ApplyService;
+import service.BusinessService;
+import util.DateUtil;
+import util.GUIUtil;
+import util.StateUtil;
 import util.TableInstance;
 
 /**
@@ -41,50 +49,76 @@ public class ManaTableListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		M_BusLisPanel_up mblp_up = M_BusLisPanel_up.instance;// 上架中的商家
-		M_BusLisPanel_down mblp_down = M_BusLisPanel_down.instance;// 下架中的商家
+		M_BusLisPanel mblp = M_BusLisPanel.instance;// 商家列表
 		M_BusAppPanel mbap = M_BusAppPanel.instance;// 申请上架的商家
 		M_CusComPanel mccp = M_CusComPanel.instance;// 投诉建议
 
 		JButton b = (JButton) e.getSource();
 
 		// 管理员子页面监听
-		if (b == mblp_up.bSee) {
-			int i = TableInstance.instance_bus_up.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了商家:" + BusLisTableModel.instance_up.getValueAt(i, 0));
+		if (b == mblp.bUp) {// 上架商家
+			int i = TableInstance.instance_bus_all.getSelectedRow();
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_all.getValueAt(i, 0);
+				int bid = BusinessService.getid(bname);
+				Business bus = BusinessService.get(bid);
+				bus.setState(StateUtil.busi[1]);
+				BusinessService.update(bus);
+				mblp.updateData();
+			}
 		}
-		if (b == mblp_up.bDown) {
-			int i = TableInstance.instance_bus_up.getSelectedRow();
-			if (i != -1)
-				System.out.println("下架了商家:" + BusLisTableModel.instance_up.getValueAt(i, 0));
+		if (b == mblp.bDown) {// 下架商家
+			int i = TableInstance.instance_bus_all.getSelectedRow();
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_all.getValueAt(i, 0);
+				int bid = BusinessService.getid(bname);
+				Business bus = BusinessService.get(bid);
+				bus.setState(StateUtil.busi[0]);
+				BusinessService.update(bus);
+				mblp.updateData();
+			}
 		}
-		if (b == mblp_down.bSee) {
-			int i = TableInstance.instance_bus_down.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了商家:" + BusLisTableModel.instance_down.getValueAt(i, 0));
-		}
-		if (b == mblp_down.bUp) {
-			int i = TableInstance.instance_bus_down.getSelectedRow();
-			if (i != -1)
-				System.out.println("上架了商家:" + BusLisTableModel.instance_down.getValueAt(i, 0));
-		}
-		if (b == mbap.bSee) {
+		if (b == mbap.bSee) {// 查看上架申请
 			int i = TableInstance.instance_bus_app.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了商家:" + BusLisTableModel.instance_app.getValueAt(i, 0));
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_app.getValueAt(i, 0);
+				int bid = BusinessService.getid(bname);
+				Date time = DateUtil.stringToDate((String) BusLisTableModel.instance_app.getValueAt(i, 1));
+				Apply app = ApplyService.get(bid, time);
+				int aid = app.getId();
+				new ApplyFrame(aid).setVisible(true);
+			}
 		}
-		if (b == mbap.bAdopt) {
+		if (b == mbap.bAdopt) {// 通过上架申请
 			int i = TableInstance.instance_bus_app.getSelectedRow();
-			if (i != -1)
-				System.out.println("通过了商家[" + BusLisTableModel.instance_app.getValueAt(i, 0) + "]的上架申请");
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_app.getValueAt(i, 0);
+				int bid = BusinessService.getid(bname);
+				Business bus = BusinessService.get(bid);
+				Date time = DateUtil.stringToDate((String) BusLisTableModel.instance_app.getValueAt(i, 1));
+				Apply app = ApplyService.get(bid, time);
+				int aid = app.getId();
+				bus.setState(StateUtil.busi[1]);
+				app.setState(StateUtil.apply[1]);
+				ApplyService.update(app);
+				BusinessService.update(bus);
+				mbap.updateData();
+			}
 		}
-		if (b == mbap.bReject) {
+		if (b == mbap.bReject) {// 驳回上架申请
 			int i = TableInstance.instance_bus_app.getSelectedRow();
-			if (i != -1)
-				System.out.println("驳回了商家[" + BusLisTableModel.instance_app.getValueAt(i, 0) + "]的上架申请");
+			if (i != -1) {
+				String bname = (String) BusLisTableModel.instance_app.getValueAt(i, 0);
+				int bid = BusinessService.getid(bname);
+				Date time = DateUtil.stringToDate((String) BusLisTableModel.instance_app.getValueAt(i, 1));
+				Apply app = ApplyService.get(bid, time);
+				int aid = app.getId();
+				app.setState(StateUtil.apply[2]);
+				ApplyService.update(app);
+				mbap.updateData();
+			}
 		}
-		if (b == mccp.bSee) {
+		if (b == mccp.bSee) {// 查看投诉建议
 			int i = TableInstance.instance_com_m.getSelectedRow();
 			if (i != -1)
 				System.out.println("查看了投诉建议：" + CusComTableModel.instance_m.getValueAt(i, 0));

@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import gui.listener.ManaTableListener;
 import gui.model.BusLisTableModel;
+import service.BusinessService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -22,18 +23,18 @@ import util.TableInstance;
  * @作者 丁伟宏
  *
  */
-public class M_BusLisPanel_down extends WorkingPanel {
-	public static M_BusLisPanel_down instance = new M_BusLisPanel_down();
-
-	public JButton bSee = new JButton("查看");
+public class M_BusLisPanel extends WorkingPanel {
+	public static M_BusLisPanel instance = new M_BusLisPanel();
 	public JButton bUp = new JButton("上架");
-	public JTable t = TableInstance.instance_bus_down;
+	public JButton bDown = new JButton("下架");
+	public JTable t = TableInstance.instance_bus_all;
+	public JScrollPane sp;
 
-	private M_BusLisPanel_down() {
-		JScrollPane sp = new JScrollPane(t);
+	private M_BusLisPanel() {
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
-		pSubmit.add(bSee);
 		pSubmit.add(bUp);
+		pSubmit.add(bDown);
 		this.setLayout(new BorderLayout());
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
@@ -47,15 +48,16 @@ public class M_BusLisPanel_down extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-
+		BusLisTableModel.instance_all.setArray(BusinessService.list_all());
+		JTable t = TableInstance.instance_bus_all;
+		sp.setViewportView(t);
 	}
 
 	@Override
 	public void addListener() {
 		ManaTableListener listener = new ManaTableListener();
-		bSee.addActionListener(listener);
 		bUp.addActionListener(listener);
+		bDown.addActionListener(listener);
 	}
 
 }

@@ -13,6 +13,7 @@ import javax.swing.event.TableModelListener;
 
 import gui.listener.ManaTableListener;
 import gui.model.BusLisTableModel;
+import service.ApplyService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -30,9 +31,10 @@ public class M_BusAppPanel extends WorkingPanel {
 	public JButton bAdopt = new JButton("Í¨¹ý");
 	public JButton bReject = new JButton("²µ»Ø");
 	public JTable t = TableInstance.instance_bus_app;
+	public JScrollPane sp;
 
 	private M_BusAppPanel() {
-		JScrollPane sp = new JScrollPane(t);
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
 		pSubmit.add(bSee);
 		pSubmit.add(bAdopt);
@@ -50,7 +52,9 @@ public class M_BusAppPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-
+		BusLisTableModel.instance_app.setArray(ApplyService.list());
+		t = TableInstance.instance_bus_app;
+		sp.setViewportView(t);
 	}
 
 	@Override

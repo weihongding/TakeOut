@@ -30,7 +30,7 @@ public class OrderFrame extends JFrame {
 
 	public static OrderFrame instance_c = new OrderFrame(new OrderDao().get_last());
 	public static OrderFrame instance_b = new OrderFrame(new OrderDao().get_last());
-	public JLabel[] jl = new JLabel[5];
+	public JLabel[] jl = new JLabel[6];
 	public JPanel pTitle = new JPanel();
 	public JPanel pSubmit = new JPanel();
 	public JButton bPlace = new JButton("确定");
@@ -43,7 +43,8 @@ public class OrderFrame extends JFrame {
 		jl[1] = new JLabel("顾客：" + CustomerService.get(order.getCid()).getName());
 		jl[2] = new JLabel("下单时间：" + DateUtil.formatDate(order.getTime()));
 		jl[3] = new JLabel("订单状态：" + order.getState());
-		jl[4] = new JLabel("总价" + order.getTotal_price());
+		jl[4] = new JLabel("地址：" + CustomerService.get(order.getCid()).getAddress());
+		jl[5] = new JLabel("总价" + order.getTotal_price());
 
 		OrderFoodTableModel.instance = new OrderFoodTableModel(otoflist);
 		t = new JTable(OrderFoodTableModel.instance);
@@ -57,12 +58,14 @@ public class OrderFrame extends JFrame {
 		jp1.setLayout(new GridLayout(1, 2));
 		jp2.add(jl[2]);
 		jp3.add(jl[3]);
+		jp3.add(jl[4]);
+		jp3.setLayout(new GridLayout(1, 2));
 		pTitle.add(jp1);
 		pTitle.add(jp2);
 		pTitle.add(jp3);
 		pTitle.setLayout(new GridLayout(3, 1));
 
-		pSubmit.add(jl[4]);
+		pSubmit.add(jl[5]);
 		pSubmit.add(bPlace);
 
 		this.setTitle("订单详情");
@@ -72,7 +75,7 @@ public class OrderFrame extends JFrame {
 		this.add(pSubmit, BorderLayout.SOUTH);
 		this.setSize(350, 300);
 		this.setLocation(800, 400);
-		
+
 		addListener();
 
 	}

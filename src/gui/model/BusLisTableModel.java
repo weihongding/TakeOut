@@ -25,13 +25,18 @@ public class BusLisTableModel extends AbstractTableModel {
 
 	static String[] columnNames1 = { "店名", "简介" };
 	static String[] columnNames2 = { "店名", "申请时间", "处理情况" };
+	static String[] columnNames3 = { "店名", "状态" };
 
 	public static BusLisTableModel instance_up = new BusLisTableModel(columnNames1, BusinessService.list_up());
-	public static BusLisTableModel instance_down = new BusLisTableModel(columnNames1, BusinessService.list_down());
+	public static BusLisTableModel instance_all = new BusLisTableModel(columnNames3, BusinessService.list_all());
 	public static BusLisTableModel instance_app = new BusLisTableModel(columnNames2, ApplyService.list());
 
 	private BusLisTableModel(String[] column, List array) {
 		this.columnNames = column;
+		this.array = array;
+	}
+
+	public void setArray(List array) {
 		this.array = array;
 	}
 
@@ -66,6 +71,8 @@ public class BusLisTableModel extends AbstractTableModel {
 				return ((Business) array.get(rowIndex)).getName();
 			if (columnNames[columnIndex].equals("简介"))
 				return ((Business) array.get(rowIndex)).getDes();
+			if (columnNames[columnIndex].equals("状态"))
+				return ((Business) array.get(rowIndex)).getState();
 		}
 
 		return null;

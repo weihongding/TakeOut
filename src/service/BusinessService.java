@@ -85,4 +85,10 @@ public class BusinessService {
 		return bdao.list_down();
 	}
 
+	public static List<Business> list_all() {
+		List<Business> list = bdao.list_up();
+		list.addAll(bdao.list_down());
+		return list;
+	}
+
 }

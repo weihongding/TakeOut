@@ -1,52 +1,41 @@
 package gui.FrameAdd;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import entity.Apply;
 import service.ApplyService;
-import service.BusinessService;
 import util.GUIUtil;
 
-public class ApplyFrame extends JFrame implements ActionListener {
+public class ApplyAddFrame extends JFrame implements ActionListener {
 	static {
 		GUIUtil.useLNF();
 	}
-
-	JLabel[] jl = new JLabel[2];
-	JTextArea jta = new JTextArea(10, 30);
-	JButton bSub = new JButton("确定");
-	Apply app = null;
-	JPanel pTitle = new JPanel();
+	JTextArea jta = new JTextArea(10, 20);
+	JButton bSub = new JButton("提交");
+	JButton bCan = new JButton("取消");
 	JPanel pCent = new JPanel();
 	JPanel pSout = new JPanel();
 
-	public ApplyFrame(int aid) {
-		app = ApplyService.get(aid);
-		
-		jl[0] = new JLabel("店家："+BusinessService.get(app.getBid()).getName(),JLabel.CENTER);
-		jl[1] = new JLabel("状态："+app.getState(),JLabel.CENTER);
-		pTitle.add(jl[0]);
-		pTitle.add(jl[1]);
-		pTitle.setLayout(new GridLayout(1, 2));
+	public ApplyAddFrame() {
 		jta.setLineWrap(true);
-		jta.setText(app.getContent());
-		jta.setEditable(false);
+		jta.setText("请简要说明");
 		pCent.add(jta);
 		bSub.addActionListener(this);
+		bCan.addActionListener(this);
 		pSout.add(bSub);
+		pSout.add(bCan);
 
 		this.setTitle("上架申请");
 		this.setLayout(new BorderLayout());
-		this.add(pTitle, BorderLayout.NORTH);
 		this.add(pCent, BorderLayout.CENTER);
 		this.add(pSout, BorderLayout.SOUTH);
 		this.setSize(350, 300);
@@ -54,13 +43,22 @@ public class ApplyFrame extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new ApplyFrame(18).setVisible(true);
+		new ApplyAddFrame().setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == "确定") {
+		if (e.getActionCommand() == "提交") {
+			int bid = GUIUtil.bus_id;
+			String content = jta.getText();
+			Apply app = new Apply(bid, content);
+			ApplyService.add(app);
+			JOptionPane.showMessageDialog(null, "提交成功！" , "提示", JOptionPane.PLAIN_MESSAGE);
+			dispose();
+		}
+		if (e.getActionCommand() == "取消") {
 			dispose();
 		}
 	}
+
 }

@@ -18,8 +18,7 @@ import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
 import gui.panel.CustomerPanel;
 import gui.panel.M_BusAppPanel;
-import gui.panel.M_BusLisPanel_down;
-import gui.panel.M_BusLisPanel_up;
+import gui.panel.M_BusLisPanel;
 import gui.panel.M_CusComPanel;
 import gui.panel.ManagePanel;
 
@@ -39,11 +38,8 @@ public class ManaWorkpanelListener implements ActionListener {
 		if (b == mp.bBusApp) {
 			mp.workingPanel.show(M_BusAppPanel.instance);
 		}
-		if (b == mp.bBusLis_up) {
-			mp.workingPanel.show(M_BusLisPanel_up.instance);
-		}
-		if (b == mp.bBusLis_down) {
-			mp.workingPanel.show(M_BusLisPanel_down.instance);
+		if (b == mp.bBusLis_all) {
+			mp.workingPanel.show(M_BusLisPanel.instance);
 		}
 		if (b == mp.bCusCom) {
 			mp.workingPanel.show(M_CusComPanel.instance);

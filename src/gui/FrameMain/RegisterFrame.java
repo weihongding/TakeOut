@@ -60,7 +60,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
 		jl4 = new JLabel("权 限：");
 		jtf = new JTextField(10);
 		jpf1 = new JPasswordField(10);
-		jpf2 = new JPasswordField(10);
+		jpf2 = new JPasswordField(18);
 
 		jrb1 = new JRadioButton("顾客");
 		jrb2 = new JRadioButton("商家");

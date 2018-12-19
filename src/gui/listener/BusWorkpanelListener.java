@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import entity.Business;
-import gui.FrameAdd.ApplyFrame;
+import gui.FrameAdd.ApplyAddFrame;
 import gui.panel.B_EarnPanel;
 import gui.panel.B_MenLisPanel;
 import gui.panel.B_MyModPanel;
@@ -54,7 +54,7 @@ public class BusWorkpanelListener implements ActionListener {
 			if (state.equals(StateUtil.busi[1])) {
 				JOptionPane.showMessageDialog(null, "您已上架，无需申请！", "", JOptionPane.ERROR_MESSAGE);
 			} else {
-				new ApplyFrame().setVisible(true);
+				new ApplyAddFrame().setVisible(true);
 			}
 		}
 		if (b == B_MyModPanel.instance.bSave) {

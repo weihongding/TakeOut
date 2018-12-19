@@ -64,7 +64,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		jl2 = new JLabel("密 码：");
 		jl3 = new JLabel("权 限：");
 		jtf = new JTextField(10);
-		jpf = new JPasswordField(10);
+		jpf = new JPasswordField(18);
 
 		jrb1 = new JRadioButton("顾客");
 		jrb2 = new JRadioButton("商家");
