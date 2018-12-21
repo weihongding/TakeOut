@@ -272,7 +272,6 @@ public class OrderDao {
 	 */
 	public Order get(int bid, int cid, Date time) {
 		java.sql.Timestamp t_time = DateUtil.toTimestamp(time);
-		System.out.println(t_time);
 		Order order = null;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 

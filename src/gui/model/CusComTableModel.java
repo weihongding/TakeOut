@@ -5,6 +5,12 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import entity.Complain;
+import service.ComplainService;
+import service.CustomerService;
+import util.DateUtil;
+import util.GUIUtil;
+
 /**
  * 投诉建议表模型
  * 
@@ -15,25 +21,27 @@ import javax.swing.table.AbstractTableModel;
 public class CusComTableModel extends AbstractTableModel {
 
 	String[] columnNames;
-	String[][] comLis;
-	
-	static String[] columnNames1 = { "编号", "顾客", "时间","状态" };
-	static String[][] comLis1 = {{"1","顾客1","2018-10-20","已处理"},{"2","顾客2","2018-10-21","已处理"},{"3","顾客1","2018-10-21","未处理"}};
-	
-	static String[] columnNames2 = {"时间","状态"};
-	static String[][] comLis2 = {{"2018-10-20","已处理"},{"2018-10-21","未处理"}};
+	List<Complain> comLis;
 
-	public static CusComTableModel instance_m = new CusComTableModel(columnNames1,comLis1);
-	public static CusComTableModel instance_c = new CusComTableModel(columnNames2,comLis2);
+	static String[] columnNames1 = { "编号", "顾客id", "时间", "状态" };
+	static String[] columnNames2 = { "时间", "状态" };
 
-	private CusComTableModel(String[] col,String[][] com) {
+	public static CusComTableModel instance_m = new CusComTableModel(columnNames1, ComplainService.list());
+	public static CusComTableModel instance_c = new CusComTableModel(columnNames2,
+			ComplainService.list(GUIUtil.cus_id));
+
+	private CusComTableModel(String[] col, List<Complain> com) {
 		this.columnNames = col;
+		this.comLis = com;
+	}
+
+	public void setComlis(List<Complain> com) {
 		this.comLis = com;
 	}
 
 	@Override
 	public int getRowCount() {
-		return comLis.length;
+		return comLis.size();
 	}
 
 	@Override
@@ -47,7 +55,15 @@ public class CusComTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return comLis[rowIndex][columnIndex];
+		if (columnNames[columnIndex].equals("编号"))
+			return comLis.get(rowIndex).getId();
+		if (columnNames[columnIndex].equals("顾客id"))
+			return CustomerService.get(comLis.get(rowIndex).getCid()).getId();
+		if (columnNames[columnIndex].equals("时间"))
+			return DateUtil.formatDate(comLis.get(rowIndex).getTime());
+		if (columnNames[columnIndex].equals("状态"))
+			return comLis.get(rowIndex).getState();
+		return null;
 	}
 
 }

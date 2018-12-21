@@ -9,6 +9,9 @@ import javax.swing.JTable;
 
 import gui.listener.CusTableListener;
 import gui.listener.ManaTableListener;
+import gui.model.CusComTableModel;
+import service.ComplainService;
+import util.GUIUtil;
 import util.TableInstance;
 
 /**
@@ -23,9 +26,10 @@ public class C_ComPanel extends WorkingPanel {
 	public JButton bSee = new JButton("查看详情");
 	public JButton bAdd = new JButton("新增");
 	public JTable t = TableInstance.instance_com_c;
+	public JScrollPane sp;
 
 	public C_ComPanel() {
-		JScrollPane sp = new JScrollPane(t);
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
 		pSubmit.add(bSee);
 		pSubmit.add(bAdd);
@@ -39,8 +43,9 @@ public class C_ComPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-
+		CusComTableModel.instance_c.setComlis(ComplainService.list(GUIUtil.cus_id));
+		t = TableInstance.instance_com_c;
+		sp.setViewportView(t);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import entity.Complain;
+import gui.panel.C_ComPanel;
 import service.ComplainService;
 import util.GUIUtil;
 
@@ -52,8 +53,9 @@ public class ComplainAddFrame extends JFrame implements ActionListener {
 			String content = jta.getText();
 			Complain app = new Complain(cid, content);
 			ComplainService.add(app);
-			JOptionPane.showMessageDialog(null, "提交成功！" , "提示", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "提交成功！", "提示", JOptionPane.PLAIN_MESSAGE);
 			dispose();
+			C_ComPanel.instance.updateData();
 		}
 		if (e.getActionCommand() == "取消") {
 			dispose();

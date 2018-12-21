@@ -18,9 +18,10 @@ public class CustomerDao {
 
 	public static void main(String[] args) {
 
-		//已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
+		// 已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
 		CustomerDao dao = new CustomerDao();
-		System.out.println(dao.getId("18050782349"));
+		Customer cus = dao.get(7);
+		System.out.println(cus.getAddress());
 	}
 
 	/**
@@ -53,7 +54,6 @@ public class CustomerDao {
 	 */
 	public void add(Customer cus) {
 
-		
 		String sql = "insert into customer values(null,?,?,?,?,?,?)";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 			ps.setString(1, cus.getAccount());
@@ -149,7 +149,7 @@ public class CustomerDao {
 		}
 		return cus;
 	}
-	
+
 	/**
 	 * 根据account得到顾客实例
 	 * 
@@ -160,7 +160,7 @@ public class CustomerDao {
 		Customer cus = null;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-			String sql = "select * from customer where account = '" + account+ "'";
+			String sql = "select * from customer where account = '" + account + "'";
 
 			ResultSet rs = s.executeQuery(sql);
 
@@ -181,7 +181,7 @@ public class CustomerDao {
 		}
 		return cus;
 	}
-	
+
 	/**
 	 * 根据phone得到顾客id
 	 * 
@@ -192,7 +192,7 @@ public class CustomerDao {
 		int id = -1;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-			String sql = "select * from customer where phone = '" + phone+ "'";
+			String sql = "select * from customer where phone = '" + phone + "'";
 
 			ResultSet rs = s.executeQuery(sql);
 
@@ -207,16 +207,17 @@ public class CustomerDao {
 		}
 		return id;
 	}
-	
+
 	/**
 	 * 验证顾客账号密码
+	 * 
 	 * @param account
 	 * @param password
 	 * @return id
 	 */
-	public int check (String account,String password){
+	public int check(String account, String password) {
 		int id = -1;
-		
+
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
 			String sql = "select * from customer where account = '" + account + "'";
@@ -225,23 +226,52 @@ public class CustomerDao {
 
 			if (rs.next()) {
 				String pas = rs.getString("password");
-				if(pas.equals(password)){
+				if (pas.equals(password)) {
 					id = rs.getInt("id");
-					JOptionPane.showMessageDialog(null, "登录成功！", "登陆信息",JOptionPane.PLAIN_MESSAGE); 
-				}else{
-					JOptionPane.showMessageDialog(null, "密码错误！", "登录信息",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "登录成功！", "登陆信息", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "密码错误！", "登录信息", JOptionPane.ERROR_MESSAGE);
 				}
-				
-			}else{
-				JOptionPane.showMessageDialog(null, "账号不存在！", "登陆信息",JOptionPane.ERROR_MESSAGE);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "账号不存在！", "登陆信息", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		
+
 		return id;
+
+	}
+
+	/**
+	 * 检验账号是否存在
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public boolean check(String account) {
+
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from customer where account = '" + account + "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return false;
 
 	}
 

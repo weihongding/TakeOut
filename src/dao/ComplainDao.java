@@ -19,9 +19,9 @@ public class ComplainDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		ComplainDao dao = new ComplainDao();
-		Complain comp = dao.get(9);
+		Complain comp = dao.list(7).get(dao.list(7).size() - 1);
 		System.out.println(comp.getContent());
-		
+
 	}
 
 	/**
@@ -151,9 +151,77 @@ public class ComplainDao {
 		}
 		return compArray;
 	}
-	
+
+	/**
+	 * 得到所有投诉建议集合
+	 * 
+	 * @return
+	 */
+	public List<Complain> list() {
+		List<Complain> compArray = new ArrayList<Complain>();
+
+		String sql = "select * from complain";
+
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String content = rs.getString("content");
+				Date time = DateUtil.toDate(rs.getTimestamp("time"));
+				String state = rs.getString("state");
+				int cid = rs.getInt("cid");
+
+				Complain comp = new Complain(cid, content, time, state);
+				comp.setId(id);
+
+				compArray.add(comp);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return compArray;
+	}
+
+	/**
+	 * 根据顾客id和时间得到complain实例
+	 * 
+	 * @param cid
+	 * @param time
+	 * @return
+	 */
+	public Complain get(int cid, Date time) {
+		java.sql.Timestamp t_time = DateUtil.toTimestamp(time);
+		Complain com = null;
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from complain where cid = '" + cid + "' AND time = '" + t_time + "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String content = rs.getString("content");
+				String state = rs.getString("state");
+
+				com = new Complain(cid, content, t_time, state);
+				com.setId(id);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return com;
+	}
+
 	/**
 	 * 根据id得到complain实例
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -182,6 +250,5 @@ public class ComplainDao {
 		}
 		return comp;
 	}
-	
 
 }

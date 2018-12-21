@@ -18,6 +18,7 @@ import gui.panel.CustomerPanel;
 import gui.panel.ManagePanel;
 import service.BusinessService;
 import service.CustomerService;
+import service.ManagerService;
 import util.GUIUtil;
 
 /**
@@ -162,9 +163,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 			} else if (jrb3.isSelected()) {
 				// 验证管理员帐号密码
 				// 返回结果
-				dispose();
-				ManageFrame.instance.show();
-				ManagePanel.instance.workingPanel.show(new JLabel("欢迎使用管理员页面！"));
+				int id = ManagerService.check(jtf.getText(), jpf.getText());
+				if (id != -1) {
+					GUIUtil.mana_id = id;
+					dispose();
+					ManageFrame.instance.show();
+					ManagePanel.instance.workingPanel.show(new JLabel("欢迎使用管理员页面！"));
+				}
 			}
 		} else if (e.getActionCommand() == "重置") {
 			clean();

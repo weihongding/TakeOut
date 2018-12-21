@@ -31,9 +31,9 @@ public class ApplyFrame extends JFrame implements ActionListener {
 
 	public ApplyFrame(int aid) {
 		app = ApplyService.get(aid);
-		
-		jl[0] = new JLabel("µê¼Ò£º"+BusinessService.get(app.getBid()).getName(),JLabel.CENTER);
-		jl[1] = new JLabel("×´Ì¬£º"+app.getState(),JLabel.CENTER);
+
+		jl[0] = new JLabel("µê¼Ò£º" + BusinessService.get(app.getBid()).getName(), JLabel.CENTER);
+		jl[1] = new JLabel("×´Ì¬£º" + BusinessService.get(app.getBid()).getState(), JLabel.CENTER);
 		pTitle.add(jl[0]);
 		pTitle.add(jl[1]);
 		pTitle.setLayout(new GridLayout(1, 2));

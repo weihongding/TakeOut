@@ -66,9 +66,17 @@ public class BusinessService {
 	 * @return 商家id，错误则返回-1
 	 */
 	public static int check(String account, String password) {
-
 		return bdao.check(account, password);
+	}
 
+	/**
+	 * 检验账号是否已存在
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public static boolean check(String account) {
+		return bdao.check(account);
 	}
 
 	/**

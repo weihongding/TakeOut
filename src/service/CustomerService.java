@@ -20,10 +20,10 @@ public class CustomerService {
 		cdao.add(cus);
 	}
 
-	public static void update(Customer cus){
+	public static void update(Customer cus) {
 		cdao.update(cus);
 	}
-	
+
 	/**
 	 * 获得顾客信息
 	 * 
@@ -47,15 +47,21 @@ public class CustomerService {
 	 * @return 顾客id，错误则返回-1
 	 */
 	public static int check(String account, String password) {
-
 		return cdao.check(account, password);
-
 	}
-	
-	public static int getid(String phone){
+
+	/**
+	 * 检验账号是否已存在
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public static boolean check(String account) {
+		return cdao.check(account);
+	}
+
+	public static int getid(String phone) {
 		return cdao.getId(phone);
 	}
-	
-	
 
 }

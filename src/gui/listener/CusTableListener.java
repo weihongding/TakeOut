@@ -5,9 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import entity.Business;
+import entity.Complain;
 import entity.Order;
+import gui.FrameAdd.ComplainAddFrame;
+import gui.FrameAdd.ComplainFrame;
 import gui.FrameAdd.OrderBusi;
 import gui.FrameAdd.OrderFrame;
 import gui.model.BusLisTableModel;
@@ -18,6 +22,8 @@ import gui.panel.C_ComPanel;
 import gui.panel.C_MyPanel;
 import gui.panel.C_OrdLisPanel;
 import service.BusinessService;
+import service.ComplainService;
+import service.CustomerService;
 import service.OrderService;
 import util.DateUtil;
 import util.GUIUtil;
@@ -41,13 +47,18 @@ public class CusTableListener implements ActionListener {
 
 		JButton b = (JButton) e.getSource();
 
-		if (b == cblp.bSee) {
+		if (b == cblp.bSee) {// 查看商家详情
 			int i = TableInstance.instance_bus_c.getSelectedRow();
 			if (i != -1) {
-				String bname = (String) BusLisTableModel.instance_up.getValueAt(i, 0);
-				GUIUtil.c_bid = BusinessService.getid(bname);
-				OrderBusi.instance = new OrderBusi(GUIUtil.c_bid);
-				OrderBusi.instance.setVisible(true);
+				if (CustomerService.get(GUIUtil.cus_id).getAddress() == null
+						|| CustomerService.get(GUIUtil.cus_id).getPhone() == null) {
+					JOptionPane.showMessageDialog(null, "您的地址/电话尚未填写，无法点餐", "错误", JOptionPane.ERROR_MESSAGE);
+				} else {
+					String bname = (String) BusLisTableModel.instance_up.getValueAt(i, 0);
+					GUIUtil.c_bid = BusinessService.getid(bname);
+					OrderBusi.instance = new OrderBusi(GUIUtil.c_bid);
+					OrderBusi.instance.setVisible(true);
+				}
 			}
 		}
 		if (b == colp.bSee) {
@@ -62,11 +73,15 @@ public class CusTableListener implements ActionListener {
 		}
 		if (b == ccp.bSee) {
 			int i = TableInstance.instance_com_c.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了投诉建议：" + CusComTableModel.instance_c.getValueAt(i, 0));
+			if (i != -1) {
+				Date time = DateUtil.stringToDate((String) CusComTableModel.instance_c.getValueAt(i, 0));
+				Complain com = ComplainService.get(GUIUtil.cus_id, time);
+				new ComplainFrame(com.getId()).setVisible(true);
+				;
+			}
 		}
 		if (b == ccp.bAdd) {
-			System.out.println("新增投诉建议");
+			new ComplainAddFrame().setVisible(true);
 		}
 
 	}

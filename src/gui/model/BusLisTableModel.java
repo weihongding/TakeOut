@@ -23,7 +23,7 @@ public class BusLisTableModel extends AbstractTableModel {
 	List array = null;
 	String[] columnNames = null;
 
-	static String[] columnNames1 = { "店名", "简介" };
+	static String[] columnNames1 = { "店名", "简介", "电话号码" };
 	static String[] columnNames2 = { "店名", "申请时间", "处理情况" };
 	static String[] columnNames3 = { "店名", "状态" };
 
@@ -71,6 +71,8 @@ public class BusLisTableModel extends AbstractTableModel {
 				return ((Business) array.get(rowIndex)).getName();
 			if (columnNames[columnIndex].equals("简介"))
 				return ((Business) array.get(rowIndex)).getDes();
+			if (columnNames[columnIndex].equals("电话号码"))
+				return ((Business) array.get(rowIndex)).getPhone();
 			if (columnNames[columnIndex].equals("状态"))
 				return ((Business) array.get(rowIndex)).getState();
 		}

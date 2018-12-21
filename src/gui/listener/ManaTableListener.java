@@ -9,7 +9,9 @@ import javax.swing.JTable;
 
 import entity.Apply;
 import entity.Business;
+import entity.Complain;
 import gui.FrameAdd.ApplyFrame;
+import gui.FrameAdd.ComplainFrame;
 import gui.FrameAdd.MenuAddFrame;
 import gui.FrameAdd.MenuModFrame;
 import gui.FrameAdd.OrderBusi;
@@ -33,6 +35,7 @@ import gui.panel.M_CusComPanel;
 import gui.panel.ManagePanel;
 import service.ApplyService;
 import service.BusinessService;
+import service.ComplainService;
 import util.DateUtil;
 import util.GUIUtil;
 import util.StateUtil;
@@ -120,8 +123,13 @@ public class ManaTableListener implements ActionListener {
 		}
 		if (b == mccp.bSee) {// 查看投诉建议
 			int i = TableInstance.instance_com_m.getSelectedRow();
-			if (i != -1)
-				System.out.println("查看了投诉建议：" + CusComTableModel.instance_m.getValueAt(i, 0));
+			if (i != -1) {
+				int coid = (Integer) CusComTableModel.instance_m.getValueAt(i, 0);
+				ComplainFrame.instance = new ComplainFrame(coid);
+				ComplainFrame.instance.jta2.setEditable(true);
+				ComplainFrame.instance.bSub.setText("提交");
+				ComplainFrame.instance.setVisible(true);
+			}
 		}
 
 	}

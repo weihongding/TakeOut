@@ -20,9 +20,9 @@ public class BusinessDao {
 
 	public static void main(String[] args) {
 
-		//已测试功能：获取总数、获取实例、获取实例集合、更新、新增、验证账号密码
+		// 已测试功能：获取总数、获取实例、获取实例集合、更新、新增、验证账号密码
 		BusinessDao dao = new BusinessDao();
-		System.out.println(dao.check("zhangzhang", "mimi"));
+		System.out.println(dao.check("zhangzhang"));
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class BusinessDao {
 		}
 		return bus;
 	}
-	
+
 	/**
 	 * 根据name得到商家实例
 	 * 
@@ -164,7 +164,7 @@ public class BusinessDao {
 		Business bus = null;
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-			String sql = "select * from business where name = '" + name +"'";
+			String sql = "select * from business where name = '" + name + "'";
 
 			ResultSet rs = s.executeQuery(sql);
 
@@ -185,7 +185,7 @@ public class BusinessDao {
 		}
 		return bus;
 	}
-	
+
 	/**
 	 * 上架中的商家列表
 	 * 
@@ -255,16 +255,16 @@ public class BusinessDao {
 		return busArray;
 	}
 
-	
 	/**
 	 * 验证商家账号密码
+	 * 
 	 * @param account
 	 * @param password
 	 * @return 商家id，错误则返回-1
 	 */
-	public int check (String account,String password){
+	public int check(String account, String password) {
 		int id = -1;
-		
+
 		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
 			String sql = "select * from business where account = '" + account + "'";
@@ -273,25 +273,52 @@ public class BusinessDao {
 
 			if (rs.next()) {
 				String pas = rs.getString("password");
-				if(pas.equals(password)){
+				if (pas.equals(password)) {
 					id = rs.getInt("id");
-					JOptionPane.showMessageDialog(null, "登录成功！", "登陆信息",JOptionPane.PLAIN_MESSAGE); 
-				}else{
-					JOptionPane.showMessageDialog(null, "密码错误！", "登录信息",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "登录成功！", "登陆信息", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "密码错误！", "登录信息", JOptionPane.ERROR_MESSAGE);
 				}
-				
-			}else{
-				JOptionPane.showMessageDialog(null, "账号不存在！", "登陆信息",JOptionPane.ERROR_MESSAGE);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "账号不存在！", "登陆信息", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		
+
 		return id;
 
 	}
-	
-	
+
+	/**
+	 * 检验账号是否已存在
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public boolean check(String account) {
+
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from business where account = '" + account + "'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
 }

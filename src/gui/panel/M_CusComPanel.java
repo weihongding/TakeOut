@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import gui.listener.ManaTableListener;
 import gui.model.CusComTableModel;
+import service.ComplainService;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -29,9 +30,10 @@ public class M_CusComPanel extends WorkingPanel {
 	public JButton bSee = new JButton("²é¿´");
 
 	public JTable t = TableInstance.instance_com_m;
+	public JScrollPane sp;
 
 	private M_CusComPanel() {
-		JScrollPane sp = new JScrollPane(t);
+		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
 		pSubmit.add(bSee);
 		this.setLayout(new BorderLayout());
@@ -47,8 +49,9 @@ public class M_CusComPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		// TODO Auto-generated method stub
-
+		CusComTableModel.instance_m.setComlis(ComplainService.list());
+		t = TableInstance.instance_com_m;
+		sp.setViewportView(t);
 	}
 
 	@Override

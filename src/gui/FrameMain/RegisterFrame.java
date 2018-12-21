@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import gui.panel.BusinessPanel;
 import gui.panel.CustomerPanel;
+import service.BusinessService;
 import service.CustomerService;
 import util.CheckUtil;
 import util.GUIUtil;
@@ -54,12 +55,12 @@ public class RegisterFrame extends JFrame implements ActionListener {
 		jb2.addActionListener(this);
 		jb3.addActionListener(this);
 
-		jl1 = new JLabel("注 册 账 号：");
-		jl2 = new JLabel("注 册 密 码：");
+		jl1 = new JLabel("输入注册账号：");
+		jl2 = new JLabel("输入注册密码：");
 		jl3 = new JLabel("再次输入密码：");
 		jl4 = new JLabel("权 限：");
 		jtf = new JTextField(10);
-		jpf1 = new JPasswordField(10);
+		jpf1 = new JPasswordField(18);
 		jpf2 = new JPasswordField(18);
 
 		jrb1 = new JRadioButton("顾客");
@@ -132,18 +133,31 @@ public class RegisterFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "确认") {
 			if (jrb1.isSelected()) {
-				if(jtf.getText().equals("")){
-					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ",JOptionPane.ERROR_MESSAGE);
-				}else if(jpf1.getText().equals("")){
-					JOptionPane.showMessageDialog(null, "密码不能为空！", "注册信息 ",JOptionPane.ERROR_MESSAGE);
-				}else if(!(jpf1.getText().equals(jpf2.getText()))){
-					JOptionPane.showMessageDialog(null, "两次密码不一致！", "注册信息 ",JOptionPane.ERROR_MESSAGE);
-				}else if(CheckUtil.Password_Register(jpf1.getText())){
-					new CustomerService().add((String)jtf.getText(), (String)jpf1.getText());
-					JOptionPane.showMessageDialog(null, "注册成功！", "注册信息",JOptionPane.PLAIN_MESSAGE); 
+				if (jtf.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (CustomerService.check(jtf.getText())) {
+					JOptionPane.showMessageDialog(null, "账号已存在！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (jpf1.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "密码不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (!(jpf1.getText().equals(jpf2.getText()))) {
+					JOptionPane.showMessageDialog(null, "两次密码不一致！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (CheckUtil.Password_Register(jpf1.getText())) {
+					CustomerService.add((String) jtf.getText(), (String) jpf1.getText());
+					JOptionPane.showMessageDialog(null, "注册成功！", "注册信息", JOptionPane.PLAIN_MESSAGE);
 				}
 			} else if (jrb2.isSelected()) {
-
+				if (jtf.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (BusinessService.check(jtf.getText())) {
+					JOptionPane.showMessageDialog(null, "账号已存在！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (jpf1.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "密码不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (!(jpf1.getText().equals(jpf2.getText()))) {
+					JOptionPane.showMessageDialog(null, "两次密码不一致！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (CheckUtil.Password_Register(jpf1.getText())) {
+					BusinessService.add((String) jtf.getText(), (String) jpf1.getText());
+					JOptionPane.showMessageDialog(null, "注册成功！", "注册信息", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		} else if (e.getActionCommand() == "重置") {
 			clean();

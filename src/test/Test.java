@@ -14,9 +14,8 @@ public class Test {
 
     public static void main(String[]args) {
 
-    	File file = new File("img/NotImage.jpg");
-    	System.out.println(file.getPath());
-    	
+    	int a = (1>2?1:2);
+    	System.out.println(a);
     }
    
 }

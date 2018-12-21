@@ -26,7 +26,6 @@ public class CheckUtil {
 	}
 
 	public static boolean Password_Register(String password) {
-
 		return true;
 	}
 
