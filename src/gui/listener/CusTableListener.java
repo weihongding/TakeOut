@@ -61,7 +61,7 @@ public class CusTableListener implements ActionListener {
 				}
 			}
 		}
-		if (b == colp.bSee) {
+		if (b == colp.bSee) {// 查看订单详情
 			int i = TableInstance.instance_order_c.getSelectedRow();
 			if (i != -1) {
 				int bid = BusinessService.getid((String) OrderTableModel.instance_c.getValueAt(i, 0));
@@ -71,7 +71,7 @@ public class CusTableListener implements ActionListener {
 				OrderFrame.instance_c.setVisible(true);
 			}
 		}
-		if (b == ccp.bSee) {
+		if (b == ccp.bSee) {// 查看投诉建议
 			int i = TableInstance.instance_com_c.getSelectedRow();
 			if (i != -1) {
 				Date time = DateUtil.stringToDate((String) CusComTableModel.instance_c.getValueAt(i, 0));
@@ -80,7 +80,7 @@ public class CusTableListener implements ActionListener {
 				;
 			}
 		}
-		if (b == ccp.bAdd) {
+		if (b == ccp.bAdd) {// 增加投诉建议
 			new ComplainAddFrame().setVisible(true);
 		}
 

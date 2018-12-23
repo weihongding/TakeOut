@@ -1,6 +1,5 @@
 /gui/
-/util/
 /service/
-/dao/
-/test/
 /start/
+/test/
+/util/

@@ -26,7 +26,7 @@ public class OrderFood extends JFrame {
 	static {
 		GUIUtil.useLNF();
 	}
-	public static OrderFood instance = new OrderFood("回锅肉", 10.5, "img/1.jpg");
+	public static OrderFood instance = new OrderFood("回锅肉", 10.5, "img/NotImage.jpg");
 	public JLabel[] jl = new JLabel[6];
 	public JLabel jicon = new JLabel();
 	public JTextField jtf = new JTextField(10);
@@ -77,7 +77,7 @@ public class OrderFood extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		instance = new OrderFood("回锅肉", 10.5, "img/1.jpg");
+		instance = new OrderFood("回锅肉", 10.5, "img/NotImage.jpg");
 		instance.setVisible(true);
 	}
 

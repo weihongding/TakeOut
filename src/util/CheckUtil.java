@@ -56,9 +56,23 @@ public class CheckUtil {
 		}
 		return count;
 	}
+	
+	/**
+	 * 是否只包含数字
+	 * @param str
+	 * @return
+	 */
+    public static boolean isNumeric(String str){ 
+        Pattern pattern = Pattern.compile("[0-9]*"); 
+        return pattern.matcher(str).matches();    
+     }
+    
+    public static int sizeof(String str){
+    	return str.length();
+    }
 
 	public static void main(String[] args) {
-		System.out.println(existence_String("business", "id", "6"));
+		System.out.println(sizeof("a114354"));
 	}
 
 }

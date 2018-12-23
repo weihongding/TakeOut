@@ -17,6 +17,7 @@ import gui.FrameAdd.OrderFrame;
 import gui.model.MenuTableModel;
 import gui.model.OrderCarTableModel;
 import service.OrderService;
+import util.CheckUtil;
 import util.GUIUtil;
 import util.TableInstance;
 
@@ -47,11 +48,17 @@ public class FrameAddListener implements ActionListener {
 		}
 		if (b == OrderFood.instance.bSave) {// 商家菜品 确定数量
 			int i = OrderBusi.instance.t.getSelectedRow();
+			String num = OrderFood.instance.jtf.getText();
 			if (i != -1) {
-				MenuTableModel.num[i] = Integer.parseInt(OrderFood.instance.jtf.getText());
+				if(CheckUtil.isNumeric(num)){
+				MenuTableModel.num[i] = Integer.parseInt(num);
 				OrderBusi.instance.setVisible(false);
 				OrderFood.instance.setVisible(false);
 				OrderBusi.instance.setVisible(true);
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "菜品数量只能是自然数！", "错误", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 		if (b == OrderCar.instance.bPlace) {// 购物车 下单

@@ -46,10 +46,10 @@ public class BusWorkpanelListener implements ActionListener {
 		if (b == bp.bMy) {
 			bp.workingPanel.show(B_MyPanel.instance);
 		}
-		if (b == B_MyPanel.instance.bMod) {
+		if (b == B_MyPanel.instance.bMod) {// 修改信息
 			bp.workingPanel.show(B_MyModPanel.instance);
 		}
-		if (b == B_MyPanel.instance.bApp) {
+		if (b == B_MyPanel.instance.bApp) {// 申请上架
 			String state = BusinessService.get(GUIUtil.bus_id).getState();
 			if (state.equals(StateUtil.busi[1])) {
 				JOptionPane.showMessageDialog(null, "您已上架，无需申请！", "", JOptionPane.ERROR_MESSAGE);
@@ -57,12 +57,17 @@ public class BusWorkpanelListener implements ActionListener {
 				new ApplyAddFrame().setVisible(true);
 			}
 		}
-		if (b == B_MyModPanel.instance.bSave) {
+		if (b == B_MyModPanel.instance.bSave) {// 保存信息修改
 			String name = B_MyModPanel.instance.jtf[0].getText();
 			String des = B_MyModPanel.instance.jtf[1].getText();
 			String phone = B_MyModPanel.instance.jtf[2].getText();
 			String address = B_MyModPanel.instance.jtf[3].getText();
-			if (CheckUtil.phoneCheck(phone)) {
+			if (CheckUtil.existence_String("business", "name", name) != 0
+					&& !name.equals(BusinessService.get(GUIUtil.bus_id).getName())) {
+				JOptionPane.showMessageDialog(null, "已存在同名商家！", "", JOptionPane.ERROR_MESSAGE);
+			} else if (!CheckUtil.phoneCheck(phone)) {
+				JOptionPane.showMessageDialog(null, "手机号不合法！", "", JOptionPane.ERROR_MESSAGE);
+			} else {
 				Business bus = BusinessService.get(GUIUtil.bus_id);
 				bus.setName(name);
 				bus.setDes(des);
@@ -72,8 +77,6 @@ public class BusWorkpanelListener implements ActionListener {
 				JOptionPane.showMessageDialog(null, "修改成功！", "", JOptionPane.PLAIN_MESSAGE);
 				B_MyPanel.instance.updateData();
 				bp.workingPanel.show(B_MyPanel.instance);
-			} else {
-				JOptionPane.showMessageDialog(null, "手机号不合法！", "", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

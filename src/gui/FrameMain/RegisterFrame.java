@@ -133,12 +133,12 @@ public class RegisterFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "确认") {
 			if (jrb1.isSelected()) {
-				if (jtf.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				if (CheckUtil.sizeof(jtf.getText()) < 8) {
+					JOptionPane.showMessageDialog(null, "账号至少应有8位！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (CustomerService.check(jtf.getText())) {
 					JOptionPane.showMessageDialog(null, "账号已存在！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
-				} else if (jpf1.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "密码不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (CheckUtil.sizeof(jpf1.getText()) < 6) {
+					JOptionPane.showMessageDialog(null, "密码至少应有6位！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (!(jpf1.getText().equals(jpf2.getText()))) {
 					JOptionPane.showMessageDialog(null, "两次密码不一致！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (CheckUtil.Password_Register(jpf1.getText())) {
@@ -146,12 +146,12 @@ public class RegisterFrame extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "注册成功！", "注册信息", JOptionPane.PLAIN_MESSAGE);
 				}
 			} else if (jrb2.isSelected()) {
-				if (jtf.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "账号不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				if (CheckUtil.sizeof(jtf.getText()) < 8) {
+					JOptionPane.showMessageDialog(null, "账号至少应有8位！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (BusinessService.check(jtf.getText())) {
 					JOptionPane.showMessageDialog(null, "账号已存在！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
-				} else if (jpf1.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "密码不能为空！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
+				} else if (CheckUtil.sizeof(jpf1.getText()) < 6) {
+					JOptionPane.showMessageDialog(null, "密码至少应有6位！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (!(jpf1.getText().equals(jpf2.getText()))) {
 					JOptionPane.showMessageDialog(null, "两次密码不一致！", "注册信息 ", JOptionPane.ERROR_MESSAGE);
 				} else if (CheckUtil.Password_Register(jpf1.getText())) {

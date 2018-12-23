@@ -47,7 +47,7 @@ public class BusTableListener implements ActionListener {
 
 		JButton b = (JButton) e.getSource();
 
-		if (b == bolp.bSee) {
+		if (b == bolp.bSee) {//查看订单
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
@@ -57,7 +57,7 @@ public class BusTableListener implements ActionListener {
 				OrderFrame.instance_b.setVisible(true);
 			}
 		}
-		if (b == bolp.bRece) {
+		if (b == bolp.bRece) {//接单
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
@@ -68,7 +68,7 @@ public class BusTableListener implements ActionListener {
 				bolp.updateData();
 			}
 		}
-		if (b == bolp.bReje) {
+		if (b == bolp.bReje) {//送达
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
