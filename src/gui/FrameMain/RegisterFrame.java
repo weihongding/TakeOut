@@ -123,7 +123,6 @@ public class RegisterFrame extends JFrame implements ActionListener {
 		this.setSize(300, 250);
 		this.setLocation(400, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置当关闭窗口时，保证JVM也退出
-		this.setVisible(true);
 		this.setResizable(false);
 		this.setResizable(true);
 

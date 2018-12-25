@@ -126,7 +126,7 @@ public class ApplyDao {
 	public List<Apply> list() {
 		List<Apply> appArray = new ArrayList<Apply>();
 
-		String sql = "select * from apply";
+		String sql = "select * from apply order by time desc";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

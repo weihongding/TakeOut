@@ -70,9 +70,15 @@ public class CheckUtil {
     public static int sizeof(String str){
     	return str.length();
     }
+    
+
+	public static boolean isDouble(String str){
+		String reg = "^[0-9]+(.[0-9]+)?$";
+		return str.matches(reg);
+	}
 
 	public static void main(String[] args) {
-		System.out.println(sizeof("a114354"));
+		System.out.println(isDouble("°¡"));
 	}
 
 }

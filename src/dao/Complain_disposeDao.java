@@ -125,7 +125,7 @@ public class Complain_disposeDao {
 	public List<Complain_dispose> list(int coid) {
 		List<Complain_dispose> compArray = new ArrayList<Complain_dispose>();
 
-		String sql = "select * from Complain_dispose where Coid = ?";
+		String sql = "select * from Complain_dispose where Coid = ? order by time desc";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

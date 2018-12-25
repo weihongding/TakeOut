@@ -22,12 +22,10 @@ public class OrderDao {
 
 		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
 		OrderDao dao = new OrderDao();
-		Order order = dao.get_last();
-		int bid = order.getBid();
-		int cid = order.getCid();
-		Date time = order.getTime();
-		Order neworder = dao.get(bid, cid, time);
-		System.out.println(neworder.getId());
+		List<Order> list = dao.get("business", 5);
+		for (Order order : list) {
+			System.out.println(order.getTime());
+		}
 	}
 
 	/**
@@ -136,9 +134,9 @@ public class OrderDao {
 		List<Order> orderArray = new ArrayList<Order>();
 		String sql = "";
 		if (status.equals("business"))
-			sql = "select * from `order` where bid = ?";
+			sql = "select * from `order` where bid = ? order by time desc";
 		else if (status.equals("customer"))
-			sql = "select * from `order` where cid = ?";
+			sql = "select * from `order` where cid = ? order by time desc";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

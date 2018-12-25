@@ -72,6 +72,8 @@ public class MenuAddFrame extends JFrame {
 	public void clean() {
 		jtf[0].setText("");
 		jtf[1].setText("");
+		icon = GUIUtil.setimgwh("img/NotImage.jpg", 150, 150);
+		jicon.setIcon(icon);
 	}
 
 	public static void main(String[] args) {

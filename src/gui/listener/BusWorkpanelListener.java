@@ -69,6 +69,8 @@ public class BusWorkpanelListener implements ActionListener {
 				JOptionPane.showMessageDialog(null, "手机号不合法！", "", JOptionPane.ERROR_MESSAGE);
 			} else {
 				Business bus = BusinessService.get(GUIUtil.bus_id);
+				String oldname = bus.getName();
+				GUIUtil.changeName(oldname, name);
 				bus.setName(name);
 				bus.setDes(des);
 				bus.setPhone(phone);

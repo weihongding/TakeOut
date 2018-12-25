@@ -16,6 +16,7 @@ import gui.model.MenuTableModel;
 import gui.panel.B_MenLisPanel;
 import service.BusinessService;
 import service.FoodService;
+import util.CheckUtil;
 import util.GUIUtil;
 
 public class MenuListener implements ActionListener {
@@ -34,6 +35,8 @@ public class MenuListener implements ActionListener {
 		if (b == madd.bSave) {
 			if (madd.jtf[0].getText().equals("") || madd.jtf[1].getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "菜名/价格不能为空！", "错误", JOptionPane.ERROR_MESSAGE);
+			} else if (!CheckUtil.isDouble(madd.jtf[1].getText())) {
+				JOptionPane.showMessageDialog(null, "价格只能为数字", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
 				String foodname = madd.jtf[0].getText();
 				double price = Double.parseDouble(madd.jtf[1].getText());
@@ -55,6 +58,8 @@ public class MenuListener implements ActionListener {
 		if (b == mmod.bSave) {
 			if (mmod.jtf[0].getText().equals("") || mmod.jtf[1].getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "菜名/价格不能为空！", "错误", JOptionPane.ERROR_MESSAGE);
+			} else if (!CheckUtil.isDouble(mmod.jtf[1].getText())) {
+				JOptionPane.showMessageDialog(null, "价格只能为数字", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
 				String foodname = mmod.jtf[0].getText();
 				double price = Double.parseDouble(mmod.jtf[1].getText());

@@ -126,7 +126,7 @@ public class ComplainDao {
 	public List<Complain> list(int cid) {
 		List<Complain> compArray = new ArrayList<Complain>();
 
-		String sql = "select * from Complain where cid = ?";
+		String sql = "select * from Complain where cid = ? order by time desc";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -160,7 +160,7 @@ public class ComplainDao {
 	public List<Complain> list() {
 		List<Complain> compArray = new ArrayList<Complain>();
 
-		String sql = "select * from complain";
+		String sql = "select * from complain order by time desc";
 
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

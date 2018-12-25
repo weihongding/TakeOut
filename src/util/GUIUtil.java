@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,9 +25,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
+import entity.Food;
 import gui.model.MenuTableModel;
 import gui.model.OrderCarTableModel;
 import service.BusinessService;
+import service.FoodService;
 
 /**
  * GUI工具类
@@ -43,15 +46,15 @@ public class GUIUtil {
 	public static void main(String[] args) {
 
 	}
-	
-    public static void useLNF() {
-        try {
-            javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
+	public static void useLNF() {
+		try {
+			javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 显示Panel
@@ -157,6 +160,8 @@ public class GUIUtil {
 	 * @return
 	 */
 	public static ImageIcon setimgwh(String iconPath, int width, int hight) {
+		if (!new File(iconPath).exists())
+			iconPath = "img/NotImage.jpg";
 		ImageIcon icon = new ImageIcon(iconPath);
 		icon.setImage(icon.getImage().getScaledInstance(width, hight, Image.SCALE_DEFAULT));
 		return icon;
@@ -219,8 +224,8 @@ public class GUIUtil {
 		ArrayList<Integer> array = getArray_int_index(num);
 		String[][] str = new String[array.size()][3];
 		for (int i = 0; i < array.size(); i++) {
-			str[i][0] = (String) t.getValueAt(i, 0);
-			str[i][1] = Double.toString((Double) t.getValueAt(i, 1));
+			str[i][0] = (String) t.getValueAt(array.get(i), 0);
+			str[i][1] = Double.toString((Double) t.getValueAt(array.get(i), 1));
 			str[i][2] = Integer.toString(num[array.get(i)]);
 		}
 		return str;
@@ -325,6 +330,30 @@ public class GUIUtil {
 			}
 		}
 
+	}
+
+	/**
+	 * 修改店名时同时修改图片名称
+	 * 
+	 * @param oldname
+	 * @param newname
+	 */
+	public static void changeName(String oldname, String newname) {
+		String name;
+		int bl = oldname.length();
+		File file = new File("img"); // 获取其file对象
+		File[] fs = file.listFiles(); // 遍历path下的文件和目录，放在File数组中
+		for (File f : fs) { // 遍历File[]数组
+			if (f.getName().startsWith(oldname)) {
+				name = f.getName().replaceAll(oldname, newname);
+				f.renameTo(new File("img/" + name));
+			}
+		}
+		List<Food> foodArray = FoodService.list_b(BusinessService.getid(oldname));
+		for (Food food : foodArray) {
+			food.setImage(food.getImage().replaceAll(oldname, newname));
+			FoodService.update(food);
+		}
 	}
 
 	/**
