@@ -37,6 +37,8 @@ public class MenuListener implements ActionListener {
 				JOptionPane.showMessageDialog(null, "菜名/价格不能为空！", "错误", JOptionPane.ERROR_MESSAGE);
 			} else if (!CheckUtil.isDouble(madd.jtf[1].getText())) {
 				JOptionPane.showMessageDialog(null, "价格只能为数字", "错误", JOptionPane.ERROR_MESSAGE);
+			} else if (!CheckUtil.inRange(0, 1000, Double.parseDouble(madd.jtf[1].getText()))) {
+				JOptionPane.showMessageDialog(null, "价格只能在0到1000以内", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
 				String foodname = madd.jtf[0].getText();
 				double price = Double.parseDouble(madd.jtf[1].getText());
@@ -60,6 +62,8 @@ public class MenuListener implements ActionListener {
 				JOptionPane.showMessageDialog(null, "菜名/价格不能为空！", "错误", JOptionPane.ERROR_MESSAGE);
 			} else if (!CheckUtil.isDouble(mmod.jtf[1].getText())) {
 				JOptionPane.showMessageDialog(null, "价格只能为数字", "错误", JOptionPane.ERROR_MESSAGE);
+			} else if (!CheckUtil.inRange(0, 1000, Double.parseDouble(mmod.jtf[1].getText()))) {
+				JOptionPane.showMessageDialog(null, "价格只能在0到1000以内", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
 				String foodname = mmod.jtf[0].getText();
 				double price = Double.parseDouble(mmod.jtf[1].getText());

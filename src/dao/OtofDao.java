@@ -16,12 +16,9 @@ public class OtofDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		OtofDao dao = new OtofDao();
-		Otof otof = dao.get(1).get(0);
-		otof.setCount(2);
-		otof.setSum_price(13);
-		dao.update(otof);
+		System.out.println(dao.getSales(8));
 
 	}
 
@@ -150,6 +147,31 @@ public class OtofDao {
 			e.printStackTrace();
 		}
 		return otofArray;
+	}
+
+	/**
+	 * 根据菜品id统计销量
+	 * @param fid
+	 * @return
+	 */
+	public int getSales(int fid) {
+		int count = 0;
+		String sql = "select * from otof where fid = ?";
+
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+			ps.setInt(1, fid);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				count++;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }

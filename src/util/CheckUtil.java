@@ -56,29 +56,49 @@ public class CheckUtil {
 		}
 		return count;
 	}
-	
+
 	/**
 	 * 是否只包含数字
+	 * 
 	 * @param str
 	 * @return
 	 */
-    public static boolean isNumeric(String str){ 
-        Pattern pattern = Pattern.compile("[0-9]*"); 
-        return pattern.matcher(str).matches();    
-     }
-    
-    public static int sizeof(String str){
-    	return str.length();
-    }
-    
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		return pattern.matcher(str).matches();
+	}
 
-	public static boolean isDouble(String str){
+	/**
+	 * 是否在范围内
+	 * 
+	 * @param min
+	 * @param max
+	 * @param value
+	 * @return
+	 */
+	public static boolean inRange(double min, double max, double value) {
+		if (value > min && value <= max)
+			return true;
+		return false;
+	}
+	
+	public static boolean inRange(int min, int max, int value) {
+		if (value > min && value <= max)
+			return true;
+		return false;
+	}
+
+	public static int sizeof(String str) {
+		return str.length();
+	}
+
+	public static boolean isDouble(String str) {
 		String reg = "^[0-9]+(.[0-9]+)?$";
 		return str.matches(reg);
 	}
 
 	public static void main(String[] args) {
-		System.out.println(isDouble("啊"));
+		System.out.println(inRange(0, 1000, 0));
 	}
 
 }

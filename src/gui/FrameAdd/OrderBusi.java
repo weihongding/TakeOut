@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,9 +16,9 @@ import util.GUIUtil;
 import util.TableInstance;
 
 /**
- * ¹Ë¿Í²é¿´ÉÌ¼ÒÒ³Ãæ
+ * é¡¾å®¢æŸ¥çœ‹å•†å®¶é¡µé¢
  * 
- * @×÷Õß ¶¡Î°ºê
+ * @ä½œè€… ä¸ä¼Ÿå®
  *
  */
 public class OrderBusi extends JFrame {
@@ -25,8 +26,9 @@ public class OrderBusi extends JFrame {
 		GUIUtil.useLNF();
 	}
 	public static OrderBusi instance = new OrderBusi(GUIUtil.c_bid);
-	public JButton bSee = new JButton("²é¿´");
-	public JButton bPlace = new JButton("ÏÂµ¥");
+	public JButton bSee = new JButton("æŸ¥çœ‹");
+	public JButton bPlace = new JButton("ä¸‹å•");
+	public JLabel jl = new JLabel("âœ©ä¸ºæ˜æ˜Ÿèœå“");
 	public JPanel pSubmit = new JPanel();
 	public JScrollPane sp;
 	public MenuTableModel m;
@@ -36,6 +38,7 @@ public class OrderBusi extends JFrame {
 		m = new MenuTableModel(bid);
 		t = new JTable(m);
 		sp = new JScrollPane(t);
+		pSubmit.add(jl);
 		pSubmit.add(bSee);
 		pSubmit.add(bPlace);
 		this.setTitle(BusinessService.get(GUIUtil.c_bid).getName());

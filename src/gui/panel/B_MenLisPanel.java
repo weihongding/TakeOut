@@ -22,6 +22,7 @@ import util.GUIUtil;
 public class B_MenLisPanel extends WorkingPanel {
 
 	public static B_MenLisPanel instance = new B_MenLisPanel();
+	public JButton bSign = new JButton("明星菜品");
 	public JButton bAdd = new JButton("新增");
 	public JButton bMod = new JButton("修改");
 	public JButton bDel = new JButton("删除");
@@ -32,6 +33,7 @@ public class B_MenLisPanel extends WorkingPanel {
 		t = new JTable(MenuTableModel.instance1);
 		sp = new JScrollPane(t);
 		JPanel pSubmit = new JPanel();
+		pSubmit.add(bSign);
 		pSubmit.add(bAdd);
 		pSubmit.add(bMod);
 		pSubmit.add(bDel);
@@ -58,6 +60,7 @@ public class B_MenLisPanel extends WorkingPanel {
 	@Override
 	public void addListener() {
 		BusTableListener listener = new BusTableListener();
+		bSign.addActionListener(listener);
 		bAdd.addActionListener(listener);
 		bMod.addActionListener(listener);
 		bDel.addActionListener(listener);

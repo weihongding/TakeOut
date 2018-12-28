@@ -20,7 +20,7 @@ public class BusinessDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数、获取实例、获取实例集合、更新、新增、验证账号密码
+		// 已测试功能：全部
 		BusinessDao dao = new BusinessDao();
 		System.out.println(dao.check("zhangzhang"));
 	}

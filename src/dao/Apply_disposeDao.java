@@ -16,7 +16,7 @@ public class Apply_disposeDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		Apply_disposeDao dao = new Apply_disposeDao();
 		Apply_dispose app = dao.get(18).get(0);
 		app.setContent("申请成功！");

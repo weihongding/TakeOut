@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entity.Business;
 import gui.listener.BusWorkpanelListener;
+import service.ApplyService;
 import service.BusinessService;
 import util.GUIUtil;
 
@@ -45,7 +46,7 @@ public class B_MyPanel extends WorkingPanel {
 		jl[6].setText(b.getDes());
 		jl[7].setText(b.getPhone());
 		jl[8].setText(b.getAddress());
-		jl[9].setText(b.getState());
+		jl[9].setText(b.getState()+"("+ApplyService.getstate(b.getId())+")");
 
 		for (int i = 0; i < 5; i++) {
 			jp[i].add(jl[i]);
@@ -79,7 +80,7 @@ public class B_MyPanel extends WorkingPanel {
 		jl[6].setText(b.getDes());
 		jl[7].setText(b.getPhone());
 		jl[8].setText(b.getAddress());
-		jl[9].setText(b.getState());
+		jl[9].setText(b.getState()+"("+ApplyService.getstate(b.getId())+")");
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class MenuTableModel extends AbstractTableModel {
 	String[] columnNames;
 	List<Food> menus;
 
-	static String[] columnNames1 = { "菜名", "价格" };
+	static String[] columnNames1 = { "菜名", "价格", "销量" };
 
 	public static int[] num;
 
@@ -65,6 +65,8 @@ public class MenuTableModel extends AbstractTableModel {
 			return menus.get(rowIndex).getPrice();
 		if (columnNames[columnIndex].equals("数量"))
 			return num[rowIndex];
+		if (columnNames[columnIndex].equals("销量"))
+			return FoodService.getSales(menus.get(rowIndex).getId());
 		return null;
 	}
 

@@ -18,10 +18,9 @@ public class ApplyDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		ApplyDao dao = new ApplyDao();
-		Apply app = dao.get(18);
-		System.out.println(app.getContent());
+		System.out.println(dao.getState(5));
 	}
 
 	/**
@@ -204,7 +203,7 @@ public class ApplyDao {
 				int id = rs.getInt("id");
 				String content = rs.getString("content");
 				String state = rs.getString("state");
-				
+
 				app = new Apply(bid, content, t_time, state);
 				app.setId(id);
 
@@ -216,6 +215,32 @@ public class ApplyDao {
 		}
 
 		return app;
+	}
+
+	/**
+	 * 根据商家id得到最后一次申请的状态
+	 * @param bid
+	 * @return
+	 */
+	public String getState(int bid) {
+		
+		String state = "尚未申请过";
+		try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+
+			String sql = "select * from apply where bid = '" + bid + "' order by time DESC limit 1";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				state = rs.getString("state");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return state;
+
 	}
 
 }

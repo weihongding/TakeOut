@@ -17,7 +17,7 @@ public class ManagerDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取实例、验证账号密码
+		// 已测试功能：全部
 		ManagerDao dao = new ManagerDao();
 		System.out.println(dao.check("manager1", "manapassword"));
 	}

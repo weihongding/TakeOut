@@ -17,7 +17,7 @@ public class FoodDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、获取单个实例
+		// 已测试功能：全部
 		FoodDao dao = new FoodDao();
 		Food food = dao.get_fid(11);
 		System.out.println(food == null);

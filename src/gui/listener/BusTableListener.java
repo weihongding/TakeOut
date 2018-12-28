@@ -30,9 +30,9 @@ import util.StateUtil;
 import util.TableInstance;
 
 /**
- * ÉÌ¼Ò±í¸ñ¼àÌı
+ * å•†å®¶è¡¨æ ¼ç›‘å¬
  * 
- * @×÷Õß ¶¡Î°ºê
+ * @ä½œè€… ä¸ä¼Ÿå®
  *
  */
 public class BusTableListener implements ActionListener {
@@ -40,14 +40,14 @@ public class BusTableListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		B_MenLisPanel bmlp = B_MenLisPanel.instance;// ²Ëµ¥ÁĞ±í
-		B_OrdLisPanel bolp = B_OrdLisPanel.instance;// ¶©µ¥ÁĞ±í
-		B_EarnPanel bep = B_EarnPanel.instance;// ÊÕÈëÇé¿ö
-		B_MyPanel bmp = B_MyPanel.instance;// ¸öÈËÖ÷Ò³
+		B_MenLisPanel bmlp = B_MenLisPanel.instance;// èœå•åˆ—è¡¨
+		B_OrdLisPanel bolp = B_OrdLisPanel.instance;// è®¢å•åˆ—è¡¨
+		B_EarnPanel bep = B_EarnPanel.instance;// æ”¶å…¥æƒ…å†µ
+		B_MyPanel bmp = B_MyPanel.instance;// ä¸ªäººä¸»é¡µ
 
 		JButton b = (JButton) e.getSource();
 
-		if (b == bolp.bSee) {//²é¿´¶©µ¥
+		if (b == bolp.bSee) {// æŸ¥çœ‹è®¢å•
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
@@ -57,7 +57,7 @@ public class BusTableListener implements ActionListener {
 				OrderFrame.instance_b.setVisible(true);
 			}
 		}
-		if (b == bolp.bRece) {//½Óµ¥
+		if (b == bolp.bRece) {// æ¥å•
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
@@ -68,7 +68,7 @@ public class BusTableListener implements ActionListener {
 				bolp.updateData();
 			}
 		}
-		if (b == bolp.bReje) {//ËÍ´ï
+		if (b == bolp.bReje) {// é€è¾¾
 			int i = TableInstance.instance_order_b.getSelectedRow();
 			if (i != -1) {
 				int cid = CustomerService.getid((String) OrderTableModel.instance_b.getValueAt(i, 0));
@@ -79,11 +79,27 @@ public class BusTableListener implements ActionListener {
 				bolp.updateData();
 			}
 		}
-		if (b == bmlp.bAdd) {// Ôö¼Ó²ËÆ·
+		if (b == bmlp.bSign) {// æ ‡è®°æ˜æ˜Ÿèœå“
+			int i = bmlp.t.getSelectedRow();
+			if (i != -1) {
+				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
+				String name = food.getName();
+				if (name.contains("âœ©")) {
+					food.setName(name.replace("âœ©", ""));
+					FoodService.update(food);
+					bmlp.updateData();
+				} else {
+					food.setName(name + "âœ©");
+					FoodService.update(food);
+					bmlp.updateData();
+				}
+			}
+		}
+		if (b == bmlp.bAdd) {// å¢åŠ èœå“
 			MenuAddFrame.instance.clean();
 			MenuAddFrame.instance.setVisible(true);
 		}
-		if (b == bmlp.bMod) {// ²ËÆ·ĞŞ¸Ä
+		if (b == bmlp.bMod) {// èœå“ä¿®æ”¹
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1) {
 				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
@@ -91,12 +107,12 @@ public class BusTableListener implements ActionListener {
 				MenuModFrame.instance.setVisible(true);
 			}
 		}
-		if (b == bmlp.bDel) {// É¾³ı²ËÆ·
+		if (b == bmlp.bDel) {// åˆ é™¤èœå“
 			int i = bmlp.t.getSelectedRow();
 			if (i != -1) {
 				Food food = FoodService.get(GUIUtil.bus_id, (String) MenuTableModel.instance1.getValueAt(i, 0));
 				FoodService.delete(food);
-				JOptionPane.showMessageDialog(null, "³É¹¦É¾³ı²ËÆ·£º" + food.getName(), "ÌáÊ¾", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "æˆåŠŸåˆ é™¤èœå“ï¼š" + food.getName(), "æç¤º", JOptionPane.PLAIN_MESSAGE);
 				bmlp.updateData();
 			}
 		}

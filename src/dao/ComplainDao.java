@@ -17,7 +17,7 @@ public class ComplainDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		ComplainDao dao = new ComplainDao();
 		Complain comp = dao.list(7).get(dao.list(7).size() - 1);
 		System.out.println(comp.getContent());

@@ -18,7 +18,7 @@ public class CustomerDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数、获取实例、增加、删除、更新、验证账号密码
+		// 已测试功能：全部
 		CustomerDao dao = new CustomerDao();
 		Customer cus = dao.get(7);
 		System.out.println(cus.getAddress());

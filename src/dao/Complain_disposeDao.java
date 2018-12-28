@@ -16,7 +16,7 @@ public class Complain_disposeDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		Complain_disposeDao dao = new Complain_disposeDao();
 		Complain_dispose comp = dao.list(3).get(dao.list(3).size()-1);
 		System.out.println(comp.getContent());

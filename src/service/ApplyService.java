@@ -35,6 +35,10 @@ public class ApplyService {
 		adao.update(app);
 	}
 	
+	public static String getstate(int bid){
+		return adao.getState(bid);
+	}
+	
 	/**
 	 * 获取投诉建议集合
 	 */

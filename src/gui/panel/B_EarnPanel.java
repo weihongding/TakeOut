@@ -26,15 +26,19 @@ import util.GUIUtil;
 public class B_EarnPanel extends WorkingPanel {
 
 	public static B_EarnPanel instance = new B_EarnPanel();
-	public JLabel jl1, jl2;
+	public JLabel jl = new JLabel();
+	public JPanel jp = new JPanel();
+	public Image img;
+	public Icon icon;
 
 	private B_EarnPanel() {
 
-		jl1 = new JLabel("已送达订单："+Double.toString(OrderService.earn_have(GUIUtil.bus_id)));
-		jl2 = new JLabel("未送达订单："+Double.toString(OrderService.earn_will(GUIUtil.bus_id)));
-		this.add(jl1);
-		this.add(jl2);
-		this.setLayout(new GridLayout(2, 2));
+		img = ChartUtil.getImage(400, 300, OrderService.getEarn(GUIUtil.bus_id));
+		icon = new ImageIcon(img);
+		jl.setIcon(icon);
+		jp.add(jl);
+
+		this.add(jp);
 
 	}
 
@@ -44,9 +48,9 @@ public class B_EarnPanel extends WorkingPanel {
 
 	@Override
 	public void updateData() {
-		jl1.setText("已送达订单："+Double.toString(OrderService.earn_have(GUIUtil.bus_id)));
-		jl2.setText("未送达订单："+Double.toString(OrderService.earn_will(GUIUtil.bus_id)));
-
+		img = ChartUtil.getImage(400, 300, OrderService.getEarn(GUIUtil.bus_id));
+		icon = new ImageIcon(img);
+		jl.setIcon(icon);
 	}
 
 	@Override

@@ -20,12 +20,11 @@ public class OrderDao {
 
 	public static void main(String[] args) {
 
-		// 已测试功能：获取总数，增加、获取实例集合、删除、更新
+		// 已测试功能：全部
 		OrderDao dao = new OrderDao();
-		List<Order> list = dao.get("business", 5);
-		for (Order order : list) {
-			System.out.println(order.getTime());
-		}
+		double[] d = dao.getEarn(8);
+		System.out.println(d[17]);
+		
 	}
 
 	/**
@@ -294,6 +293,42 @@ public class OrderDao {
 		}
 
 		return order;
+	}
+
+	/**
+	 * 根据商家id获得本月的收入
+	 * 
+	 * @param bid
+	 * @return
+	 */
+	public double[] getEarn(int bid) {
+
+		double[] earn = new double[31];
+		String sql = "select * from `order` where bid = '" + bid + "' AND time >= ? AND time <= ? ";
+		double todayEarn = 0;
+
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+
+			for (int i = 0; i < 31; i++) {
+				todayEarn = 0;
+				ps.setString(1, "2018-12-" + Integer.toString(i + 1));
+				ps.setString(2, "2018-12-" + Integer.toString(i + 2));
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					if (rs.getString("state").equals(StateUtil.order[2])) {
+						todayEarn += rs.getDouble("total_price");
+					}
+				}
+				earn[i] = todayEarn;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return earn;
+
 	}
 
 }

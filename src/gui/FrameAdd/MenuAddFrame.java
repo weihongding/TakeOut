@@ -63,7 +63,7 @@ public class MenuAddFrame extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.add(pCent, BorderLayout.CENTER);
 		this.add(pSout, BorderLayout.SOUTH);
-		this.setSize(350, 300);
+		this.setSize(450, 400);
 		this.setLocation(800, 400);
 
 		addListener();

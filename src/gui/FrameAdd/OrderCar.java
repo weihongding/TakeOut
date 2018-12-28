@@ -47,7 +47,7 @@ public class OrderCar extends JFrame {
 		this.add(pTitle, BorderLayout.NORTH);
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
-		this.setSize(350, 300);
+		this.setSize(450, 400);
 		this.setLocation(800, 400);
 
 		addListener();

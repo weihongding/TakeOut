@@ -9,6 +9,7 @@ import entity.Food;
 public class FoodService {
 
 	static FoodDao fdao = new FoodDao();
+	static OtofDao otofdao = new OtofDao();
 
 	/** 根据商家id获得商家的菜单 */
 	public static List<Food> list_b(int bid) {
@@ -35,4 +36,8 @@ public class FoodService {
 		fdao.delete(food.getId());
 	}
 
+	public static int getSales(int fid){
+		return otofdao.getSales(fid);
+	}
+	
 }

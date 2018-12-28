@@ -77,8 +77,12 @@ public class OrderService {
 		return otofdao.get(oid);
 	}
 
-	public static void update(Order order){
+	public static void update(Order order) {
 		odao.update(order);
 	}
-	
+
+	public static double[] getEarn(int bid) {
+		return odao.getEarn(bid);
+	}
+
 }
