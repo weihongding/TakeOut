@@ -31,8 +31,6 @@ public class FrameAddListener implements ActionListener {
 		if (b == OrderBusi.instance.bPlace) {// 商家菜单 下单
 			if (GUIUtil.getSum(new OrderCarTableModel(), 1, 2) == 0) {
 				JOptionPane.showMessageDialog(null, "没有选择餐品，下单失败！", "错误", JOptionPane.ERROR_MESSAGE);
-			} else if (GUIUtil.getSum(new OrderCarTableModel(), 1, 2) >= 20) {
-				JOptionPane.showMessageDialog(null, "单次单品如需大于20件，请自行联系商家", "错误", JOptionPane.ERROR_MESSAGE);
 			} else {
 				OrderCar.instance = new OrderCar();
 				OrderCar.instance.setVisible(true);
@@ -53,10 +51,14 @@ public class FrameAddListener implements ActionListener {
 			String num = OrderFood.instance.jtf.getText();
 			if (i != -1) {
 				if (CheckUtil.isNumeric(num)) {
-					MenuTableModel.num[i] = Integer.parseInt(num);
-					OrderBusi.instance.setVisible(false);
-					OrderFood.instance.setVisible(false);
-					OrderBusi.instance.setVisible(true);
+					if (Double.parseDouble(num) >= 20) {
+						JOptionPane.showMessageDialog(null, "单次单品如需大于20件请自行联系商家！", "错误", JOptionPane.ERROR_MESSAGE);
+					} else {
+						MenuTableModel.num[i] = Integer.parseInt(num);
+						OrderBusi.instance.setVisible(false);
+						OrderFood.instance.setVisible(false);
+						OrderBusi.instance.setVisible(true);
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "菜品数量只能是自然数！", "错误", JOptionPane.ERROR_MESSAGE);
 				}

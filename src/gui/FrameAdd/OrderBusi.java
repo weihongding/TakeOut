@@ -45,7 +45,7 @@ public class OrderBusi extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.add(sp, BorderLayout.CENTER);
 		this.add(pSubmit, BorderLayout.SOUTH);
-		this.setSize(350, 300);
+		this.setSize(450, 400);
 		this.setLocation(800, 400);
 
 		addListener();
