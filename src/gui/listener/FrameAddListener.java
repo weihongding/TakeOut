@@ -26,17 +26,17 @@ public class FrameAddListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		JButton b = (JButton) e.getSource();// »ñÈ¡°´Å¥
+		JButton b = (JButton) e.getSource();// è·å–æŒ‰é’®
 
-		if (b == OrderBusi.instance.bPlace) {// ÉÌ¼Ò²Ëµ¥ ÏÂµ¥
+		if (b == OrderBusi.instance.bPlace) {// å•†å®¶èœå• ä¸‹å•
 			if (GUIUtil.getSum(new OrderCarTableModel(), 1, 2) == 0) {
-				JOptionPane.showMessageDialog(null, "Ã»ÓĞÑ¡Ôñ²ÍÆ·£¬ÏÂµ¥Ê§°Ü£¡", "´íÎó", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "æ²¡æœ‰é€‰æ‹©é¤å“ï¼Œä¸‹å•å¤±è´¥ï¼", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			} else {
 				OrderCar.instance = new OrderCar();
 				OrderCar.instance.setVisible(true);
 			}
 		}
-		if (b == OrderBusi.instance.bSee) {// ÉÌ¼Ò²Ëµ¥ ²é¿´²ËÆ·ÏêÇé
+		if (b == OrderBusi.instance.bSee) {// å•†å®¶èœå• æŸ¥çœ‹èœå“è¯¦æƒ…
 			int i = OrderBusi.instance.t.getSelectedRow();
 			if (i != -1) {
 				OrderFood.instance = new OrderFood((String) OrderBusi.instance.m.getValueAt(i, 0),
@@ -46,13 +46,13 @@ public class FrameAddListener implements ActionListener {
 				OrderFood.instance.setVisible(true);
 			}
 		}
-		if (b == OrderFood.instance.bSave) {// ÉÌ¼Ò²ËÆ· È·¶¨ÊıÁ¿
+		if (b == OrderFood.instance.bSave) {// å•†å®¶èœå“ ç¡®å®šæ•°é‡
 			int i = OrderBusi.instance.t.getSelectedRow();
 			String num = OrderFood.instance.jtf.getText();
 			if (i != -1) {
 				if (CheckUtil.isNumeric(num)) {
 					if (Double.parseDouble(num) >= 20) {
-						JOptionPane.showMessageDialog(null, "µ¥´Îµ¥Æ·ÈçĞè´óÓÚ20¼şÇë×ÔĞĞÁªÏµÉÌ¼Ò£¡", "´íÎó", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "å•æ¬¡å•å“å¦‚éœ€å¤§äº20ä»¶è¯·è‡ªè¡Œè”ç³»å•†å®¶ï¼", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 					} else {
 						MenuTableModel.num[i] = Integer.parseInt(num);
 						OrderBusi.instance.setVisible(false);
@@ -60,18 +60,18 @@ public class FrameAddListener implements ActionListener {
 						OrderBusi.instance.setVisible(true);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "²ËÆ·ÊıÁ¿Ö»ÄÜÊÇ×ÔÈ»Êı£¡", "´íÎó", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "èœå“æ•°é‡åªèƒ½æ˜¯è‡ªç„¶æ•°ï¼", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
-		if (b == OrderCar.instance.bPlace) {// ¹ºÎï³µ ÏÂµ¥
+		if (b == OrderCar.instance.bPlace) {// è´­ç‰©è½¦ ä¸‹å•
 			String[][] str = GUIUtil.getArray_String(OrderBusi.instance.m, OrderBusi.instance.m.num);
 			boolean flag = OrderService.add(GUIUtil.c_bid, GUIUtil.cus_id, str);
 			if (flag) {
-				JOptionPane.showMessageDialog(null, "ÏÂµ¥³É¹¦£¡", "ÌáÊ¾", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ä¸‹å•æˆåŠŸï¼", "æç¤º", JOptionPane.PLAIN_MESSAGE);
 				OrderCar.instance.setVisible(false);
 			} else {
-				JOptionPane.showMessageDialog(null, "ÏÂµ¥Ê§°Ü£¡", "´íÎó", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ä¸‹å•å¤±è´¥ï¼", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (b == OrderCar.instance.bQuit) {

@@ -32,9 +32,9 @@ import service.BusinessService;
 import service.FoodService;
 
 /**
- * GUI¹¤¾ßÀà
+ * GUIå·¥å…·ç±»
  * 
- * @×÷Õß ¶¡Î°ºê
+ * @ä½œè€… ä¸ä¼Ÿå®
  *
  */
 public class GUIUtil {
@@ -57,11 +57,11 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ÏÔÊ¾Panel
+	 * æ˜¾ç¤ºPanel
 	 * 
 	 * @param p
 	 * @param strechRate
-	 *            À­Éì±ÈÀı1±íÊ¾ÂúÆÁÄ»
+	 *            æ‹‰ä¼¸æ¯”ä¾‹1è¡¨ç¤ºæ»¡å±å¹•
 	 */
 	public static void showPanel(JPanel p, double strechRate) {
 		JFrame f = new JFrame();
@@ -75,7 +75,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * 0.85µÄ±ÈÀıÏÔÊ¾Panel
+	 * 0.85çš„æ¯”ä¾‹æ˜¾ç¤ºPanel
 	 * 
 	 * @param p
 	 */
@@ -84,7 +84,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¼ì²éÊı×ÖÊÇ·ñÎªÕûÊı
+	 * æ£€æŸ¥æ•°å­—æ˜¯å¦ä¸ºæ•´æ•°
 	 * 
 	 * @param tf
 	 * @param input
@@ -98,14 +98,14 @@ public class GUIUtil {
 			Integer.parseInt(text);
 			return true;
 		} catch (NumberFormatException e1) {
-			JOptionPane.showMessageDialog(null, input + " ĞèÒªÊÇÕûÊı");
+			JOptionPane.showMessageDialog(null, input + " éœ€è¦æ˜¯æ•´æ•°");
 			tf.grabFocus();
 			return false;
 		}
 	}
 
 	/**
-	 * ¼ì²éÊı×ÖÊÇ·ñÎª0
+	 * æ£€æŸ¥æ•°å­—æ˜¯å¦ä¸º0
 	 * 
 	 * @param tf
 	 * @param input
@@ -117,7 +117,7 @@ public class GUIUtil {
 		String text = tf.getText().trim();
 
 		if (0 == Integer.parseInt(text)) {
-			JOptionPane.showMessageDialog(null, input + " ²»ÄÜÎªÁã");
+			JOptionPane.showMessageDialog(null, input + " ä¸èƒ½ä¸ºé›¶");
 			tf.grabFocus();
 			return false;
 		}
@@ -125,7 +125,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¼ì²éÊäÈëÊÇ·ñÎª¿Õ
+	 * æ£€æŸ¥è¾“å…¥æ˜¯å¦ä¸ºç©º
 	 * 
 	 * @param tf
 	 * @param input
@@ -134,7 +134,7 @@ public class GUIUtil {
 	public static boolean checkEmpty(JTextField tf, String input) {
 		String text = tf.getText().trim();
 		if (0 == text.length()) {
-			JOptionPane.showMessageDialog(null, input + " ²»ÄÜÎª¿Õ");
+			JOptionPane.showMessageDialog(null, input + " ä¸èƒ½ä¸ºç©º");
 			tf.grabFocus();
 			return false;
 		}
@@ -143,7 +143,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ½«ÊäÈëµÄÎÄ±¾×ª»¯Îªint
+	 * å°†è¾“å…¥çš„æ–‡æœ¬è½¬åŒ–ä¸ºint
 	 * 
 	 * @param tf
 	 * @return
@@ -153,7 +153,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ÉèÖÃÍ¼Æ¬´óĞ¡
+	 * è®¾ç½®å›¾ç‰‡å¤§å°
 	 * 
 	 * @param width
 	 * @param hight
@@ -168,9 +168,9 @@ public class GUIUtil {
 	}
 
 	/**
-	 * µÃµ½Ò»¸öÊı×é1
+	 * å¾—åˆ°ä¸€ä¸ªæ•°ç»„1
 	 * 
-	 * @param Êı×é³¤¶È
+	 * @param æ•°ç»„é•¿åº¦
 	 * @return
 	 */
 	public static int[] getArray_int_num(int num) {
@@ -182,10 +182,10 @@ public class GUIUtil {
 	}
 
 	/**
-	 * µÃµ½Ò»¸öÊı×é2
+	 * å¾—åˆ°ä¸€ä¸ªæ•°ç»„2
 	 * 
-	 * @param ±í¸ñ
-	 * @param Êı×ÖËùÔÚÁĞÊı
+	 * @param è¡¨æ ¼
+	 * @param æ•°å­—æ‰€åœ¨åˆ—æ•°
 	 * @return
 	 */
 	public static int[] getArray_int_table(AbstractTableModel t, int num) {
@@ -198,10 +198,10 @@ public class GUIUtil {
 	}
 
 	/**
-	 * µÃµ½Êı×éÖĞ·Ç0Êı×ÖµÄÏÂ±êÊı×é
+	 * å¾—åˆ°æ•°ç»„ä¸­é0æ•°å­—çš„ä¸‹æ ‡æ•°ç»„
 	 * 
-	 * @param Ô­Êı×é
-	 * @return ÏÂ±êÊı×é
+	 * @param åŸæ•°ç»„
+	 * @return ä¸‹æ ‡æ•°ç»„
 	 */
 	public static ArrayList<Integer> getArray_int_index(int[] num) {
 		ArrayList<Integer> array = new ArrayList<>();
@@ -213,11 +213,11 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¸ù¾İÊı×éºÍ±íµÃµ½È¥ÁãÊı×é¶ÔÓ¦µÄ±í
+	 * æ ¹æ®æ•°ç»„å’Œè¡¨å¾—åˆ°å»é›¶æ•°ç»„å¯¹åº”çš„è¡¨
 	 * 
-	 * @param Ô­±í
-	 * @param Êı×é
-	 * @return È¥ÁãÊı×é¶ÔÓ¦µÄ±í
+	 * @param åŸè¡¨
+	 * @param æ•°ç»„
+	 * @return å»é›¶æ•°ç»„å¯¹åº”çš„è¡¨
 	 */
 	public static String[][] getArray_String(AbstractTableModel t, int[] num) {
 
@@ -232,12 +232,12 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¼ÆËã±í¸ñÖĞµÄ×ÜºÍ
+	 * è®¡ç®—è¡¨æ ¼ä¸­çš„æ€»å’Œ
 	 * 
-	 * @param ±í¸ñ
-	 * @param aÁĞ
-	 * @param bÁĞ
-	 * @return aÁĞ*bÁĞºóµÄ³Ë»ıºÍ
+	 * @param è¡¨æ ¼
+	 * @param aåˆ—
+	 * @param båˆ—
+	 * @return aåˆ—*båˆ—åçš„ä¹˜ç§¯å’Œ
 	 */
 	public static double getSum(AbstractTableModel t, int a, int b) {
 		double sum = 0;
@@ -248,7 +248,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¸ù¾İ²ËÃûºÍµÇÂ½µÄÉÌ¼ÒidµÃµ½Ô¤ÁôµÄÍ¼Æ¬µØÖ·
+	 * æ ¹æ®èœåå’Œç™»é™†çš„å•†å®¶idå¾—åˆ°é¢„ç•™çš„å›¾ç‰‡åœ°å€
 	 * 
 	 * @param foodname
 	 * @return
@@ -259,7 +259,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * Í¼Æ¬¸´ÖÆÆ÷
+	 * å›¾ç‰‡å¤åˆ¶å™¨
 	 * 
 	 * @param oldpath
 	 * @param newpath
@@ -270,23 +270,23 @@ public class GUIUtil {
 	}
 
 	/**
-	 * Í¼Æ¬Ñ¡ÔñÆ÷
+	 * å›¾ç‰‡é€‰æ‹©å™¨
 	 * 
 	 * @param foodname
-	 * @return Ñ¡ÔñµÄÊµ¼ÊÍ¼Æ¬µÄµØÖ·
+	 * @return é€‰æ‹©çš„å®é™…å›¾ç‰‡çš„åœ°å€
 	 */
 	public static String imgcho() {
 		ImageChoose ic = new ImageChoose();
 		File file = ic.getImage();
 		if (file == null) {
-			JOptionPane.showMessageDialog(null, "Î´Ñ¡ÔñÍ¼Æ¬", "´íÎó", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "æœªé€‰æ‹©å›¾ç‰‡", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			return "img/NotImage.jpg";
 		}
 		return file.getPath();
 	}
 
 	/**
-	 * Ê¹ÓÃ»º´æÁ÷½øĞĞÎÄ¼ş¸´ÖÆ
+	 * ä½¿ç”¨ç¼“å­˜æµè¿›è¡Œæ–‡ä»¶å¤åˆ¶
 	 * 
 	 * @param file
 	 */
@@ -307,10 +307,10 @@ public class GUIUtil {
 			bout = new BufferedOutputStream(outputStream);
 			while ((i = bin.read()) != -1) {
 				bout.write(i);
-				// ×¢Òâ£¬¶ÁÈ¡Ò»¸ö×Ö½Ú£¬È»ºóĞ´Èë»º´æÖĞ£¡ĞèÒªÔÚ×îºó½«»º´æÖĞµÄÄÚÈİĞ´ÈëÎÄ¼şÖĞ£¡
-				// ĞèÒªÇå¿Õ»º´æÇø£¬½«»º´æÇøÄÚÈİĞ´ÈëÎÄ¼şÖĞ£¡-flush()
+				// æ³¨æ„ï¼Œè¯»å–ä¸€ä¸ªå­—èŠ‚ï¼Œç„¶åå†™å…¥ç¼“å­˜ä¸­ï¼éœ€è¦åœ¨æœ€åå°†ç¼“å­˜ä¸­çš„å†…å®¹å†™å…¥æ–‡ä»¶ä¸­ï¼
+				// éœ€è¦æ¸…ç©ºç¼“å­˜åŒºï¼Œå°†ç¼“å­˜åŒºå†…å®¹å†™å…¥æ–‡ä»¶ä¸­ï¼-flush()
 			}
-			// Èç¹ûÒª¼ôÇĞ£¬ÔÚ´Ë¼ÓÒ»¾ädelete¼´¿É£¡
+			// å¦‚æœè¦å‰ªåˆ‡ï¼Œåœ¨æ­¤åŠ ä¸€å¥deleteå³å¯ï¼
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,7 +320,7 @@ public class GUIUtil {
 		} finally {
 			try {
 				// bout.flush();
-				bout.close();// close()·½·¨ÄÚ²¿×Ô¶¯µ÷ÓÃflush()
+				bout.close();// close()æ–¹æ³•å†…éƒ¨è‡ªåŠ¨è°ƒç”¨flush()
 				outputStream.close();
 				bin.close();
 				inStream.close();
@@ -333,7 +333,7 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ĞŞ¸ÄµêÃûÊ±Í¬Ê±ĞŞ¸ÄÍ¼Æ¬Ãû³Æ
+	 * ä¿®æ”¹åº—åæ—¶åŒæ—¶ä¿®æ”¹å›¾ç‰‡åç§°
 	 * 
 	 * @param oldname
 	 * @param newname
@@ -341,9 +341,9 @@ public class GUIUtil {
 	public static void changeName(String oldname, String newname) {
 		String name;
 		int bl = oldname.length();
-		File file = new File("img"); // »ñÈ¡Æäfile¶ÔÏó
-		File[] fs = file.listFiles(); // ±éÀúpathÏÂµÄÎÄ¼şºÍÄ¿Â¼£¬·ÅÔÚFileÊı×éÖĞ
-		for (File f : fs) { // ±éÀúFile[]Êı×é
+		File file = new File("img"); // è·å–å…¶fileå¯¹è±¡
+		File[] fs = file.listFiles(); // éå†pathä¸‹çš„æ–‡ä»¶å’Œç›®å½•ï¼Œæ”¾åœ¨Fileæ•°ç»„ä¸­
+		for (File f : fs) { // éå†File[]æ•°ç»„
 			if (f.getName().startsWith(oldname)) {
 				name = f.getName().replaceAll(oldname, newname);
 				f.renameTo(new File("img/" + name));
@@ -357,13 +357,16 @@ public class GUIUtil {
 	}
 
 	/**
-	 * ¸ù¾İÉÌ¼ÒidºÍ²ËÆ·Ãû»ñµÃ²ËÆ·¾ø¶ÔÂ·¾¶
+	 * æ ¹æ®å•†å®¶idå’Œèœå“åè·å¾—èœå“ç»å¯¹è·¯å¾„
 	 * 
 	 * @param bid
 	 * @param foodname
 	 * @return
 	 */
 	public static String getImgPath(int bid, String foodname) {
+		if (foodname.endsWith("âœ©")) {
+			foodname = foodname.replace("âœ©", "");
+		}
 		String filePath = "img/" + BusinessService.get(bid).getName() + "-" + foodname + ".jpg";
 		if (new File(filePath).exists()) {
 			return filePath;

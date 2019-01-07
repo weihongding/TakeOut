@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/gui/FrameAdd/OrderBusi.java=UTF-8
 encoding//src/gui/listener/BusTableListener.java=UTF-8
+encoding//src/gui/listener/FrameAddListener.java=UTF-8
 encoding//src/test/Test.java=UTF-8
+encoding//src/util/GUIUtil.java=UTF-8

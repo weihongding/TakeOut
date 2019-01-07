@@ -21,8 +21,8 @@ import util.GUIUtil;
 
 public class MenuListener implements ActionListener {
 
-	static String add_oldname = "img/NotImage";
-	static String mod_oldname = "img/NotImage";
+	static String add_oldname = "img/NotImage.jpg";
+	static String mod_oldname = "img/NotImage.jpg";
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -68,7 +68,7 @@ public class MenuListener implements ActionListener {
 				String foodname = mmod.jtf[0].getText();
 				double price = Double.parseDouble(mmod.jtf[1].getText());
 				String imgname = GUIUtil.get_Foodimgpath(foodname);// 获得预存图片地址
-				if (!mod_oldname.equals("img/NotImage"))// 判断是否选择了新的图片
+				if (!mod_oldname.equals("img/NotImage.jpg"))// 判断是否选择了新的图片
 					GUIUtil.ImageCopy(mod_oldname, imgname);// 用选择得到的图片覆盖预存图片
 				Food food = MenuModFrame.food;
 				food.setName(foodname);
